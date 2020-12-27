@@ -1,0 +1,24 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>This our home page</h1>
+
+    <div class="blogs content">
+        <h2>All Blogs</h2>
+    
+        <% if (blogs.length > 0) { %>
+          <% blogs.forEach(blog => { %>
+            <h3 class="title"><%= blog.title %></h3>
+            <p class="snippet"><%= blog.snippet %></p>
+          <% }) %>
+        <% } else { %>
+          <p>There are no blogs to display...</p>
+        <% } %>
+        
+      </div>
+</body>
+</html>
