@@ -1,60 +1,99 @@
-const express = require('express');
-const morgan = require('morgan');
+ const express = require('express');
+ const morgan = require('morgan');
+const mysql  = require('mysql');
+
+const db = mysql.createConnection({
+  host     : 'localhost',
+  user     : 'root',
+  password : '7561275612'
+
+});
 
 // express app
 const app = express();
 
-// app.set('views', __dirname + '/views');
-
-// listen for requests
-app.listen(3000);
-
-// register view engine
 app.set('view engine', 'ejs');
 
-// middleware & static files
 app.use(express.static('public'));
 
-app.use((req, res, next) => {
-    console.log('new request made:');
-    console.log('host: ', req.hostname);
-    console.log('path: ', req.path);
-    console.log('method: ', req.method);
-    next();
+db.connect((err) =>{
+    if (err) {
+     throw err;
+    }
+    console.log('my sql connected');
+  });
+
+
+app.get('/createdb',(req,res)=>{
+    let sql ='CREATE DATABASE nodemysql';
+     
+    db.query(sql,(err,result)=>{
+        if(err) throw err;
+        console.log(result);
+        res.send('database created....');
+    });
+
 });
 
-app.use((req, res, next) => {
-    console.log('in the next middleware');
-    next();
+// listen for requests
+app.listen(3000,()=>{
+    console.log('server started on port 3000');
 });
 
-app.use(morgan('dev'));
-
-
-app.use((req, res, next) => {
-    res.locals.path = req.path;
-    next();
-});
-
-
-
-app.get('/', (req, res) => {
-    const blogs = [
-        { title: 'Yoshi finds eggs', snippet: 'Lorem ipsum dolor sit amet consectetur' },
-        { title: 'Mario finds stars', snippet: 'Lorem ipsum dolor sit amet consectetur' },
-        { title: 'How to defeat bowser', snippet: 'Lorem ipsum dolor sit amet consectetur' },
-    ];
+app.get('/makequery',(req,res)=>{
+     
+    let myquery="SELECT Fname,Salary from nodemysql.Employee";
+    db.query(myquery,(err,result,field)=>{
     
-    res.render('home', { title: 'Home', blogs });
+        if (err) throw err;
+    
+        console.log(result);
+    
+    });
+
 });
 
-app.get('/register', (req, res) => {
-    res.render('register', { title: 'About' });
+
+app.get('/getemployee',(req,res)=>{
+     
+    let myquery="SELECT Fname,Salary from nodemysql.Employee";
+    db.query(myquery,(err,result,field)=>{
+    
+        res.render('register', { result });
+        if (err) throw err;
+    
+
+    });
+
+});
+
+
+app.get('/',(req,res)=>{
+     
+    res.render('index')
+});
+app.get('/FAQS',(req,res)=>{
+     
+    res.render('FAQS')
+});
+app.get('/Login',(req,res)=>{
+     
+    res.render('Login')
+});
+app.get('/Offers',(req,res)=>{
+     
+    res.render('Offers')
+});
+app.get('/plans',(req,res)=>{
+     
+    res.render('plans')
+});
+app.get('/Register',(req,res)=>{
+     
+    res.render('Register')
 });
 
 
 
-// 404 page
-app.use((req, res) => {
-    res.status(404).render('404', { title: '404' });
-});
+
+

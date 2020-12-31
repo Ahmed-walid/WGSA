@@ -1,0 +1,185 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@500;900&display=swap');
+/* font-family: 'Rubik', sans-serif; */
+/* font-family: 'Montserrat', sans-serif; */
+
+/* @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap'); */
+
+*{
+    font-family: 'Rubik', sans-serif;
+    font-weight: 500;
+    margin: 0px;
+    padding: 0px;
+    text-decoration: none;
+    color:white;
+}
+
+:root {
+    --dark:#1c1a39 ;
+    --mid:#0c3938;
+    --light:#0C908C ;
+    --hColor:#064e4b;
+    --BGColor:#2c2c2c;
+    
+}
+main{
+    height: 100vh;
+}
+body{
+    background-image: radial-gradient(circle farthest-side at 65% 55%,var(--light),var(--dark));
+}
+
+.nav-container{
+    
+    background-image: linear-gradient(to right ,var(--dark),var(--mid));
+    box-shadow: 0px .2em .2em rgba(0, 0, 0, .2);
+    
+}
+nav{
+    width: 95%;
+    margin: auto;
+    padding: .8em 0em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+    min-height:3em ;
+}
+nav ul{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex: 1;
+    list-style: none;
+}
+.logo{
+    flex: 2;
+}
+.logo h2{
+    font-family: 'Rubik', sans-serif;
+    font-weight: 900;
+    position: relative;
+}   
+.lgci{
+    background-color: var(--light);
+    padding:1.6em;
+    margin: -.7em .6em;
+    position: absolute;
+    border-radius: 50%;
+    
+}
+button{
+    background-color: var(--light);
+    text-decoration: none;
+    font-family: 'Rubik', sans-serif;
+    border: none;
+}
+button:hover {
+    background-color: var(--hColor);
+}
+a:hover{
+    color:var(--hColor);
+}
+.log-btn{
+
+    border-radius:2rem ;
+    padding: .5rem 1.5rem;
+}
+.Line{
+    height: 2px;
+    width: 100%;
+    background-color: #369DC5;
+    border: none;
+
+}
+.Home{
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1% 10% 1fr 1fr  5%;
+    grid-template-rows: 10% .5fr .5fr;
+}
+
+.txt{
+    margin-top: 2em;
+    font-size: 230%;
+    grid-column:3/4;
+    grid-row:2/4 ;
+    text-align: left;
+}
+.txt h2{
+    font-size: 95%;
+    padding: 1rem 0rem;
+}
+.SideBar{
+    grid-column:1/2;
+    grid-row:2/3 ;
+    height: 40%;
+    margin-top:5em;
+    opacity: .5;
+    background-color: white;
+}
+
+.reg-btn{
+    border-radius:.3rem ;
+    padding: .5rem 1.5rem;
+    font-size: 45%;
+
+}
+img{
+    grid-row: 2/4;
+    grid-column: 4/5;
+    margin: 2em 2em 2em 0em;
+    height: 32em;
+          
+}
+
+/*------------RegisterPage--------------*/
+.Reg{
+    height: 100vb;
+    background-size: cover;
+    background-image: radial-gradient(circle farthest-side at 50% 50%,var(--light),var(--dark));
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+.FormContainer{
+    margin: auto;
+}
+.inputs {
+    width: 100%;
+    padding: 3em;
+    border-radius: 2em;
+    background-color:#161616 ;
+
+}
+
+.input {
+	position: relative;
+	margin-bottom: 20px;
+	width: 100%;
+	display: flex;
+	align-items: center;
+}
+
+.input input {
+	width: 100%;
+	font-size: 17px;
+	background: #1C1C1C;
+	border-radius: 8px;
+	padding: 16px 18px 16px 51px;
+	color: rgb(220,220,220);
+}
+
+.input img {
+	width: 16px;
+	position: absolute;
+	left: 19px;
+}
+.inputs p{
+    font-size: 90%;
+    margin: 1em;
+}
+.input button{
+    font-size: 100%;
+    
+}
