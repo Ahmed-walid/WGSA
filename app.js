@@ -89,7 +89,11 @@ app.get('/', (req, res) => {
 });
 app.get('/FAQS', (req, res) => {
 
-    res.render('FAQS')
+    let myquery1 = "SELECT Question_code, Question, Answer, Answered_by from wgsa_company.FAQs";
+    db.query(myquery1, (err, result, field) => {
+        if (err) throw err;
+        res.render('FAQS',{result})
+    });
 });
 app.get('/Login', (req, res) => {
 
