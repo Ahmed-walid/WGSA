@@ -36,8 +36,7 @@
 
 
 
-        <div id="heatmap">
-
+        <!-- <div id="heatmap">
             <input id="heatit" name="heatit" type="submit" value="Heat up!">
 
             <h1>Tasks</h1>
@@ -46,28 +45,25 @@
                 <input id="task" placeholder = "New Task" type="text">
                 <input id="submit" type="submit">
             </form>
-    
-
-
             <script>
            $('input[name=heatit]').on('click', function(){
             $.ajax({
-                    url:"/heatmap",
+                    url:"/heatmapp",
                     type: "POST",
                     success: function(result) {
                         for (x in result) {
                             // document.querySelector('body').innerHTML = '1 USD is equal to  EUR.';
                             
                             const p = document.createElement('p');
+                            
                                   p.innerHTML = x;
                                   document.querySelector('#tasks').append(p);
-
                         } 
                     }                
                     });
                 });
                 </script>
-        </div>
+        </div> -->
 
 
 

@@ -2,4 +2,8 @@ node_modules/
 /.vs/slnx.sqlite
 /.vs/ProjectSettings.json
 /.vs/WGSA/v16/.suo
+<<<<<<< HEAD
 Queries.txt
+=======
+/.vs/VSWorkspaceState.json
+>>>>>>> 78c12e43f03c4bf04a91aa02c078d3bce7e6da1f
