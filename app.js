@@ -324,3 +324,19 @@ app.post('/Add_branch', urlencodedParser, function(req, res) {
     });
 
 });
+app.post('/Remove_branch', urlencodedParser, function(req, res) {
+
+    var bnum = req.body.bnum;
+
+    let myquery = `delete FROM wgsa_company.branch WHERE branch.bnum =${bnum}`;
+
+    db.query(myquery, (err, result, field) => {
+        if (err) {
+            console.log(err)
+            res.render('404', { err });
+        }
+        console.log(result);
+        res.render('HR', { result });
+    });
+
+});
