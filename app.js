@@ -105,6 +105,12 @@ app.get('/Test', (req, res) => {
 var result =""
     res.render('Test',{result})
 });
+
+app.get('/DataEmployee',(req,res)=>
+{
+    res.render('DataEmployee')
+});
+
 app.get('/Offers', (req, res) => {
 
     let myquery1 = "SELECT Launch_date, Price, Minutes, Expire_date, Megas, Offer_describ, Offer_num from wgsa_company.Offer";
@@ -139,9 +145,80 @@ app.post('/heatmapp', function (req, res, err) {
 });
 
 
-app.post('/login', urlencodedParser, function (req, res) {
-    res.send('welcome, ' + req.body.username)
-})
+app.post('/Update_Plan_Cost', urlencodedParser, function (req, res) {
+    
+    var Plannewprice=req.body.Plan_New_Price;
+    var plancode=req.body.Plan_Code;
+    let myquery=`UPDATE wgsa_company.Plan  SET Plan.Price= ${Plannewprice}  where Plan.Plan_code=${plancode}`;
+
+    db.query(myquery, (err, result, field) => {
+        if (err) throw err;
+        console.log(result);
+        res.render('DataEmployee',{result});
+    });  
+    
+});
+app.post('/Delete_Plan', urlencodedParser, function (req, res) {
+    
+    var Plan_code=req.body.Plan_Code;
+ 
+    let myquery=`delete FROM wgsa_company.PLAN WHERE PLAN.PLAN_CODE =${Plan_code}`;
+
+    db.query(myquery, (err, result, field) => {
+        if (err) throw err;
+        console.log(result);
+        res.render('DataEmployee',{result});
+    });  
+    
+});
+
+
+
+app.post('/Add_New_Plan', urlencodedParser, function (req, res) {
+    
+    var Plan_name=req.body.Plan_name;
+    var Plan_code=req.body.Plan_code;
+    var Minutes=req.body.Minutes;
+    var Megas=req.body.Megas;
+    var Price=req.body.Price;
+
+    let myquery=`Insert into wgsa_company.plan (Plan_code, Price, Minutes, Megas, Plan_name) values (${Plan_code},${Price},${Minutes},${Megas},"${Plan_name.toString()}")`;
+
+
+    db.query(myquery, (err, result, field) => {
+        if (err) res.render('404',{err});
+        else
+        {
+        console.log(result);
+        res.render('DataEmployee');
+        }
+    });  
+    
+});
+
+
+app.post('/Add_New_Offer', urlencodedParser, function (req, res) {
+    
+    var Offer_num=req.body.Offer_num;
+    var Offer_describtion=req.body.Offer_describtion;
+    var Minutes=req.body.Minutes;
+    var Megas=req.body.Megas;
+    var Price=req.body.Price;
+    var Launch_date=req.body.Launch_date;
+    var Expire_date=req.body.Expire_date;
+
+    let myquery=`Insert into wgsa_company.Offer (Launch_date, Price, Minutes, Expire_date, Megas, Offer_describ, Offer_num) values ( '${Launch_date}',${Price},${Minutes},'${Expire_date}',${Megas},'${Offer_describtion}',${Offer_num})`;
+
+    db.query(myquery, (err, result, field) => {
+        if (err) throw err;
+        console.log(result);
+        res.render('DataEmployee');
+    });  
+    
+});
+
+
+
 
 app.post('/getemployeeinfo',urlencodedParser, (req, res) => {
      
@@ -150,9 +227,11 @@ app.post('/getemployeeinfo',urlencodedParser, (req, res) => {
     let myquery1 = `SELECT * from wgsa_company.Customer where Customer.Phone_num = ${PhoneNumber}`;
     //let myquery2 = "SELECT * from wgsa_company.Customer";
     db.query(myquery1, (err, result, field) => {
-        if (err) throw err;
+        if (err)  throw err;
         console.log(result);
         res.render('Test',{result});
     });
 
 });
+
+
