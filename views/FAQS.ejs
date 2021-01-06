@@ -4,8 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<<<<<<< HEAD
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <link rel="stylesheet" href="css/Style.css">
+=======
+    <link rel="stylesheet" href="/Style.css">
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"> -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+>>>>>>> 67ef9fc3c36ea7773d62ede4a3d4bdf96d5ccc35
     <title>WGSA</title>
 </head>
 
@@ -30,7 +36,16 @@
             <hr class="Line" />
         </header>
 
-
+        <% for(var row of result) { %>
+            <div  class="alert alert-light" role="alert">
+              <ul class="list-group">
+                  <li  style="color:black;" class="list-group-item">Code :<%=row.Question_code%></li>
+                  <li style="color:black;" class="list-group-item">Question:<%=row.Question%></li>
+                  <li style="color:black;" style="color:black;" class="list-group-item">Answer:<%=row.Answer%> </li>
+                  <li style="color:black;" class="list-group-item">Answered_by:<%=row.Answered_by%></li>
+                </ul>
+            </div>
+        <%}%>
 
 
         <!-- <div id="heatmap">

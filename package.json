@@ -1,7 +1,7 @@
 {
   "name": "db_projgit",
   "version": "1.0.0",
-  "description": "",
+  "description": "Website for a telecommunication company with data base",
   "main": "app.js",
   "dependencies": {
     "body-parser": "^1.19.0",
@@ -18,5 +18,13 @@
     "start": "node server.js"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ahmed-walid/WGSA.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Ahmed-walid/WGSA/issues"
+  },
+  "homepage": "https://github.com/Ahmed-walid/WGSA#readme"
 }
