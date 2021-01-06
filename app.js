@@ -106,6 +106,11 @@ var result =""
     res.render('Test',{result})
 });
 
+app.get('/Recharge',(req,res)=>
+{
+    res.render('Recharge')
+});
+
 app.get('/DataEmployee',(req,res)=>
 {
     res.render('DataEmployee')
@@ -132,6 +137,22 @@ app.get('/plans', (req, res) => {
 app.get('/Register', (req, res) => {
 
     res.render('Register')
+});
+
+app.get('/Customer', (req, res) => {
+
+    var user_number=13654456;
+
+    let myquery1= `Select customer.balance, customer.fname, plan.Plan_name
+    from wgsa_company.plan,wgsa_company.customer
+    where customer.plan_code=plan.Plan_code and customer.Phone_num=${user_number}`;
+
+        db.query(myquery1, (err, result, field) => {
+        if (err) throw err;
+        console.log(result);
+        res.render('Customer',{result})
+    });
+
 });
 
 
@@ -194,6 +215,31 @@ app.post('/Add_New_Plan', urlencodedParser, function (req, res) {
         }
     });  
     
+});
+
+
+app.post('/Recharge_Process', urlencodedParser, function (req, res)
+{
+    var Card_Serial_Num=req.body.Card_Serial_Num;
+     var user_number=13654456;
+    let myquery= `Update wgsa_company.customer
+    set customer.balance=customer.balance+ (select Card_value
+                                                    from wgsa_company.card
+                                                    where card.Serial_number=${Card_Serial_Num})
+    where customer.Phone_num=${user_number}`;
+
+
+    db.query(myquery, (err, result, field) => {
+        if (err) res.render('404',{err});
+        else
+        {
+        console.log(result);
+        res.render('Recharge',{status:1});
+        }
+    });  
+
+     
+
 });
 
 

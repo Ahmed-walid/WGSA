@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+ 
+    <title>Customer page</title>
+
+    <style>
+        /* #balance {
+            background-color: rgb(102, 102, 102);
+            color: rgb(255, 255, 255);
+            font-style: italic;
+            font-size: 2em;
+            text-align: center;
+            line-height: 100px;
+        } */
+
+        #customer_name {
+            font-style: italic;
+            font-size: 2em;
+            text-align: left;
+            line-height: 100px;
+
+        }
+
+        #btns {
+            height: 300px;
+            align-content: center;
+            margin-left: 120px;
+
+        }
+        #Welcome,#balance{
+
+            font-style: italic;
+            font-size: 2em;
+            text-align: left;
+            line-height: 100px;
+
+        }
+
+        .box {
+            display: flex;
+            flex-direction: column;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid">
+
+
+
+<div  class="row">
+
+    <div id ="Welcome" class="col-md-12">Welcome <%=result[0].fname%>
+    </div>
+
+</div>
+
+
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Your account info </h3>
+            </div>
+            <div class="panel-body">
+            
+
+                <div id="balance" class="col-md-12">
+                    your current balance: <%=result[0].balance%>
+                </div>
+
+                <div id="balance" class="col-md-12">
+                    your current plan: <%=result[0].Plan_name%>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="btns" class="row">
+
+            <div class="col-md-3">
+                <a class="btn btn-info" href="Recharge" role="button">Recharge</a>
+            </div>
+
+            <div class="col-md-3">
+                <button type="button" class="btn btn-info">Migrate</button>
+            </div>
+
+
+            <div class="col-md-3">
+                <button type="button" class="btn btn-info">Complain</button>
+            </div>
+
+            <div class="col-md-3">
+                <button type="button" class="btn btn-info">Transfer balance</button>
+            </div>
+        </div>
+
+
+
+        <div id="Recharge" style="display:none;">
+            <form action="/Customer_Recharge" method="POST">
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Plan code</label>
+                    <input type="number" name="Plan_Code" class="form-control" id="exampleInputEmail1"
+                        aria-describedby="emailHelp">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">New cost</label>
+                    <input type="number" name="Plan_New_Price" class="form-control" id="exampleInputPassword1">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+
+
+
+
+    
+</body>
+
+</html>
