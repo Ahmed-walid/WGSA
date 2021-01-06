@@ -172,38 +172,6 @@ app.post('/Delete_Plan', urlencodedParser, function(req, res) {
     });
 
 });
-app.post('/Remove_customer', urlencodedParser, function(req, res) {
-
-    var phone_num = req.body.Phone_num;
-
-    let myquery = `delete FROM wgsa_company.customer WHERE customer.Phone_num =${phone_num}`;
-
-    db.query(myquery, (err, result, field) => {
-        if (err) {
-            console.log(err)
-            res.render('404', { err });
-        }
-        console.log(result);
-        res.render('HR', { result });
-    });
-
-});
-app.post('/Remove_employee', urlencodedParser, function(req, res) {
-
-    var ssn = req.body.SSN;
-
-    let myquery = `delete FROM wgsa_company.EMPLOYEE WHERE EMPLOYEE.SSN =${ssn}`;
-
-    db.query(myquery, (err, result, field) => {
-        if (err) {
-            console.log(err)
-            res.render('404', { err });
-        }
-        console.log(result);
-        res.render('HR', { result });
-    });
-
-});
 
 
 app.post('/Add_New_Plan', urlencodedParser, function(req, res) {
@@ -227,37 +195,8 @@ app.post('/Add_New_Plan', urlencodedParser, function(req, res) {
 
 });
 
-app.post('/Add_employee', urlencodedParser, function(req, res) {
-
-    var Fname = req.body.Fname;
-    var Lname = req.body.Lname;
-    var Dnum = req.body.Dnum;
-    var Address = req.body.Address;
-    var ssn = req.body.SSN;
-    var Position = req.body.Position;
-    var Salary = req.body.Salary;
-    var bnum = req.body.Bnum;
-    var hours = req.body.hours;
-    var gender = req.body.Gender;
-    var phone_num = req.body.Phone_number;
-    var s_ssn = req.body.Super_ssn;
 
 
-
-    let myquery = `INSERT INTO wgsa_company.employee(Fname, Lname, Dnum, Address, Ssn, Postion, Salary, Branch_num, Hours, Gender, Phone_num, Super_ssn) VALUES("${Fname}", "${Lname}", ${Dnum}, "${Address}", ${ssn}, "${Position}", ${Salary}, ${bnum}, ${hours}, "${gender}", ${phone_num}, ${s_ssn})`;
-
-
-    db.query(myquery, (err, result, field) => {
-        if (err) {
-            console.log(err)
-            res.render('404', { err });
-        } else {
-            console.log(result);
-            res.render('HR');
-        }
-    });
-
-});
 app.post('/Add_New_Offer', urlencodedParser, function(req, res) {
 
     var Offer_num = req.body.Offer_num;
@@ -295,6 +234,93 @@ app.post('/getemployeeinfo', urlencodedParser, (req, res) => {
         if (err) throw err;
         console.log(result);
         res.render('Test', { result });
+    });
+
+});
+
+
+
+
+/*----------------------------------------------------------------HR-----------------------------------*/
+app.post('/Add_employee', urlencodedParser, function(req, res) {
+
+    var Fname = req.body.Fname;
+    var Lname = req.body.Lname;
+    var Dnum = req.body.Dnum;
+    var Address = req.body.Address;
+    var ssn = req.body.SSN;
+    var Position = req.body.Position;
+    var Salary = req.body.Salary;
+    var bnum = req.body.Bnum;
+    var hours = req.body.hours;
+    var gender = req.body.Gender;
+    var phone_num = req.body.Phone_number;
+    var s_ssn = req.body.Super_ssn;
+
+
+
+    let myquery = `INSERT INTO wgsa_company.employee(Fname, Lname, Dnum, Address, Ssn, Postion, Salary, Branch_num, Hours, Gender, Phone_num, Super_ssn) VALUES("${Fname}", "${Lname}", ${Dnum}, "${Address}", ${ssn}, "${Position}", ${Salary}, ${bnum}, ${hours}, "${gender}", ${phone_num}, ${s_ssn})`;
+
+
+    db.query(myquery, (err, result, field) => {
+        if (err) {
+            console.log(err)
+            res.render('404', { err });
+        } else {
+            console.log(result);
+            res.render('HR');
+        }
+    });
+
+});
+app.post('/Remove_customer', urlencodedParser, function(req, res) {
+
+    var phone_num = req.body.Phone_num;
+
+    let myquery = `delete FROM wgsa_company.customer WHERE customer.Phone_num =${phone_num}`;
+
+    db.query(myquery, (err, result, field) => {
+        if (err) {
+            console.log(err)
+            res.render('404', { err });
+        }
+        console.log(result);
+        res.render('HR', { result });
+    });
+
+});
+app.post('/Remove_employee', urlencodedParser, function(req, res) {
+
+    var ssn = req.body.SSN;
+
+    let myquery = `delete FROM wgsa_company.EMPLOYEE WHERE EMPLOYEE.SSN =${ssn}`;
+
+    db.query(myquery, (err, result, field) => {
+        if (err) {
+            console.log(err)
+            res.render('404', { err });
+        }
+        console.log(result);
+        res.render('HR', { result });
+    });
+
+});
+app.post('/Add_branch', urlencodedParser, function(req, res) {
+
+    var phone_num = req.body.phone_num;
+    var bnum = req.body.bnum;
+    var location = req.body.location;
+
+
+    let myquery = `INSERT INTO wgsa_company.branch(Phone_num, Bnum, Location) VALUES(${phone_num}, ${bnum}, "${location}")`;
+
+    db.query(myquery, (err, result, field) => {
+        if (err) {
+            console.log(err)
+            res.render('404', { err });
+        }
+        console.log(result);
+        res.render('HR');
     });
 
 });
