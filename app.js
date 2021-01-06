@@ -208,7 +208,37 @@ app.post('/Add_New_Plan', urlencodedParser, function(req, res) {
 
 });
 
+app.post('/Add_employee', urlencodedParser, function(req, res) {
 
+    var Fname = req.body.Fname;
+    var Lname = req.body.Lname;
+    var Dnum = req.body.Dnum;
+    var Address = req.body.Address;
+    var ssn = req.body.SSN;
+    var Position = req.body.Position;
+    var Salary = req.body.Salary;
+    var bnum = req.body.Bnum;
+    var hours = req.body.hours;
+    var gender = req.body.Gender;
+    var phone_num = req.body.Phone_number;
+    var s_ssn = req.body.Super_ssn;
+
+
+
+    let myquery = `INSERT INTO wgsa_company.employee(Fname, Lname, Dnum, Address, Ssn, Postion, Salary, Branch_num, Hours, Gender, Phone_num, Super_ssn) VALUES("${Fname}", "${Lname}", ${Dnum}, "${Address}", ${ssn}, "${Position}", ${Salary}, ${bnum}, ${hours}, "${gender}", ${phone_num}, ${s_ssn})`;
+
+
+    db.query(myquery, (err, result, field) => {
+        if (err) {
+            console.log(err)
+            res.render('404', { err });
+        } else {
+            console.log(result);
+            res.render('HR');
+        }
+    });
+
+});
 app.post('/Add_New_Offer', urlencodedParser, function(req, res) {
 
     var Offer_num = req.body.Offer_num;
@@ -219,7 +249,9 @@ app.post('/Add_New_Offer', urlencodedParser, function(req, res) {
     var Launch_date = req.body.Launch_date;
     var Expire_date = req.body.Expire_date;
 
-    let myquery = `Insert into wgsa_company.Offer (Launch_date, Price, Minutes, Expire_date, Megas, Offer_describ, Offer_num) values ( '${Launch_date}',${Price},${Minutes},'${Expire_date}',${Megas},'${Offer_describtion}',${Offer_num})`;
+    let myquery = `
+            Insert into wgsa_company.Offer(Launch_date, Price, Minutes, Expire_date, Megas, Offer_describ, Offer_num) values('${Launch_date}', $ { Price }, $ { Minutes }, '${Expire_date}', $ { Megas }, '${Offer_describtion}', $ { Offer_num })
+            `;
 
     db.query(myquery, (err, result, field) => {
         if (err) throw err;
@@ -236,7 +268,9 @@ app.post('/getemployeeinfo', urlencodedParser, (req, res) => {
 
     var PhoneNumber = req.body.Phone_number;
     //var PhoneNumber = 13654456
-    let myquery1 = `SELECT * from wgsa_company.Customer where Customer.Phone_num = ${PhoneNumber}`;
+    let myquery1 = `
+            SELECT * from wgsa_company.Customer where Customer.Phone_num = $ { PhoneNumber }
+            `;
     //let myquery2 = "SELECT * from wgsa_company.Customer";
     db.query(myquery1, (err, result, field) => {
         if (err) throw err;
