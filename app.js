@@ -172,6 +172,22 @@ app.post('/Delete_Plan', urlencodedParser, function(req, res) {
     });
 
 });
+app.post('/Remove_customer', urlencodedParser, function(req, res) {
+
+    var phone_num = req.body.Phone_num;
+
+    let myquery = `delete FROM wgsa_company.customer WHERE customer.Phone_num =${phone_num}`;
+
+    db.query(myquery, (err, result, field) => {
+        if (err) {
+            console.log(err)
+            res.render('404', { err });
+        }
+        console.log(result);
+        res.render('HR', { result });
+    });
+
+});
 app.post('/Remove_employee', urlencodedParser, function(req, res) {
 
     var ssn = req.body.SSN;
@@ -179,7 +195,10 @@ app.post('/Remove_employee', urlencodedParser, function(req, res) {
     let myquery = `delete FROM wgsa_company.EMPLOYEE WHERE EMPLOYEE.SSN =${ssn}`;
 
     db.query(myquery, (err, result, field) => {
-        if (err) throw err;
+        if (err) {
+            console.log(err)
+            res.render('404', { err });
+        }
         console.log(result);
         res.render('HR', { result });
     });
