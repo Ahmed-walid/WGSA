@@ -1,0 +1,61 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@500;900&display=swap');
+:root {
+    --dark:#111111 ;
+    --mid:#222222;
+    --light:#8c00d4 ;
+    --hColor:#797bbf;
+    --BGColor:#5a0285;
+    --lineC:#8c00d4;
+}
+*{
+    font-weight: 500;
+    margin: 0px;
+    padding: 0px;
+    text-decoration: none;
+    color:white;
+    box-sizing: border-box;
+}
+body{
+    font-family: 'Rubik', sans-serif;
+    justify-content: center;
+    background-image: radial-gradient(circle farthest-side at 65% 55%,var(--mid),var(--dark));
+    
+}
+
+a{
+    text-decoration: none;
+    color: white;
+    
+}
+button{
+    background-color: var(--light);
+    text-decoration: none;
+    font-family: 'Rubik', sans-serif;
+    border: none;
+}
+button:hover {
+    background-color: var(--hColor);
+}
+a:hover{
+    color:var(--hColor);
+}
+hr{
+    margin: 0px;
+}
+
+li{
+    align-self: center;
+}
+ul{
+    padding: 0;
+    margin: 0;
+}
+h1{
+    margin: 0;
+    padding: 0;
+    font-size: 150%;
+}
+@import "home" ;
+@import "Register" ;
+@import "Plans" ;

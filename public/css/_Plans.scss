@@ -1,0 +1,61 @@
+.plans {
+    h2 {
+        text-align: center;
+        margin-top: 0.3em;
+    }
+    .cards {
+        width: 90%;
+        margin: auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        
+        .card {
+        
+            border-radius: 2em;
+            border: none;
+            overflow: hidden;
+            width: 25em;
+            background-color: white;
+            box-shadow: 4px 4px 3px var(--light), -4px -4px 3px var(--light);
+            margin: 1em  ;
+        
+            .card-body {
+                padding: 0;
+                display: flex;
+                justify-content: center;
+                flex-direction: column;
+                .card-title {
+                    background-color: var(--BGColor);
+                    margin: 0;
+                    padding: 1em;
+                }
+        
+            }
+        }
+    }
+}
+
+tr {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 2px solid #666666;
+}
+th {
+    border-right: 2px solid #666666;
+    color: black;
+    flex: 1;
+    padding: 2em;
+}
+td {
+    display: flex;
+    color: black;
+    flex: 1;
+    padding: 2em;
+    p {
+        flex: 1;
+        color: #666666;
+        margin-left: 5px;
+    }
+}

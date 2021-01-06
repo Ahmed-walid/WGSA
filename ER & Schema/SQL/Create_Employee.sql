@@ -1,4 +1,4 @@
-/*CREATE TABLE wgsa_company.Employee
+CREATE TABLE wgsa_company.Employee
 (
 Fname varchar(50),
 Lname varchar(50),
@@ -15,7 +15,7 @@ Super_ssn int,
 primary key (Ssn),
 foreign key(Super_ssn) references Employee(Ssn),
 foreign key (Branch_num) references Branch(Bnum)
-);*/
+);
 
 ALTER TABLE wgsa_company.Employee
 ADD FOREIGN KEY (Dnum) REFERENCES Department(Dnum);
