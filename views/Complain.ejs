@@ -12,21 +12,27 @@
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css"
         integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
-        <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@300&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@300&display=swap" rel="stylesheet">
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
         integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
         crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+        crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <title>Complain</title>
 
     <script>
         function Whencreatenewcomplaintisclicked() {
             var x = document.getElementById("Make_new_complaint");
-                x.style.display = "block";
-                x = document.getElementById("old_complaints");
-                x.style.display = "none";
-       
+            x.style.display = "block";
+            x = document.getElementById("old_complaints");
+            x.style.display = "none";
+
         }
         function whenssubmitisclicked() {
 
@@ -36,23 +42,23 @@
             x.style.display = "block";
             location = self.location['href'];
             setTimeout(function () {
-                        alert("Form submitted successfully!.");
-                    }, 2000);
-       
+                alert("Form submitted successfully!.");
+            }, 2000);
+
         }
         function whencancelisclicked() {
-            var myTextArea=document.getElementById('complaint_area');
-            myTextArea.value="";
+            var myTextArea = document.getElementById('complaint_area');
+            myTextArea.value = "";
             var x = document.getElementById("Make_new_complaint");
             x.style.display = "none";
             x = document.getElementById("old_complaints");
             x.style.display = "block";
         }
 
-        function isEmpty(obj) { 
-   for (var x in obj) { return false; }
-   return true;
-}  
+        function isEmpty(obj) {
+            for (var x in obj) { return false; }
+            return true;
+        }
 
     </script>
 
@@ -70,34 +76,48 @@
         <div class="panel-body">
 
 
-            <% if (result[0]) %>
-            <%{%>
-            <div class="row" class="alert alert-light" role="alert">
-                <div class="col-md-10">
-                    <h1 style="font-family: 'Inconsolata', monospace;">Describtion</h1>
-                </div>
-                <div class="col-md-2">
-                  <h1 style="font-family: 'Inconsolata', monospace;">Status</h1>  
-                </div>
-            </div>
-                <%}%>
+
 
             <% for(var row of result) { %>
-                <div class="row" class="alert alert-light" role="alert">
 
-                    <div style="font-family: 'Dosis', sans-serif;" class="col-md-10">
-                        <%=row.C_Descrip%>
-                    </div>
-                    <div style="font-family: 'Dosis', sans-serif;" class="col-md-2">
-                        <%=row.C_Status%>
-                    </div>
+                <div class="accordion" id="accordionExample">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#id<%=row.C_Code%>" aria-expanded="true" aria-controls="collapseOne">
+                                <%=row.C_Descrip%>
+                                    .........................................................................................................................................
+                                    <%=row.Complaint_date%>
+                                        ................................................................................................................................................................................................................................................
+                                        <%=row.C_Status%>
+                            </button>
+                        </h2>
+                        <div id="id<%=row.C_Code%>" class="accordion-collapse collapse " aria-labelledby="headingOne"
+                            data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
 
+
+                                <%=row.Reply%>
+
+
+                                    <form action='/Delete_Complaint' method="POST">
+                                    <input type="number" name="C_Code_to_be_deleted" class="form-control" hidden value=<%=row.C_Code%>>
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                    </form>
+
+
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
+
                 <%}%>
 
 
         </div>
-        <button type="button" onclick="Whencreatenewcomplaintisclicked()" id="createnewcomplaintbtn" class="btn btn-success">New complaint</button>
+        <button type="button" onclick="Whencreatenewcomplaintisclicked()" id="createnewcomplaintbtn"
+            class="btn btn-success">New complaint</button>
     </div>
 
 
@@ -117,18 +137,28 @@
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Write your complaint </label>
 
-                        <textarea required name="User_Complaint" id="complaint_area" class="form-control" rows="3"></textarea>
+                        <textarea required name="User_Complaint" id="complaint_area" class="form-control"
+                            rows="3"></textarea>
                         <!-- <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"> -->
                     </div>
 
 
-                    <button onclick="whenssubmitisclicked()" id ="submitbtn" type="submit" class="btn btn-success">Submit</button>
-                    <button  onclick="whencancelisclicked()" id ="cancelbtn" type="button" class="btn btn-danger">Cancel</button>
+                    <button onclick="whenssubmitisclicked()" id="submitbtn" type="submit"
+                        class="btn btn-success">Submit</button>
+                    <button onclick="whencancelisclicked()" id="cancelbtn" type="button"
+                        class="btn btn-danger">Cancel</button>
                 </form>
 
             </div>
         </div>
     </div>
+
+
+
+
+
+
+
 
 
 
