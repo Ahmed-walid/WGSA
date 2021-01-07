@@ -1,0 +1,366 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@500;900&display=swap");
+:root {
+  --dark:#111111 ;
+  --mid:#222222;
+  --light:#8c00d4 ;
+  --hColor:#797bbf;
+  --BGColor:#5a0285;
+  --lineC:#8c00d4;
+}
+
+* {
+  font-weight: 500;
+  margin: 0px;
+  padding: 0px;
+  text-decoration: none;
+  color: white;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  font-family: 'Rubik', sans-serif;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  background-image: radial-gradient(circle farthest-side at 65% 55%, var(--mid), var(--dark));
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+button {
+  background-color: var(--light);
+  text-decoration: none;
+  font-family: 'Rubik', sans-serif;
+  border: none;
+}
+
+button:hover {
+  background-color: var(--hColor);
+}
+
+a:hover {
+  color: var(--hColor);
+}
+
+hr {
+  margin: 0px;
+}
+
+li {
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+}
+
+h1 {
+  margin: 0;
+  padding: 0;
+  font-size: 150%;
+}
+
+main {
+  height: 100vh;
+}
+
+.nav-container {
+  background-image: -webkit-gradient(linear, left top, right top, from(var(--dark)), to(var(--mid)));
+  background-image: linear-gradient(to right, var(--dark), var(--mid));
+  -webkit-box-shadow: 0px 0.2em 0.2em rgba(0, 0, 0, 0.2);
+          box-shadow: 0px 0.2em 0.2em rgba(0, 0, 0, 0.2);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-line-pack: center;
+      align-content: center;
+}
+
+nav {
+  width: 95%;
+  margin: auto;
+  min-height: 4.5em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: .8em 0em;
+}
+
+nav ul {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  list-style: none;
+}
+
+nav .logo {
+  -webkit-box-flex: 2;
+      -ms-flex: 2;
+          flex: 2;
+}
+
+nav .logo .lgci {
+  background-color: var(--light);
+  padding: 1.6em;
+  position: absolute;
+  border-radius: 50%;
+  -webkit-transform: translate(25%, -20%);
+          transform: translate(25%, -20%);
+}
+
+nav .logo h2 {
+  font-family: "Rubik", sans-serif;
+  font-weight: 900;
+  font-size: 150%;
+  position: relative;
+}
+
+.log-btn {
+  border-radius: 2rem;
+  padding: 0.3rem 1.2rem;
+  -webkit-transform: translateY(5%);
+          transform: translateY(5%);
+}
+
+.HomeP {
+  background-image: radial-gradient(circle farthest-side at 65% 55%, var(--mid), var(--dark));
+  height: 100vh;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1% 10% 1fr 1fr 5%;
+      grid-template-columns: 1% 10% 1fr 1fr 5%;
+  -ms-grid-rows: 10% 0.5fr 0.5fr;
+      grid-template-rows: 10% 0.5fr 0.5fr;
+}
+
+.txt {
+  margin-top: 2em;
+  font-size: 230%;
+  -ms-grid-column: 3;
+  -ms-grid-column-span: 1;
+  grid-column: 3/4;
+  -ms-grid-row: 2;
+  -ms-grid-row-span: 2;
+  grid-row: 2/4;
+  text-align: left;
+}
+
+.txt h2 {
+  font-size: 95%;
+  padding: 1rem 0rem;
+}
+
+.SideBar {
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 1;
+  grid-column: 1/2;
+  -ms-grid-row: 2;
+  -ms-grid-row-span: 1;
+  grid-row: 2/3;
+  height: 40%;
+  margin-top: 5em;
+  opacity: 0.5;
+  background-color: white;
+}
+
+.reg-btn {
+  border-radius: 0.3rem;
+  padding: 0.5rem 1.5rem;
+  font-size: 45%;
+}
+
+img {
+  -ms-grid-row: 2;
+  -ms-grid-row-span: 2;
+  grid-row: 2/4;
+  -ms-grid-column: 4;
+  -ms-grid-column-span: 1;
+  grid-column: 4/5;
+  margin: 2em 2em 2em 0em;
+  height: 32em;
+}
+
+.Line {
+  height: 2px;
+  width: 100%;
+  background-color: var(--lineC);
+  opacity: 1;
+  border: none;
+}
+
+/*------------RegisterPage--------------*/
+.Reg {
+  height: 100vb;
+  background-size: cover;
+  background-image: radial-gradient(circle farthest-side at 50% 50%, var(--mid), var(--dark));
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-line-pack: center;
+      align-content: center;
+}
+
+.FormContainer {
+  margin: auto;
+}
+
+.inputs {
+  -webkit-box-shadow: 2px 2px 5px rgba(255, 255, 255, 0.197), -2px -2px 5px rgba(255, 255, 255, 0.17);
+          box-shadow: 2px 2px 5px rgba(255, 255, 255, 0.197), -2px -2px 5px rgba(255, 255, 255, 0.17);
+  width: 30em;
+  padding: 3em;
+  border-radius: 2em;
+  background-color: var(--dark);
+}
+
+.input {
+  position: relative;
+  margin-bottom: 20px;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.input input {
+  width: 100%;
+  font-size: 17px;
+  background: var(--mid);
+  border-radius: 8px;
+  padding: 16px 18px 16px 51px;
+  color: gainsboro;
+}
+
+.input img {
+  width: 16px;
+  position: absolute;
+  left: 19px;
+}
+
+.inputs p {
+  font-size: 90%;
+  margin: 1em;
+}
+
+.input button {
+  font-size: 100%;
+}
+
+.plans h2 {
+  text-align: center;
+  margin-top: 0.3em;
+}
+
+.plans .cards {
+  width: 90%;
+  margin: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.plans .cards .card {
+  border-radius: 2em;
+  border: none;
+  overflow: hidden;
+  width: 25em;
+  background-color: white;
+  -webkit-box-shadow: 4px 4px 3px var(--light), -4px -4px 3px var(--light);
+          box-shadow: 4px 4px 3px var(--light), -4px -4px 3px var(--light);
+  margin: 1em;
+}
+
+.plans .cards .card .card-body {
+  padding: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.plans .cards .card .card-body .card-title {
+  background-color: var(--BGColor);
+  margin: 0;
+  padding: 1em;
+}
+
+tr {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  border-bottom: 2px solid #666666;
+}
+
+th {
+  border-right: 2px solid #666666;
+  color: black;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  padding: 2em;
+}
+
+td {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  color: black;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  padding: 2em;
+}
+
+td p {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  color: #666666;
+  margin-left: 5px;
+}
+/*# sourceMappingURL=Style.css.map */

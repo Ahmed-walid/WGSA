@@ -4,11 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/Style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+        <link rel="stylesheet" href="css/Style.css">
     <title>WGSA</title>
 </head>
 
 <body>
+    <main>
         <header>
             <section class="nav-container">
                 <nav>
@@ -23,25 +26,39 @@
                         <li><a href="Offers">Offers</a></li>
                         <li><a href="FAQS">FAQS</a></li>
                         <li><a href="Login"> <Button class="log-btn">Log in</Button> </a></li>
-                                
                     </ul>
                 </nav>
-
-
-                <hr class="Line" />
             </section>
+            <hr class="Line" />
         </header>
 
+        <section class="plans">
+            
+            <h2>WSGA Mobile Packages</h2>
+            <div class="cards">
+                <% for(var row of result) { %>
+                
+                <div class="card">
+                    <div class="card-body">
+                        
+                        <h2 class="card-title"><%=row.Plan_name%></h2>
+                        <p class="card-text">
+                            <table>
+                                <tr> <th> MegaBytes</th>    <td> <%=row.Megas%>   <p>  MegaBytes</p></td>   </tr>
+                                <tr> <th> Minutes</th>      <td> <%=row.Minutes%>   <p>  Minutes</p></td>   </tr>
+                                <tr style="border-bottom: none;;"> <th> Price</th>        <td> <%=row.Price%>     <p>  EGP</p></td>   </tr>
+                            </table>
+                            
+                        </p>
+                        <a href="#" class="btn btn-primary">Migrate</a>
+                    </div>
+                </div>
+                <%}%>
 
-         <ul>
-   <% for(var row of result) { %>
-            <li>Plan name :<%=row.Plan_name%> &nbsp; &nbsp;&nbsp; &nbsp; plan code:<%=row.Plan_code %> &nbsp; &nbsp;&nbsp; &nbsp; plan price:<%=row.price%>&nbsp; &nbsp;&nbsp; &nbsp;            Minutes:<%=row.Minutes%>       &nbsp; &nbsp;&nbsp; &nbsp;  Megas:<%=row.Megas%>    </li>
-            <%}%>
-   </ul>
-
-
-
+        </section>
+    </main>
 
 </body>
 
 </html>
+

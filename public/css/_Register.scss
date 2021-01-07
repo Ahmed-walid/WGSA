@@ -1,0 +1,51 @@
+/*------------RegisterPage--------------*/
+.Reg{
+    height: 100vb;
+    background-size: cover;
+    background-image: radial-gradient(circle farthest-side at 50% 50%,var(--mid),var(--dark));
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+.FormContainer{
+    margin: auto;
+}
+.inputs {
+   box-shadow: 2px 2px 5px rgba(255, 255, 255, 0.197) ,-2px -2px 5px rgba(255, 255, 255, 0.17) ;
+    width: 30em;
+    padding: 3em;
+    border-radius: 2em;
+    background-color:var(--dark) ;
+
+}
+
+.input {
+	position: relative;
+	margin-bottom: 20px;
+	width: 100%;
+	display: flex;
+	align-items: center;
+}
+
+.input input {
+	width: 100%;
+	font-size: 17px;
+	background: var(--mid);
+	border-radius: 8px;
+	padding: 16px 18px 16px 51px;
+	color: rgb(220,220,220);
+}
+
+.input img {
+	width: 16px;
+	position: absolute;
+	left: 19px;
+}
+.inputs p{
+    font-size: 90%;
+    margin: 1em;
+}
+.input button{
+    font-size: 100%;
+    
+}
