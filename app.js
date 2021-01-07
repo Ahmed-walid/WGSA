@@ -87,6 +87,7 @@ app.get('/', (req, res) => {
 
     res.render('index')
 });
+
 app.get('/FAQS', (req, res) => {
 
     let myquery1 = "SELECT Question_code, Question, Answer, Answered_by from wgsa_company.FAQs";
@@ -102,8 +103,8 @@ app.get('/Login', (req, res) => {
 
 app.get('/Test', (req, res) => {
 
-    var result = ""
-    res.render('Test', { result:" " })
+    var result = "0"
+    res.render('Test', { result })
 });
 
 app.get('/Recharge', (req, res) => {
@@ -117,6 +118,16 @@ app.get('/DataEmployee', (req, res) => {
 app.get('/HR', (req, res) => {
     res.render('HR')
 });
+app.get('/', (req, res) => {
+
+    res.render('index')
+});
+
+app.get('/CustomerService', (req, res) => {
+
+    res.render('CustomerService')
+});
+
 app.get('/Offers', (req, res) => {
 
     let myquery1 = "SELECT Launch_date, Price, Minutes, Expire_date, Megas, Offer_describ, Offer_num from wgsa_company.Offer";
@@ -314,7 +325,7 @@ app.post('/Add_New_Offer', urlencodedParser, function (req, res) {
     var Expire_date=req.body.Expire_date;
 
     let myquery = `
-            Insert into wgsa_company.Offer(Launch_date, Price, Minutes, Expire_date, Megas, Offer_describ, Offer_num) values('${Launch_date}', $ { Price }, $ { Minutes }, '${Expire_date}', $ { Megas }, '${Offer_describtion}', $ { Offer_num })
+            Insert into wgsa_company.Offer(Launch_date, Price, Minutes, Expire_date, Megas, Offer_describ, Offer_num) values('${Launch_date}', ${ Price }, ${ Minutes }, '${Expire_date}', ${ Megas }, '${Offer_describtion}', ${ Offer_num })
             `;
 
     db.query(myquery, (err, result, field) => {
@@ -384,4 +395,583 @@ app.get('/Complain',(req, res) => {
             console.log(result);
             }
     });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*----------------------------------------------------------------HR-----------------------------------*/
+app.post('/Add_employee', urlencodedParser, function(req, res) {
+
+    var Fname = req.body.Fname;
+    var Lname = req.body.Lname;
+    var Dnum = req.body.Dnum;
+    var Address = req.body.Address;
+    var ssn = req.body.SSN;
+    var Position = req.body.Position;
+    var Salary = req.body.Salary;
+    var bnum = req.body.Bnum;
+    var hours = req.body.hours;
+    var gender = req.body.Gender;
+    var phone_num = req.body.Phone_number;
+    var s_ssn = req.body.Super_ssn;
+
+
+
+    let myquery = `INSERT INTO wgsa_company.employee(Fname, Lname, Dnum, Address, Ssn, Postion, Salary, Branch_num, Hours, Gender, Phone_num, Super_ssn) VALUES("${Fname}", "${Lname}", ${Dnum}, "${Address}", ${ssn}, "${Position}", ${Salary}, ${bnum}, ${hours}, "${gender}", ${phone_num}, ${s_ssn})`;
+
+
+    db.query(myquery, (err, result, field) => {
+        if (err) {
+            console.log(err)
+            res.render('404', { err });
+        } else {
+            console.log(result);
+            res.render('HR');
+        }
+    });
+
+});
+app.post('/Remove_customer', urlencodedParser, function(req, res) {
+
+    var phone_num = req.body.Phone_num;
+
+    let myquery = `delete FROM wgsa_company.customer WHERE customer.Phone_num =${phone_num}`;
+
+    db.query(myquery, (err, result, field) => {
+        if (err) {
+            console.log(err)
+            res.render('404', { err });
+        }
+        console.log(result);
+        res.render('HR', { result });
+    });
+
+});
+
+app.post('/Remove_employee', urlencodedParser, function(req, res) {
+
+    var ssn = req.body.SSN;
+
+    let myquery = `delete FROM wgsa_company.EMPLOYEE WHERE EMPLOYEE.SSN =${ssn}`;
+
+    db.query(myquery, (err, result, field) => {
+        if (err) {
+            console.log(err)
+            res.render('404', { err });
+        }
+        console.log(result);
+        res.render('HR', { result });
+    });
+
+});
+app.post('/Add_branch', urlencodedParser, function(req, res) {
+
+    var phone_num = req.body.phone_num;
+    var bnum = req.body.bnum;
+    var location = req.body.location;
+
+
+    let myquery = `INSERT INTO wgsa_company.branch(Phone_num, Bnum, Location) VALUES(${phone_num}, ${bnum}, "${location}")`;
+
+    db.query(myquery, (err, result, field) => {
+        if (err) {
+            console.log(err)
+            res.render('404', { err });
+        }
+        console.log(result);
+        res.render('HR');
+    });
+
+});
+app.post('/Remove_branch', urlencodedParser, function(req, res) {
+
+    var bnum = req.body.bnum;
+
+    let myquery = `delete FROM wgsa_company.branch WHERE branch.bnum =${bnum}`;
+
+    db.query(myquery, (err, result, field) => {
+        if (err) {
+            console.log(err)
+            res.render('404', { err });
+        }
+        console.log(result);
+        res.render('HR', { result });
+    });
+
+});
+/*-------------------------------------------------customer service--------------------------------*/
+app.post('/change_cplan', urlencodedParser, function(req, res) {
+
+    var plane_code = req.body.plane_code;
+    var phone_num = req.body.phone_num;
+    let myquery = `UPDATE wgsa_company.customer SET Plan_code =${plane_code} WHERE Phone_num = ${phone_num}`;
+
+    db.query(myquery, (err, result, field) => {
+        if (err) {
+            console.log(err)
+            res.render('404', { err });
+        }
+        console.log(result);
+        res.render('CustomerService', { result });
+    });
+
 });
