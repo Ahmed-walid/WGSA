@@ -10,7 +10,7 @@ const mysql = require('mysql');
 const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: '7561275612',
+    password: '01149873532',
     database: 'wgsa_company'
 });
 
@@ -168,7 +168,7 @@ app.get('/Customer', (req, res) => {
 });
 
 
-app.post('/heatmapp', function (req, res, err) {
+app.post('/heatmapp', function(req, res, err) {
 
     console.log("hey");
 
@@ -178,7 +178,7 @@ app.post('/heatmapp', function (req, res, err) {
 });
 
 
-app.post('/Update_Plan_Cost', urlencodedParser, function (req, res) {
+app.post('/Update_Plan_Cost', urlencodedParser, function(req, res) {
 
     var Plannewprice = req.body.Plan_New_Price;
     var plancode = req.body.Plan_Code;
@@ -191,7 +191,7 @@ app.post('/Update_Plan_Cost', urlencodedParser, function (req, res) {
     });
 
 });
-app.post('/Delete_Plan', urlencodedParser, function (req, res) {
+app.post('/Delete_Plan', urlencodedParser, function(req, res) {
 
     var Plan_code = req.body.Plan_Code;
 
@@ -204,7 +204,7 @@ app.post('/Delete_Plan', urlencodedParser, function (req, res) {
     });
 
 });
-app.post('/Remove_customer', urlencodedParser, function (req, res) {
+app.post('/Remove_customer', urlencodedParser, function(req, res) {
 
     var phone_num = req.body.Phone_num;
 
@@ -220,7 +220,7 @@ app.post('/Remove_customer', urlencodedParser, function (req, res) {
     });
 
 });
-app.post('/Remove_employee', urlencodedParser, function (req, res) {
+app.post('/Remove_employee', urlencodedParser, function(req, res) {
 
     var ssn = req.body.SSN;
 
@@ -238,7 +238,7 @@ app.post('/Remove_employee', urlencodedParser, function (req, res) {
 });
 
 
-app.post('/Add_New_Plan', urlencodedParser, function (req, res) {
+app.post('/Add_New_Plan', urlencodedParser, function(req, res) {
 
     var Plan_name = req.body.Plan_name;
     var Plan_code = req.body.Plan_code;
@@ -259,7 +259,7 @@ app.post('/Add_New_Plan', urlencodedParser, function (req, res) {
 
 });
 
-app.post('/Add_employee', urlencodedParser, function (req, res) {
+app.post('/Add_employee', urlencodedParser, function(req, res) {
 
     var Fname = req.body.Fname;
     var Lname = req.body.Lname;
@@ -293,11 +293,10 @@ app.post('/Add_employee', urlencodedParser, function (req, res) {
 
 
 
-app.post('/Recharge_Process', urlencodedParser, function (req, res)
-{
-    var Card_Serial_Num=req.body.Card_Serial_Num;
-     var user_number=13654456;
-    let myquery= `Update wgsa_company.customer
+app.post('/Recharge_Process', urlencodedParser, function(req, res) {
+    var Card_Serial_Num = req.body.Card_Serial_Num;
+    var user_number = 13654456;
+    let myquery = `Update wgsa_company.customer
     set customer.balance=customer.balance+ (select Card_value
                                                     from wgsa_company.card
                                                     where card.Serial_number=${Card_Serial_Num})
@@ -305,26 +304,25 @@ app.post('/Recharge_Process', urlencodedParser, function (req, res)
 
 
     db.query(myquery, (err, result, field) => {
-        if (err) res.render('404',{err});
-        else
-        {
-        console.log(result);
-        res.render('Recharge',{status:1});
+        if (err) res.render('404', { err });
+        else {
+            console.log(result);
+            res.render('Recharge', { status: 1 });
         }
-    });  
+    });
 });
 
 
 
-app.post('/Add_New_Offer', urlencodedParser, function (req, res) {
+app.post('/Add_New_Offer', urlencodedParser, function(req, res) {
 
-    var Offer_num=req.body.Offer_num;
-    var Offer_describtion=req.body.Offer_describtion;
-    var Minutes=req.body.Minutes;
-    var Megas=req.body.Megas;
-    var Price=req.body.Price;
-    var Launch_date=req.body.Launch_date;
-    var Expire_date=req.body.Expire_date;
+    var Offer_num = req.body.Offer_num;
+    var Offer_describtion = req.body.Offer_describtion;
+    var Minutes = req.body.Minutes;
+    var Megas = req.body.Megas;
+    var Price = req.body.Price;
+    var Launch_date = req.body.Launch_date;
+    var Expire_date = req.body.Expire_date;
 
     let myquery = `
             Insert into wgsa_company.Offer(Launch_date, Price, Minutes, Expire_date, Megas, Offer_describ, Offer_num) values('${Launch_date}', ${ Price }, ${ Minutes }, '${Expire_date}', ${ Megas }, '${Offer_describtion}', ${ Offer_num })
@@ -358,44 +356,43 @@ app.post('/getemployeeinfo', urlencodedParser, (req, res) => {
 app.post('/Complain_process', urlencodedParser, (req, res) => {
 
     var Complaint = req.body.User_Complaint;
-    var user_id =123987;
-    current_date='2021-08-08';
-    
-   
-    let Querytogetmaxcode = ` SELECT MAX(wgsa_company.complaint.C_Code) as m  from wgsa_company.complaint`; 
+    var user_id = 123987;
+    current_date = '2021-08-08';
+
+
+    let Querytogetmaxcode = ` SELECT MAX(wgsa_company.complaint.C_Code) as m  from wgsa_company.complaint`;
     db.query(Querytogetmaxcode, (err, result, field) => {
-        if (err){ 
-            res.render('404',{err});
+        if (err) {
+            res.render('404', { err });
             throw err;
-            }    
-             var maxcode=result[0].m;
-             maxcode=maxcode+1;
-             console.log(Complaint);
-             let myquery1=`Insert into wgsa_company.complaint (C_Code, C_Status, C_Descrip, Complaint_by, Complaint_date) values (${maxcode},'Wait','${Complaint}','${user_id}','${current_date}')`;
-             db.query(myquery1, (err, result, field) => {
-                 if (err){ 
-                     res.render('404',{err});
-                     throw err;
-                     }    
-                     console.log(result);
-             });
-           
+        }
+        var maxcode = result[0].m;
+        maxcode = maxcode + 1;
+        console.log(Complaint);
+        let myquery1 = `Insert into wgsa_company.complaint (C_Code, C_Status, C_Descrip, Complaint_by, Complaint_date) values (${maxcode},'Wait','${Complaint}','${user_id}','${current_date}')`;
+        db.query(myquery1, (err, result, field) => {
+            if (err) {
+                res.render('404', { err });
+                throw err;
+            }
+            console.log(result);
         });
+
+    });
 
 
 });
 
-app.get('/Complain',(req, res) => {
-    let query=`Select *
+app.get('/Complain', (req, res) => {
+    let query = `Select *
     from wgsa_company.complaint`;
     db.query(query, (err, result, field) => {
-        if (err){ 
-            res.render('404',{err})
-            }else
-            { 
-                res.render('Complain',{result});   
+        if (err) {
+            res.render('404', { err })
+        } else {
+            res.render('Complain', { result });
             console.log(result);
-            }
+        }
     });
 });
 
