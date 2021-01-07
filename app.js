@@ -168,7 +168,7 @@ app.get('/Customer', (req, res) => {
 });
 
 
-app.post('/heatmapp', function (req, res, err) {
+app.post('/heatmapp', function(req, res, err) {
 
     console.log("hey");
 
@@ -178,7 +178,7 @@ app.post('/heatmapp', function (req, res, err) {
 });
 
 
-app.post('/Update_Plan_Cost', urlencodedParser, function (req, res) {
+app.post('/Update_Plan_Cost', urlencodedParser, function(req, res) {
 
     var Plannewprice = req.body.Plan_New_Price;
     var plancode = req.body.Plan_Code;
@@ -191,7 +191,7 @@ app.post('/Update_Plan_Cost', urlencodedParser, function (req, res) {
     });
 
 });
-app.post('/Delete_Plan', urlencodedParser, function (req, res) {
+app.post('/Delete_Plan', urlencodedParser, function(req, res) {
 
     var Plan_code = req.body.Plan_Code;
 
@@ -204,7 +204,7 @@ app.post('/Delete_Plan', urlencodedParser, function (req, res) {
     });
 
 });
-app.post('/Remove_customer', urlencodedParser, function (req, res) {
+app.post('/Remove_customer', urlencodedParser, function(req, res) {
 
     var phone_num = req.body.Phone_num;
 
@@ -220,7 +220,7 @@ app.post('/Remove_customer', urlencodedParser, function (req, res) {
     });
 
 });
-app.post('/Remove_employee', urlencodedParser, function (req, res) {
+app.post('/Remove_employee', urlencodedParser, function(req, res) {
 
     var ssn = req.body.SSN;
 
@@ -238,7 +238,7 @@ app.post('/Remove_employee', urlencodedParser, function (req, res) {
 });
 
 
-app.post('/Add_New_Plan', urlencodedParser, function (req, res) {
+app.post('/Add_New_Plan', urlencodedParser, function(req, res) {
 
     var Plan_name = req.body.Plan_name;
     var Plan_code = req.body.Plan_code;
@@ -259,7 +259,7 @@ app.post('/Add_New_Plan', urlencodedParser, function (req, res) {
 
 });
 
-app.post('/Add_employee', urlencodedParser, function (req, res) {
+app.post('/Add_employee', urlencodedParser, function(req, res) {
 
     var Fname = req.body.Fname;
     var Lname = req.body.Lname;
@@ -314,7 +314,7 @@ app.post('/Recharge_Process', urlencodedParser, function (req, res) {
 
 
 
-app.post('/Add_New_Offer', urlencodedParser, function (req, res) {
+app.post('/Add_New_Offer', urlencodedParser, function(req, res) {
 
     var Offer_num = req.body.Offer_num;
     var Offer_describtion = req.body.Offer_describtion;
