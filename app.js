@@ -87,6 +87,7 @@ app.get('/', (req, res) => {
 
     res.render('index')
 });
+
 app.get('/FAQS', (req, res) => {
 
     let myquery1 = "SELECT Question_code, Question, Answer, Answered_by from wgsa_company.FAQs";
@@ -102,7 +103,7 @@ app.get('/Login', (req, res) => {
 
 app.get('/Test', (req, res) => {
 
-    var result = ""
+    var result = "0"
     res.render('Test', { result })
 });
 
@@ -112,6 +113,16 @@ app.get('/DataEmployee', (req, res) => {
 app.get('/HR', (req, res) => {
     res.render('HR')
 });
+app.get('/', (req, res) => {
+
+    res.render('index')
+});
+
+app.get('/CustomerService', (req, res) => {
+
+    res.render('CustomerService')
+});
+
 app.get('/Offers', (req, res) => {
 
     let myquery1 = "SELECT Launch_date, Price, Minutes, Expire_date, Megas, Offer_describ, Offer_num from wgsa_company.Offer";
@@ -226,9 +237,7 @@ app.post('/getemployeeinfo', urlencodedParser, (req, res) => {
 
     var PhoneNumber = req.body.Phone_number;
     //var PhoneNumber = 13654456
-    let myquery1 = `
-            SELECT * from wgsa_company.Customer where Customer.Phone_num = $ { PhoneNumber }
-            `;
+    let myquery1 = `SELECT * from wgsa_company.Customer where Customer.Phone_num = ${PhoneNumber}`;
     //let myquery2 = "SELECT * from wgsa_company.Customer";
     db.query(myquery1, (err, result, field) => {
         if (err) throw err;

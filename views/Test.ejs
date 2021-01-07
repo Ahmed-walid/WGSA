@@ -1,41 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <link rel="stylesheet" href="css/Style.css">
     <title>Document</title>
 </head>
+<script>
+    function myFunction1() {
+        var x = document.getElementById("form1");
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+    }
+</script>
+
 <body>
-    
-    
+
+
     <form action="/getemployeeinfo" method="POST">
         <div class="form-group">
-          <label for="ex.phone_num">Phone number</label>
-          <input type="number" class="form-control" id="exampleInputEmail1" name="Phone_number" aria-describedby="emailHelp" placeholder="Enter Phone number">
-          <small id="emailHelp" class="form-text text-muted">Ensure that phone number is correct</small>
+            <label for="ex.phone_num">Phone number</label>
+            <input type="number" class="form-control" id="exampleInputEmail1" name="Phone_number" aria-describedby="emailHelp" placeholder="Enter Phone number">
+            <small id="emailHelp" class="form-text text-muted">Ensure that phone number is correct</small>
         </div>
-    
+
         <button type="submit" class="btn btn-primary">Get customer info</button>
-      </form>
-   
-    
-      <div  class="alert alert-light" role="alert">
-        <ul class="list-group">
-            <li  style="color:black;" class="list-group-item">Name : <%=result[0].Fname%> <%=result[0].Lname%> </li>
-            <li  style="color:black;" class="list-group-item">ID :<%=result[0].Id%></li>
-            <li  style="color:black;"  class="list-group-item">Phone number:<%=result[0].Phone_num%> </li>
-            <li  style="color:black;" class="list-group-item">Plan code :<%=result[0].Plan_code%></li>
-            <li  style="color:black;" class="list-group-item">Balance :<%=result[0].Balance%></li>
-            <li  style="color:black;" class="list-group-item">Address :<%=result[0].Address%></li>
-            <li  style="color:black;" class="list-group-item">Gender :<%=result[0].Gender%></li>
-            <li  style="color:black;" class="list-group-item">Used Minutes:<%=result[0].Used_min%></li>
-            <li  style="color:black;" class="list-group-item">Used Megas:<%=result[0].Used_megas%></li>
-            <li  style="color:black;" class="list-group-item">Renewal date:<%=result[0].Renewal_date%></li>
-          </ul>
-      </div>
+    </form>
+
+
+    <div lass=" alert alert-light " role="alert ">
+        <ul class="list-group ">
+            <li style="color:black; " class="list-group-item ">Name :
+                <%=result[0].Fname%>
+                    <%=result[0].Lname%>
+            </li>
+            <li style="color:black; " class="list-group-item ">ID :
+                <%=result[0].Id%>
+            </li>
+            <li style="color:black; " class="list-group-item ">Phone number:
+                <%=result[0].Phone_num%>
+            </li>
+            <li style="color:black; " class="list-group-item ">Plan code :
+                <%=result[0].Plan_code%>
+            </li>
+            <li style="color:black; " class="list-group-item ">Balance :
+                <%=result[0].Balance%>
+            </li>
+            <li style="color:black; " class="list-group-item ">Address :
+                <%=result[0].Address%>
+            </li>
+            <li style="color:black; " class="list-group-item ">Gender :
+                <%=result[0].Gender%>
+            </li>
+            <li style="color:black; " class="list-group-item ">Used Minutes:
+                <%=result[0].Used_min%>
+            </li>
+            <li style="color:black; " class="list-group-item ">Used Megas:
+                <%=result[0].Used_megas%>
+            </li>
+            <li style="color:black; " class="list-group-item ">Renewal date:
+                <%=result[0].Renewal_date%>
+            </li>
+        </ul>
+    </div>
 
 </body>
+
 </html>
