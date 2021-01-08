@@ -2,6 +2,7 @@ const { JSDOM } = require("jsdom");
 const { window } = new JSDOM("");
 const $ = require("jquery")(window);
 var bodyParser = require('body-parser')
+const { check, body, validationResult } = require('express-validator');
 const express = require('express');
 const morgan = require('morgan');
 const mysql = require('mysql');
