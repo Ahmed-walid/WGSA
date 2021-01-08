@@ -88,6 +88,7 @@ app.get('/', (req, res) => {
     res.render('index')
 });
 
+
 app.get('/FAQS', (req, res) => {
 
     let myquery1 = "SELECT Question_code, Question, Answer, Answered_by from wgsa_company.FAQs";
@@ -422,7 +423,48 @@ app.post('/Delete_Complaint', urlencodedParser, (req, res) => {
     });
 });
 
+app.get('/Transfer', (req, res) => {
+    res.render('Transfer')
+});
 
+
+
+
+app.post('/Transfer_balance', urlencodedParser, (req, res) => {
+
+        var user_phone_number= 13654456 ;
+        var Recipient_Phone_number=req.body.Recipient_phone_num;
+        var Balance_to_be_transfered =req.body.Balance_to_be_transfered;
+
+        let query1 = `Update wgsa_company.customer 
+        set customer.Balance=customer.Balance-${Balance_to_be_transfered}
+        where customer.Phone_num=${user_phone_number}`;
+        
+       
+        db.query(query1, (err, result, field) => {
+            if (err) {
+                res.render('404', { err });
+                console.log(result);
+            } else {
+
+                let  query2  =`update wgsa_company.customer
+                set customer.Balance=customer.Balance+${Balance_to_be_transfered}
+                where customer.phone_num=${Recipient_Phone_number};`
+
+                db.query(query2, (err, result, field) => {
+                    if (err) {
+                        res.render('404', { err });
+                        console.log(result);
+                    } else {
+
+                        res.render('Transfer');
+                        
+                    }
+                });
+
+            }
+        });        
+});
 
 
 
