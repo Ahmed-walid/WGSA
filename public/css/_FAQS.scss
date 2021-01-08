@@ -1,0 +1,28 @@
+#accordionFlushExample{
+    margin: auto;
+    margin-top: 5em;
+    width: 60%;
+    padding: 3em;
+    border-radius: 2em;
+    font-family: 'Montserrat', sans-serif;
+    .accordion-item {
+        
+        
+        .accordion-button {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            background-color: var(--BGColor);
+            color: white;
+        }
+        .accordion-body {
+            background-color: white;
+            color: black;
+            p{
+                color:#888888;
+                font-weight: light;
+            }
+        }
+
+
+    }
+}
