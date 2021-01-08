@@ -14,17 +14,7 @@
             height: 200px;
         }
     </style>
-
     <script>
-        function myFunction1() {
-            var x = document.getElementById("form1");
-            if (x.style.display === "none") {
-                x.style.display = "block";
-            } else {
-                x.style.display = "none";
-            }
-        }
-
         function myFunction2() {
             var x = document.getElementById("form2");
             if (x.style.display === "none") {
@@ -42,64 +32,40 @@
                 x.style.display = "none";
             }
         }
-
-        function myFunction4() {
-            var x = document.getElementById("form4");
-            if (x.style.display === "none") {
-                x.style.display = "block";
-            } else {
-                x.style.display = "none";
-            }
-        }
-
-        function myFunction5() {
-            var x = document.getElementById("form5");
-            if (x.style.display === "none") {
-                x.style.display = "block";
-            } else {
-                x.style.display = "none";
-            }
-        }
     </script>
 </head>
 
 <body>
 
     <div class="btn-group" role="group" aria-label="Basic example">
-        <button onclick="myFunction1()" type="button" class="btn btn-primary">Remove Employee</button>
-        <button onclick="myFunction2()" type="button" class="btn btn-primary">Add employee</button>
-        <button onclick="myFunction3()" type="button" class="btn btn-primary">Remove customer</button>
-        <button onclick="myFunction4()" type="button" class="btn btn-primary">Add branch</button>
-        <button onclick="myFunction5()" type="button" class="btn btn-primary">Remove branch</button>
-    </div>
-
-
-    <div style="display:none;" class="alert alert-success">
-        <strong>Success!</strong> Indicates a successful or positive action.
-    </div>
-
-    <div style="display:none;" class="alert alert-danger">
-        <strong>Danger!</strong>
+        <a href="Test"><button type=" button " class="btn btn-primary ">Get Customer info</button></a>
+        <button onclick="myFunction2()" type=" button " class="btn btn-primary ">Change customers' plan</button>
+        <button onclick="myFunction3()" type="button " class="btn btn-primary ">Add new customer</button>
+        <button onclick="myFunction5()" type="button " class="btn btn-primary ">Register customers' complaint</button>
     </div>
 
 
 
 
-    <div id="form1" style="display:none;">
-        <form action="/Remove_employee" method="POST">
-            <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">SSN</label>
-                <input type="number" name="SSN" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                <button type="submit" class="btn btn-primary">Remove employee</button>
+    <div id="form2" style="display:none; ">
+        <form action="/change_cplan" method="POST">
+            <div class="mb-3 ">
+                <label for="exampleInputEmail1 " class="form-label ">Plane code</label>
+                <input type="number " name="plane_code" class="form-control " id="exampleInputEmail1 " aria-describedby="emailHelp ">
             </div>
+            <div class="mb-3 ">
+                <label for="exampleInputPassword1 " class="form-label ">Customer phone number</label>
+                <input type="number " name="phone_num" class="form-control " id="exampleInputPassword1 ">
+            </div>
+            <button type="submit " class="btn btn-primary ">Change customers' plan</button>
         </form>
     </div>
 
 
 
 
-    <div id="form2" style="display:none;">
-        <form action="/Add_employee" method="POST">
+    <div id="form3" style="display:none;">
+        <form action="/Add_customer" method="POST">
 
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Frist name</label>
@@ -168,51 +134,8 @@
 
 
 
-    <!-- for adding new offer -->
-    <div id="form3" style="display:none;">
-        <form action="/Remove_customer" method="POST">
-            <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Phone number</label>
-                <input type="number" name="Phone_num" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-            </div>
-            <button type="submit" class="btn btn-primary">Remove customer</button>
-        </form>
-    </div>
 
 
-
-    <div id="form4" style="display:none;">
-        <form action="/Add_branch" method="POST">
-            <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Phone number</label>
-                <input type="number" name="phone_num" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-            </div>
-            <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Branch number</label>
-                <input type="number" name="bnum" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-            </div>
-            <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Location</label>
-                <input type="ntext" name="location" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-            </div>
-            <button type="submit" class="btn btn-primary">Add branch</button>
-        </form>
-    </div>
-
-
-    <div id="form5" style="display:none;">
-        <form action="/Remove_branch" method="POST">
-            <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Branch number</label>
-                <input type="number" name="bnum" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-            </div>
-            <button type="submit" class="btn btn-primary">Remove branch</button>
-        </form>
-    </div>
-
-</body>
-
-</html>
 </body>
 
 </html>

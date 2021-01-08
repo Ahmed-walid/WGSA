@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+        integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css"
+        integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+        integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
+        crossorigin="anonymous"></script>
+    <title>Recharge</title>
+</head>
+
+<body>
+
+
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h1 class="panel-title">Recharge</h1>
+        </div>
+        <div class="panel-body">
+
+
+            <div id="form1" >
+                <form action="/Recharge_Process" method="POST">
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Card serial number </label>
+                        <input type="number" name="Card_Serial_Num" class="form-control" id="exampleInputEmail1"
+                            aria-describedby="emailHelp">
+                    </div>
+                    <button type="submit" class="btn btn-success">Recharge</button>
+                </form>
+                <div style="display:none;" id="Anger" class="alert alert-danger">
+                    <strong>Invalid serial number!</strong>
+                </div>
+
+                <div style="display:none;" id="Success" class="alert alert-success">
+                    <strong>Success!</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  
+</body>
+
+</html>
