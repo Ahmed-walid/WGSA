@@ -11,7 +11,7 @@ const mysql = require('mysql');
 const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: '7561275612',
+    password:'',
     database: 'wgsa_company'
 });
 
@@ -92,15 +92,15 @@ app.get('/', (req, res) => {
 
 app.get('/FAQS', (req, res) => {
 
-    let myquery1 = "SELECT Question_code, Question, Answer, Answered_by from wgsa_company.FAQs";
+    let myquery1 = "SELECT Question_code, Question, Answer, Fname,Lname from wgsa_company.FAQs , wgsa_company.employee where Answered_by=Ssn";
     db.query(myquery1, (err, result, field) => {
         if (err) throw err;
         res.render('FAQS', { result })
     });
 });
 app.get('/Login', (req, res) => {
-
-    res.render('Login')
+    
+    res.render('Login', { errmessage: '', successMes: '' })
 });
 
 app.get('/Test', (req, res) => {
@@ -150,7 +150,7 @@ app.get('/plans', (req, res) => {
 });
 app.get('/Register', (req, res) => {
 
-    res.render('Register')
+    res.render('Register', { errmessage: '', successMes: '' })
 });
 
 app.get('/Customer', (req, res) => {
@@ -473,7 +473,68 @@ app.post('/Transfer_balance', urlencodedParser, (req, res) => {
 
 
 
+//login and register
 
+app.post('/registernew', urlencodedParser, (req, res) => {
+    const { Fname, Lname, Phone_number, password, ID } = req.body;
+    var gender = req.body.gender;
+
+    if (!Fname || !Lname || !Phone_number || !password || !ID || !gender) {
+        return res.render('Register', { errmessage: 'Please enter all fields', successMes: '' });
+    }
+
+    db.query('select phone_num from customer where phone_num=? or ID=?', [Phone_number, ID], (err, result) => {
+        console.log(result);
+        if (err) throw err;
+
+        if (result.length > 0) {
+            res.render('Register', { errmessage: 'This Phone is Already registerd', successMes: '' });
+        }
+        else {      //valid
+
+            if (gender == 'male')
+                gender = 'M';
+            else
+                gender = 'F';
+
+            if (password.length < 7)
+                return res.render('Register', { errmessage: 'Password should be at least 6 characters', successMes: '' });
+
+            db.query('insert into customer(Fname,Lname,Phone_num,ID,gender,password) values(?,?,?,?,?,?)', [Fname, Lname, Phone_number, ID, gender, password], err => {
+                if (err) throw err;
+                res.render('Register', { errmessage: '', successMes: 'Registerd You Can now Log in ' });
+            });
+        }
+    }
+    );
+});
+
+app.post('/loginSubmit', urlencodedParser, (req, res) => {
+    const { Phone_number, password } = req.body;
+    console.log(Phone_number,password);
+    
+    if (!Phone_number || !password) {
+        return res.render('Login', { errmessage: 'Please enter all fields', successMes: '' });
+    }
+
+    db.query('select phone_num,password from customer where phone_num=?', [Phone_number], (err, result) => {
+        if (err) throw err;
+
+        if (result.length == 0) {
+            return res.render('Login', { errmessage: 'This Phone is not Registered yet', successMes: '' });
+        }
+        if (result[0].password != password)
+            return res.render('Login', { errmessage: 'Wrong Password', successMes: '' });
+
+        return res.render('CustomerAccount', { errmessage: '', successMes: '' });
+
+    }
+    );
+});
+app.get('/CustomerAccount', (req, res) => {
+
+    res.render('CustomerAccount')
+});
 
 
 
