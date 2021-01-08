@@ -221,6 +221,10 @@ img {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   -ms-flex-line-pack: center;
       align-content: center;
 }
@@ -260,7 +264,8 @@ img {
 }
 
 .input img {
-  width: 16px;
+  width: 20px;
+  height: 20px;
   position: absolute;
   left: 19px;
 }
@@ -272,6 +277,55 @@ img {
 
 .input button {
   font-size: 100%;
+}
+
+.name-cont {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.name-cont input {
+  margin-bottom: 20px;
+  width: 49%;
+  font-size: 17px;
+  background: var(--mid);
+  border-radius: 8px;
+  padding: 16px;
+  color: gainsboro;
+}
+
+.alertErr {
+  background-color: rgba(224, 20, 20, 0.3);
+  border: 1px solid #e01414;
+  text-align: center;
+  padding: 1em;
+  border-radius: 1em;
+  margin: .5em;
+}
+
+.alertSuccess {
+  background-color: rgba(37, 224, 20, 0.3);
+  border: 1px solid #25e014;
+  text-align: center;
+  padding: 1em;
+  border-radius: 1em;
+  margin: .5em;
+}
+
+.gender {
+  margin: -.5em 0 .5em 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .plans h2 {
@@ -324,6 +378,14 @@ img {
   background-color: var(--BGColor);
   margin: 0;
   padding: 1em;
+  border-radius: 0 0 50% 50%;
+  -webkit-box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.292);
+          box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.292);
+}
+
+.plans .cards .card .card-body .card-text {
+  color: black;
+  padding: 2em;
 }
 
 tr {
@@ -362,5 +424,31 @@ td p {
           flex: 1;
   color: #666666;
   margin-left: 5px;
+}
+
+#accordionFlushExample {
+  margin: auto;
+  margin-top: 5em;
+  width: 60%;
+  padding: 3em;
+  border-radius: 2em;
+  font-family: 'Montserrat', sans-serif;
+}
+
+#accordionFlushExample .accordion-item .accordion-button {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  background-color: var(--BGColor);
+  color: white;
+}
+
+#accordionFlushExample .accordion-item .accordion-body {
+  background-color: white;
+  color: black;
+}
+
+#accordionFlushExample .accordion-item .accordion-body p {
+  color: #888888;
+  font-weight: light;
 }
 /*# sourceMappingURL=Style.css.map */

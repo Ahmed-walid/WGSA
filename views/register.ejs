@@ -4,9 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <link rel="stylesheet" href="css/Style.css">
     <title>WGSA</title>
+    <link rel="icon" href="/images/logo.svg">
 </head>
 
 <body>
@@ -31,38 +33,69 @@
     </header>
 
     <main class="Reg">
+
         <div class="FormContainer">
-            <section class="inputs">
-                <form>
-                    <div class="input">
-                        <input placeholder="Username" type="text">
-                        <img src="../images/user.svg">
-                    </div>
-
-                    <div class="input">
-                        <input placeholder="Email" type="text">
-                        <img src="../images/mail.svg">
-                    </div>
-
-                    <div class="input">
-                        <input placeholder="Password" type="password">
-                        <img src="../images/pass.svg">
-                    </div>
-
-                    <div class="input">
-                        <button class="reg-btn"> Register </button> 
-                    </div>
-
-                    <p>Already Registered?</p>
-
-                </form>
-                <div class="input">
-                    <a href="Login"> <Button class="reg-btn">
-                            Log in
-                        </Button> </a>
+            <% if (errmessage) { %>
+                <div class="alertErr">
+                    <%= errmessage %>
                 </div>
-            </section>
+                <% } %>
+                    <% if (successMes) { %>
+                        <div class="alertSuccess">
+                            <%= successMes %>
+                        </div>
+                        <% } %>
+
+                            <section class="inputs">
+                                <form action="/registernew" method="POST">
+                                    <div class="name-cont">
+                                        <input placeholder="First name" type="text" name="Fname">
+                                        <input placeholder="Last Name" type="text" name="Lname">
+                                    </div>
+                                    <div class="input">
+                                        <input placeholder="Phone number" type="text" name="Phone_number">
+                                        <img src="../images/phone.svg">
+                                    </div>
+
+                                    <div class="input">
+                                        <input placeholder="ID" type="text" name="ID">
+                                        <img src="../images/ID.svg">
+                                    </div>
+
+
+                                    <div class="input">
+                                        <input placeholder="Password" type="password" name="password">
+                                        <img src="../images/pass.png">
+                                    </div>
+
+                                    <p>Gender:</p>
+                                    <div class="gender">
+                                        <div>
+                                            <input type="radio" id="male" name="gender" value="male">
+                                            <label for="male">Male</label><br>
+                                        </div>
+                                        <div>
+                                            <input type="radio" id="female" name="gender" value="male">
+                                            <label for="female">Female</label>
+                                        </div>
+                                    </div>
+                                    <div class="input">
+                                        <button class="reg-btn" type="submit"> Register </button>
+                                    </div>
+
+                                    <p>Already Registered?</p>
+
+                                </form>
+
+
+                                <div class="input">
+                                    <a href="Login"> <Button class="reg-btn">
+                                            Log in
+                                        </Button> </a>
+                                </div>
+
         </div>
+        </section>
     </main>
 
 </body>

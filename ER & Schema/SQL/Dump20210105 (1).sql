@@ -1,4 +1,4 @@
-CREATE DATABASE  IF NOT EXISTS `wgsa_company` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+-- CREATE DATABASE  IF NOT EXISTS `wgsa_company` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `wgsa_company`;
 -- MySQL dump 10.13  Distrib 8.0.22, for Win64 (x86_64)
 --
@@ -58,7 +58,7 @@ CREATE TABLE `card` (
   `Recharge_date` date DEFAULT NULL,
   PRIMARY KEY (`Serial_number`),
   KEY `Recharged_by` (`Recharged_by`),
-  CONSTRAINT `card_ibfk_1` FOREIGN KEY (`Recharged_by`) REFERENCES `customer` (`Id`)
+  CONSTRAINT `card_ibfk_1` FOREIGN KEY (`Recharged_by`) REFERENCES `customer` (`Phone_num`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -91,7 +91,7 @@ CREATE TABLE `complaint` (
   PRIMARY KEY (`C_Code`),
   KEY `Complaint_by` (`Complaint_by`),
   KEY `Replied_by` (`Replied_by`),
-  CONSTRAINT `complaint_ibfk_1` FOREIGN KEY (`Complaint_by`) REFERENCES `customer` (`Id`),
+  CONSTRAINT `complaint_ibfk_1` FOREIGN KEY (`Complaint_by`) REFERENCES `customer` (`Phone_num`),
   CONSTRAINT `complaint_ibfk_2` FOREIGN KEY (`Replied_by`) REFERENCES `employee` (`Ssn`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -117,7 +117,7 @@ CREATE TABLE `customer` (
   `Fname` varchar(50) DEFAULT NULL,
   `Lname` varchar(50) DEFAULT NULL,
   `Id` int NOT NULL,
-  `Phone_num` int DEFAULT NULL,
+  `Phone_num` int not NULL,
   `Plan_code` int DEFAULT NULL,
   `Balance` float DEFAULT NULL,
   `Address` varchar(50) DEFAULT NULL,
@@ -125,8 +125,8 @@ CREATE TABLE `customer` (
   `Used_min` int DEFAULT NULL,
   `Used_megas` int DEFAULT NULL,
   `Renewal_date` date DEFAULT NULL,
-  PRIMARY KEY (`Id`),
-  UNIQUE KEY `Phone_num_UNIQUE` (`Phone_num`),
+  `Password` varchar(50) not NULL,
+  PRIMARY KEY (`Phone_num`),
   KEY `Plan_code` (`Plan_code`),
   CONSTRAINT `customer_ibfk_1` FOREIGN KEY (`Plan_code`) REFERENCES `plan` (`Plan_code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -138,7 +138,7 @@ CREATE TABLE `customer` (
 
 LOCK TABLES `customer` WRITE;
 /*!40000 ALTER TABLE `customer` DISABLE KEYS */;
-INSERT INTO `customer` VALUES ('Tarek','Fahmy',123987,13654456,112,350,'Zayed','M',100,500,'2020-08-02'),('Israa','Gamal',143696,13357741,333,200,'Zatoon','F',100,500,'2020-08-03'),('Ahmed','Gamal',147852,1300601669,112,119,'Helwan','M',50,350,'2020-06-11'),('Aya','Mohsn',147896,13349267,333,800,'Hawamdeia','F',100,500,'2020-08-11'),('Youssef','Gamal',157359,13987354,333,670,'Luxor','M',100,500,'2020-08-07'),('Ibrahim','Alaa',202020,13789321,333,700,'Gmeza','M',100,500,'2020-08-12'),('Alaa','Ali',254114,13369147,333,200,'Shobra','M',100,500,'2020-08-04'),('Waleed','Anwar',258741,1398356917,333,159,'Giza','M',66,400,'2020-05-09'),('Gamal ','Abbas',258789,13324489,333,500,'Shobra','M',100,500,'2020-07-11'),('Retag','Fawzy',330202,13498735,333,500,'Dokii','F',100,500,'2020-08-05'),('Mohamed','Salama',369852,1326583147,555,320,'Aswan','M',70,700,'2020-09-09'),('Manar','hasan',370555,1375335789,333,23,'october','F',15,70,'2020-05-03'),('Marawan','Emad',548625,13153957,333,720,'Rehab','M',100,500,'2020-08-10'),('Hamid ','Tarek',556677,13556699,333,200,'Sheben','M',100,550,'2020-08-05'),('Gieath','agaam',654789,1326497562,777,798,'sadat','M',0,660,'2020-06-09'),('Andrew','Boshra',789654,1326958756,112,0,'qwesna','M',83,2000,'2020-08-07'),('Gehan','Elsadat',871515,13267953,333,500,'Zatoon','F',90,400,'2021-05-05');
+INSERT INTO `customer` VALUES ('Tarek','Fahmy',123987,13654456,112,350,'Zayed','M',100,500,'2020-08-02','12345678'),('Israa','Gamal',143696,13357741,333,200,'Zatoon','F',100,500,'2020-08-03','12345678'),('Ahmed','Gamal',147852,1300601669,112,119,'Helwan','M',50,350,'2020-06-11','12345678'),('Aya','Mohsn',147896,13349267,333,800,'Hawamdeia','F',100,500,'2020-08-11','12345678'),('Youssef','Gamal',157359,13987354,333,670,'Luxor','M',100,500,'2020-08-07','12345678'),('Ibrahim','Alaa',202020,13789321,333,700,'Gmeza','M',100,500,'2020-08-12','12345678'),('Alaa','Ali',254114,13369147,333,200,'Shobra','M',100,500,'2020-08-04','12345678'),('Waleed','Anwar',258741,1398356917,333,159,'Giza','M',66,400,'2020-05-09','12345678'),('Gamal ','Abbas',258789,13324489,333,500,'Shobra','M',100,500,'2020-07-11','12345678'),('Retag','Fawzy',330202,13498735,333,500,'Dokii','F',100,500,'2020-08-05','12345678'),('Mohamed','Salama',369852,1326583147,555,320,'Aswan','M',70,700,'2020-09-09','12345678'),('Manar','hasan',370555,1375335789,333,23,'october','F',15,70,'2020-05-03','12345678'),('Marawan','Emad',548625,13153957,333,720,'Rehab','M',100,500,'2020-08-10','12345678'),('Hamid ','Tarek',556677,13556699,333,200,'Sheben','M',100,550,'2020-08-05','12345678'),('Ghieath','Ajam',654789,1326497562,777,798,'Sadat','M',0,660,'2020-06-09','12345678'),('Andrew','Boshra',789654,1326958756,112,0,'qwesna','M',83,2000,'2020-08-07','12345678'),('Gehan','Elsadat',871515,13267953,333,500,'Zatoon','F',90,400,'2021-05-05','12345678');
 /*!40000 ALTER TABLE `customer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -217,6 +217,7 @@ CREATE TABLE `employee` (
   `Gender` char(1) DEFAULT NULL,
   `Phone_num` int DEFAULT NULL,
   `Super_ssn` int DEFAULT NULL,
+   `Password` varchar(50) NOT null,
   PRIMARY KEY (`Ssn`),
   UNIQUE KEY `Phone_num_UNIQUE` (`Phone_num`),
   KEY `Super_ssn` (`Super_ssn`),
@@ -234,7 +235,7 @@ CREATE TABLE `employee` (
 
 LOCK TABLES `employee` WRITE;
 /*!40000 ALTER TABLE `employee` DISABLE KEYS */;
-INSERT INTO `employee` VALUES ('Gamal','Abbas',83,'Shobra',193728,'DE',6500,1,8,'M',13324489,898989),('Aya','mohsn',80,'hawamdeia',248629,'HR',3000,1,8,'F',13349267,444999),('Ibrahim','Alaa',80,'Gmeza',326598,'HR',2000,1,8,'M',13789321,444999),('Marawan','Emad',81,'Rehab',357753,'MGR_CS',5000,2,8,'M',13153957,NULL),('Retag','Fawzy',80,'Dokii',444999,'MGR_HR',8000,2,6,'F',13498735,NULL),('Youssef','Gamal',82,'Luxor',456147,'MG',4500,2,10,'M',13987354,898989),('Tarek','Fahmy',81,'Zayed',585858,'CS',2000,3,8,'F',13654456,357753),('Israa','Gamal',82,'Zatoon',784512,'MGR_MG',5000,3,8,'F',13357741,NULL),('Alaa','Ali',81,'Shobra',895623,'CS',2500,2,8,'M',13369147,357753),('Hamid','Tarek',83,'Shbeen',898989,'MGR_DE',9000,3,8,'M',13556699,NULL);
+INSERT INTO `employee` VALUES ('Gamal','Abbas',83,'Shobra',193728,'DE',6500,1,8,'M',13324489,898989,'12345678'),('Aya','mohsn',80,'hawamdeia',248629,'HR',3000,1,8,'F',13349267,444999,'12345678'),('Ibrahim','Alaa',80,'Gmeza',326598,'HR',2000,1,8,'M',13789321,444999,'12345678'),('Marawan','Emad',81,'Rehab',357753,'MGR_CS',5000,2,8,'M',13153957,NULL,'12345678'),('Retag','Fawzy',80,'Dokii',444999,'MGR_HR',8000,2,6,'F',13498735,NULL,'12345678'),('Youssef','Gamal',82,'Luxor',456147,'MG',4500,2,10,'M',13987354,898989,'12345678'),('Tarek','Fahmy',81,'Zayed',585858,'CS',2000,3,8,'F',13654456,357753,'12345678'),('Israa','Gamal',82,'Zatoon',784512,'MGR_MG',5000,3,8,'F',13357741,NULL,'12345678'),('Alaa','Ali',81,'Shobra',895623,'CS',2500,2,8,'M',13369147,357753,'12345678'),('Hamid','Tarek',83,'Shbeen',898989,'MGR_DE',9000,3,8,'M',13556699,NULL,'12345678');
 /*!40000 ALTER TABLE `employee` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -303,11 +304,11 @@ DROP TABLE IF EXISTS `offered_to`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `offered_to` (
-  `Cus_id` int NOT NULL,
+  `Cus_Phone_num` int NOT NULL,
   `Offer_code` int NOT NULL,
-  PRIMARY KEY (`Cus_id`,`Offer_code`),
+  PRIMARY KEY (`Cus_Phone_num`,`Offer_code`),
   KEY `Offer_code` (`Offer_code`),
-  CONSTRAINT `offered_to_ibfk_1` FOREIGN KEY (`Cus_id`) REFERENCES `customer` (`Id`),
+  CONSTRAINT `offered_to_ibfk_1` FOREIGN KEY (`Cus_Phone_num`) REFERENCES `customer` (`Phone_num`),
   CONSTRAINT `offered_to_ibfk_2` FOREIGN KEY (`Offer_code`) REFERENCES `offer` (`Offer_num`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -383,9 +384,11 @@ DROP TABLE IF EXISTS `sign_for`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `sign_for` (
-  `Cus_id` int NOT NULL,
+  `Cus_Phone_num` int NOT NULL,
   `Service_code` int NOT NULL,
-  PRIMARY KEY (`Cus_id`,`Service_code`)
+  PRIMARY KEY (`Cus_Phone_num`,`Service_code`),
+  CONSTRAINT `sign_for_ibfk_1` FOREIGN KEY (`Cus_Phone_num`) REFERENCES `customer` (`Phone_num`),
+  CONSTRAINT `sign_for_ibfk_2` FOREIGN KEY (`Service_code`) REFERENCES `services` (`Serv_code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -409,3 +412,4 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2021-01-05 15:00:31
+-- GH EDIT ON 08-01-2021 04:02 PM
