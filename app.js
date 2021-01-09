@@ -155,14 +155,15 @@ app.get('/Register', (req, res) => {
 
 app.get('/Customer', (req, res) => {
 
-    var user_number = 13654456;
+    var user_number = 130000000;
 
-    let myquery1 = `Select customer.balance, customer.fname, plan.Plan_name
+    let myquery1 = `Select customer.balance, customer.Renewal_date, customer.gender ,customer.fname,customer.lname, plan.Plan_name,customer.used_megas,customer.used_min
     from wgsa_company.plan,wgsa_company.customer
     where customer.plan_code=plan.Plan_code and customer.Phone_num=${user_number}`;
 
     db.query(myquery1, (err, result, field) => {
         if (err) throw err;
+        result[0].Renewal_date=result[0].Renewal_date.toString().substr(0,15);
         console.log(result);
         res.render('Customer', { result })
     });

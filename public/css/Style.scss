@@ -6,6 +6,7 @@
     --light:#8c00d4 ;
     --hColor:#797bbf;
     --BGColor:#5a0285;
+    --BGLColor:#B24BE4;
     --lineC:#8c00d4;
 }
 *{
@@ -60,3 +61,4 @@ h1{
 @import "Register" ;
 @import "Plans" ;
 @import"FAQS";
+@import"User";
