@@ -14,6 +14,11 @@
             background-color: var(--BGColor);
             color: white;
         }
+        .Done{
+            .accordion-button{
+                background-color: rgb(69, 144, 69);
+            }
+        }
         .accordion-body {
             background-color: white;
             color: black;
@@ -25,4 +30,13 @@
 
 
     }
+}
+///-------------------------Complaint--------------
+
+.accordion .btn-primary{
+    margin: 1em;
+    transform: translateX(380%);
+    background-color: var(--BGColor);
+    border: none;
+    
 }

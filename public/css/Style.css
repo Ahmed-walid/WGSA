@@ -443,6 +443,10 @@ td p {
   color: white;
 }
 
+#accordionFlushExample .accordion-item .Done .accordion-button {
+  background-color: #459045;
+}
+
 #accordionFlushExample .accordion-item .accordion-body {
   background-color: white;
   color: black;
@@ -451,6 +455,14 @@ td p {
 #accordionFlushExample .accordion-item .accordion-body p {
   color: #888888;
   font-weight: light;
+}
+
+.accordion .btn-primary {
+  margin: 1em;
+  -webkit-transform: translateX(380%);
+          transform: translateX(380%);
+  background-color: var(--BGColor);
+  border: none;
 }
 
 .UserPage {

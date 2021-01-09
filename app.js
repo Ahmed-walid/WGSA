@@ -483,11 +483,14 @@ app.post('/registernew', urlencodedParser, (req, res) => {
     if (!Fname || !Lname || !Phone_number || !password || !ID || !gender) {
         return res.render('Register', { errmessage: 'Please enter all fields', successMes: '' });
     }
+    if(!parseInt(Phone_number)||!parseInt(ID))
+    {
+        return res.render('Register', { errmessage: 'Please enter a Valid number', successMes: '' });
+    }
 
     db.query('select phone_num from customer where phone_num=? or ID=?', [Phone_number, ID], (err, result) => {
-        console.log(result);
+        console.log();
         if (err) throw err;
-
         if (result.length > 0) {
             res.render('Register', { errmessage: 'This Phone is Already registerd', successMes: '' });
         }
@@ -499,7 +502,7 @@ app.post('/registernew', urlencodedParser, (req, res) => {
                 gender = 'F';
 
             if (password.length < 7)
-                return res.render('Register', { errmessage: 'Password should be at least 6 characters', successMes: '' });
+                return res.render('Register', { errmessage: 'Password should be at least 7 characters', successMes: '' });
 
             db.query('insert into customer(Fname,Lname,Phone_num,ID,gender,password) values(?,?,?,?,?,?)', [Fname, Lname, Phone_number, ID, gender, password], err => {
                 if (err) throw err;
