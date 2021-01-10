@@ -12,11 +12,7 @@ const { response } = require("express");
 const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-<<<<<<< HEAD
-    password: '01149873532',
-=======
     password:'7561275612',
->>>>>>> bf25bc7bffff5811d9a467f32e82d333af6459f2
     database: 'wgsa_company'
 });
 
@@ -201,14 +197,7 @@ app.post('/getCustomerinfo', urlencodedParser, (req, res) => {
 
 });
 
-<<<<<<< HEAD
-app.get('/TechnicalSupport', (req, res) => {
 
-    res.render('TechnicalSupport')
-});
-=======
-
->>>>>>> bf25bc7bffff5811d9a467f32e82d333af6459f2
 app.get('/Offers', (req, res) => {
 
     let myquery1 = "SELECT Launch_date, Price, Minutes, Expire_date, Megas, Offer_describ, Offer_num from wgsa_company.Offer";
@@ -234,11 +223,7 @@ app.get('/Register', (req, res) => {
 
 app.get('/Customer', (req, res) => {
 
-<<<<<<< HEAD
-    var user_number = 13267953;
-=======
     var user_number = 13789321;
->>>>>>> bf25bc7bffff5811d9a467f32e82d333af6459f2
 
     let myquery1 = `Select customer.Balance, customer.Renewal_date, customer.Gender ,customer.Fname,customer.Lname, plan.Plan_name,customer.Used_megas,customer.Used_min
     from wgsa_company.plan,wgsa_company.customer
@@ -246,17 +231,11 @@ app.get('/Customer', (req, res) => {
 
     db.query(myquery1, (err, result, field) => {
         if (err) throw err;
-<<<<<<< HEAD
-        result[0].Renewal_date = result[0].Renewal_date.toString().substr(0, 15);
-        console.log(result);
-        res.render('Customer', { result })
-=======
         if (result.length > 0) {
             result[0].Renewal_date = result[0].Renewal_date.toString().substr(0, 15);
             console.log(result);
             res.render('Customer', { result })
         }
->>>>>>> bf25bc7bffff5811d9a467f32e82d333af6459f2
     });
 
 });
@@ -360,45 +339,7 @@ app.post('/Add_New_Plan', urlencodedParser, function (req, res) {
 
 });
 
-<<<<<<< HEAD
-app.post('/Add_employee', urlencodedParser, function(req, res) {
-
-    var Fname = req.body.Fname;
-    var Lname = req.body.Lname;
-    var Dnum = req.body.Dnum;
-    var Address = req.body.Address;
-    var ssn = req.body.SSN;
-    var Position = req.body.Position;
-    var Salary = req.body.Salary;
-    var bnum = req.body.Bnum;
-    var hours = req.body.hours;
-    var gender = req.body.Gender;
-    var phone_num = req.body.Phone_number;
-    var s_ssn = req.body.Super_ssn;
-
-
-
-    let myquery = `INSERT INTO wgsa_company.employee(Fname, Lname, Dnum, Address, Ssn, Postion, Salary, Branch_num, Hours, Gender, Phone_num, Super_ssn) VALUES("${Fname}", "${Lname}", ${Dnum}, "${Address}", ${ssn}, "${Position}", ${Salary}, ${bnum}, ${hours}, "${gender}", ${phone_num}, ${s_ssn})`;
-
-
-    db.query(myquery, (err, result, field) => {
-        if (err) {
-            console.log(err)
-            res.render('404', { err });
-        } else {
-            console.log(result);
-            res.render('HR');
-        }
-    });
-
-});
-
-
-
-app.post('/Recharge_Process', urlencodedParser, function(req, res) {
-=======
 app.post('/Recharge_Process', urlencodedParser, function (req, res) {
->>>>>>> bf25bc7bffff5811d9a467f32e82d333af6459f2
     var Card_Serial_Num = req.body.Card_Serial_Num;
     var user_number = 13654456;
     let myquery = `Update wgsa_company.customer
@@ -463,44 +404,8 @@ app.post('/Add_New_Offer', urlencodedParser, function (req, res) {
 
 
 
-<<<<<<< HEAD
-});
-app.post('/change_c_status', urlencodedParser, (req, res) => {
 
-    var complaint_code = req.body.complaint_code;
-    var complaint_status = req.body.complaint_status;
-    var replied_by = req.body.replied_by;
-    var rep_date = req.body.rep_date;
-    var reply = req.body.reply;
-    // console.log(rep_date);
-    let myquery1 = `UPDATE wgsa_company.complaint SET C_Status = '${complaint_status}', Replied_by = ${replied_by}, Reply_date = '${rep_date}' , Reply = '${reply}' WHERE (C_Code = ${complaint_code});`;
 
-    db.query(myquery1, (err, result, field) => {
-        if (err) res.render('404', { err });
-        console.log(result);
-        res.render('TechnicalSupport', { result });
-    });
-
-});
-app.post('/Add_faq', urlencodedParser, (req, res) => {
-
-    var question = req.body.question;
-    var answer = req.body.answer;
-    var code = req.body.code;
-    var ID = req.body.ID;
-=======
->>>>>>> bf25bc7bffff5811d9a467f32e82d333af6459f2
-
-    //console.log(rep_date);
-    let myquery1 = `INSERT INTO wgsa_company.faqs (Answer, Question, Question_code, Answered_by) VALUES ('${answer}', '${question}', ${code} , ${ID});`
-
-    db.query(myquery1, (err, result, field) => {
-        if (err) res.render('404', { err });
-        console.log(result);
-        res.render('TechnicalSupport', { result });
-    });
-
-});
 
 app.post('/Complain_process', urlencodedParser, (req, res) => {
 
@@ -509,8 +414,7 @@ app.post('/Complain_process', urlencodedParser, (req, res) => {
     current_date = '2021-08-08';
 
 
-    let Querytogetmaxcode = `
-            SELECT MAX(wgsa_company.complaint.C_Code) as m from wgsa_company.complaint `;
+    let Querytogetmaxcode = ` SELECT MAX(wgsa_company.complaint.C_Code) as m  from wgsa_company.complaint`;
     db.query(Querytogetmaxcode, (err, result, field) => {
         if (err) {
             res.render('404', { err });
@@ -519,13 +423,7 @@ app.post('/Complain_process', urlencodedParser, (req, res) => {
         var maxcode = result[0].m;
         maxcode = maxcode + 1;
         console.log(Complaint);
-<<<<<<< HEAD
-        let myquery1 = `
-            Insert into wgsa_company.complaint(C_Code, C_Status, C_Descrip, Complaint_by, Complaint_date) values($ { maxcode }, 'Wait', '${Complaint}', '${user_id}', '${current_date}')
-            `;
-=======
         let myquery1 = `Insert into wgsa_company.complaint (C_Code, C_Descrip, Complaint_by, Complaint_date) values (${maxcode},'${Complaint}','${user_id}','${current_date}')`;
->>>>>>> bf25bc7bffff5811d9a467f32e82d333af6459f2
         db.query(myquery1, (err, result, field) => {
             if (err) {
                 res.render('404', { err });
@@ -540,9 +438,8 @@ app.post('/Complain_process', urlencodedParser, (req, res) => {
 });
 
 app.get('/Complain', (req, res) => {
-    let query = `
-            Select *
-                from wgsa_company.complaint `;
+    let query = `Select *
+    from wgsa_company.complaint`;
     db.query(query, (err, result, field) => {
         if (err) {
             res.render('404', { err })
@@ -558,17 +455,14 @@ app.get('/Complain', (req, res) => {
 app.post('/Delete_Complaint', urlencodedParser, (req, res) => {
 
     var C_Code = req.body.C_Code_to_be_deleted;
-    let query = `
-            DELETE FROM wgsa_company.complaint WHERE complaint.C_Code = $ { C_Code }
-            `;
+    let query = `DELETE FROM wgsa_company.complaint WHERE complaint.C_Code=${C_Code}`;
     db.query(query, (err, result, field) => {
         if (err) {
             res.render('404', { err })
         } else {
             app.get('/Complain', (req, res) => {
-                let query1 = `
-            Select *
-                from wgsa_company.complaint `;
+                let query1 = `Select *
+                    from wgsa_company.complaint`;
                 db.query(query1, (err, result, field) => {
                     if (err) {
                         res.render('404', { err })
@@ -594,136 +488,94 @@ app.get('/Transfer', (req, res) => {
     */
 
 
-app.post('/Transfer_balance', urlencodedParser, (req, res, (req, res, (req, res) => {//4
+// app.post('/Transfer_balance', urlencodedParser, (req, res, (req, res, (req, res) => {//4
                                 
-    // var user_phone_number = 13357741;//Gehan sadat
-    // var Recipient_Phone_number = req.body.Recipient_phone_num;
-    // var Balance_to_be_transfered = req.body.Balance_to_be_transfered;
+//     // var user_phone_number = 13357741;//Gehan sadat
+//     // var Recipient_Phone_number = req.body.Recipient_phone_num;
+//     // var Balance_to_be_transfered = req.body.Balance_to_be_transfered;
 
-<<<<<<< HEAD
-app.post('/Transfer_balance', urlencodedParser, (req, res) => {
+//     let query1 = `Update wgsa_company.customer 
+//     set customer.Balance=customer.Balance-${Balance_to_be_transfered}
+//     where customer.Phone_num=${user_phone_number}`;
 
-    var user_phone_number = 13654456;
-    var Recipient_Phone_number = req.body.Recipient_phone_num;
-    var Balance_to_be_transfered = req.body.Balance_to_be_transfered;
+//     db.query(query1, (err, result, field) => {//5
+//         if (err) {
+//             res.render('404', { err });
+//             console.log(result);
+//         } else {
 
-    let query1 = `
-            Update wgsa_company.customer
-            set customer.Balance = customer.Balance - $ { Balance_to_be_transfered }
-            where customer.Phone_num = $ { user_phone_number }
-            `;
+//             let query2 = `update wgsa_company.customer
+//             set customer.Balance=customer.Balance+${Balance_to_be_transfered}
+//             where customer.phone_num=${Recipient_Phone_number};`
 
+//             db.query(query2, (err, result, field) => {//6
+//                 if (err) {
+//                     res.render('404', { err });
+//                     console.log(result);
+//                 } else {
 
-    db.query(query1, (err, result, field) => {
-        if (err) {
-            res.render('404', { err });
-            console.log(result);
-        } else {
+//                     res.render('Transfer', { errmessage: '', successMes: '' });
 
-            let query2 = `
-            update wgsa_company.customer
-            set customer.Balance = customer.Balance + $ { Balance_to_be_transfered }
-            where customer.phone_num = $ { Recipient_Phone_number };
-            `
+//                 }
+//             });//6
 
-            db.query(query2, (err, result, field) => {
-                if (err) {
-                    res.render('404', { err });
-                    console.log(result);
-                } else {
+//         }
+//     });//5
 
-                    res.render('Transfer');
+// }) => {//2
+//     console.log("g");
+//     // var user_phone_number1 = 13357741; //Gehan sadat
+//     // var Recipient_Phone_number1 = parseInt(req.body.Recipient_phone_num,10);
+//     // var Balance_to_be_transfered = parseint(req.body.Balance_to_be_transfered,10);
+//     //query to check that the recipient is a client of wsga
+//     let queryrecipient = `select *
+// from wgsa_company.customer
+// where customer.phone_num=${Recipient_Phone_number}; `;
 
-                }
-            });
+//     db.query(queryrecipient, (err, result, field) => { //3
+//         if (err) {
+//             res.render('404', { err });
+//             throw err;
+//         }
+//         if (result.length === 0) {
+//             console.log("The recipient number is not fount");
+//             return res.render('Transfer', { errmessage: 'There is no recipent with such a number', successMes: '' });
+//         }
 
-        }
-    });
-});
-=======
-    let query1 = `Update wgsa_company.customer 
-    set customer.Balance=customer.Balance-${Balance_to_be_transfered}
-    where customer.Phone_num=${user_phone_number}`;
-
-    db.query(query1, (err, result, field) => {//5
-        if (err) {
-            res.render('404', { err });
-            console.log(result);
-        } else {
-
-            let query2 = `update wgsa_company.customer
-            set customer.Balance=customer.Balance+${Balance_to_be_transfered}
-            where customer.phone_num=${Recipient_Phone_number};`
-
-            db.query(query2, (err, result, field) => {//6
-                if (err) {
-                    res.render('404', { err });
-                    console.log(result);
-                } else {
-
-                    res.render('Transfer', { errmessage: '', successMes: '' });
->>>>>>> bf25bc7bffff5811d9a467f32e82d333af6459f2
-
-                }
-            });//6
-
-        }
-    });//5
-
-}) => {//2
-    console.log("g");
-    // var user_phone_number1 = 13357741; //Gehan sadat
-    // var Recipient_Phone_number1 = parseInt(req.body.Recipient_phone_num,10);
-    // var Balance_to_be_transfered = parseint(req.body.Balance_to_be_transfered,10);
-    //query to check that the recipient is a client of wsga
-    let queryrecipient = `select *
-from wgsa_company.customer
-where customer.phone_num=${Recipient_Phone_number}; `;
-
-    db.query(queryrecipient, (err, result, field) => { //3
-        if (err) {
-            res.render('404', { err });
-            throw err;
-        }
-        if (result.length === 0) {
-            console.log("The recipient number is not fount");
-            return res.render('Transfer', { errmessage: 'There is no recipent with such a number', successMes: '' });
-        }
-
-    }
-}) => {
+//     }
+// }) => {
 
     
-////////////////////////////////////////////////////////////////////
-    var user_phone_number = 13357741;  //Gehan sadat
-    var Recipient_Phone_number =parseInt( req.body.Recipient_phone_num,10);
-    var Balance_to_be_transfered =  parseInt(req.body.Balance_to_be_transfered, 10);
+// ////////////////////////////////////////////////////////////////////
+//     var user_phone_number = 13357741;  //Gehan sadat
+//     var Recipient_Phone_number =parseInt( req.body.Recipient_phone_num,10);
+//     var Balance_to_be_transfered =  parseInt(req.body.Balance_to_be_transfered, 10);
    
 
-    //check that the number entered and balance to be transfered is postive
-    if (user_phone_number <= 0 || Recipient_Phone_number <= 0) {
-        return res.render('Transfer', { errmessage: 'Please enter valid numbers', successMes: '' });
-    }
-    // check that the user has a balance greater than or equal to Balance_to_be_transfered
-    let query_customer_curr_balance = `select customer.Balance
-         from wgsa_company.customer
-         where customer.phone_num='${user_phone_number}';`;
-    db.query(query_customer_curr_balance,  (err, result1, field) => {//1
-        if (err) {
-            res.render('404', { err });
-            throw err;
-        }
+//     //check that the number entered and balance to be transfered is postive
+//     if (user_phone_number <= 0 || Recipient_Phone_number <= 0) {
+//         return res.render('Transfer', { errmessage: 'Please enter valid numbers', successMes: '' });
+//     }
+//     // check that the user has a balance greater than or equal to Balance_to_be_transfered
+//     let query_customer_curr_balance = `select customer.Balance
+//          from wgsa_company.customer
+//          where customer.phone_num='${user_phone_number}';`;
+//     db.query(query_customer_curr_balance,  (err, result1, field) => {//1
+//         if (err) {
+//             res.render('404', { err });
+//             throw err;
+//         }
     
-        //console.log(result1[0].Balance);
-        //console.log(parseInt(Balance_to_be_transfered, 10));
-        if (result1[0].Balance < Balance_to_be_transfered) {
+//         //console.log(result1[0].Balance);
+//         //console.log(parseInt(Balance_to_be_transfered, 10));
+//         if (result1[0].Balance < Balance_to_be_transfered) {
             
-            console.log("your balance is not sufficient to complete the transfer process");
-            return res.render('Transfer', { errmessage: 'your balance is not sufficient to complete the transfer process', successMes: '' });
-        }
-    }
-}
-});            
+//             console.log("your balance is not sufficient to complete the transfer process");
+//             return res.render('Transfer', { errmessage: 'your balance is not sufficient to complete the transfer process', successMes: '' });
+//         }
+//     }
+// }
+// });            
     
     
     
@@ -761,7 +613,8 @@ app.post('/registernew', urlencodedParser, (req, res) => {
         if (err) throw err;
         if (result.length > 0) {
             res.render('Register', { errmessage: 'This Phone is Already registerd', successMes: '' });
-        } else { //valid
+        }
+        else {      //valid
 
             if (gender == 'Male')
                 gender = 'M';
@@ -776,7 +629,8 @@ app.post('/registernew', urlencodedParser, (req, res) => {
                 res.render('Register', { errmessage: '', successMes: 'Registerd You Can now Log in ' });
             });
         }
-    });
+    }
+    );
 });
 
 app.post('/loginSubmit', urlencodedParser, (req, res) => {
@@ -798,7 +652,8 @@ app.post('/loginSubmit', urlencodedParser, (req, res) => {
 
         return res.render('CustomerAccount', { errmessage: '', successMes: '' });
 
-    });
+    }
+    );
 });
 app.get('/CustomerAccount', (req, res) => {
 
@@ -1035,424 +890,6 @@ app.post('/Add_Customer', urlencodedParser, function (req, res) {
         Gender = 'F';
 
 
-<<<<<<< HEAD
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*----------------------------------------------------------------HR-----------------------------------*/
-app.post('/Add_employee', urlencodedParser, function(req, res) {
-
-    var Fname = req.body.Fname;
-    var Lname = req.body.Lname;
-    var Dnum = req.body.Dnum;
-    var Address = req.body.Address;
-    var ssn = req.body.SSN;
-    var Position = req.body.Position;
-    var Salary = req.body.Salary;
-    var bnum = req.body.Bnum;
-    var hours = req.body.hours;
-    var gender = req.body.Gender;
-    var phone_num = req.body.Phone_number;
-    var s_ssn = req.body.Super_ssn;
-
-
-
-    let myquery = `
-            INSERT INTO wgsa_company.employee(Fname, Lname, Dnum, Address, Ssn, Postion, Salary, Branch_num, Hours, Gender, Phone_num, Super_ssn) VALUES("${Fname}", "${Lname}", $ { Dnum }, "${Address}", $ { ssn }, "${Position}", $ { Salary }, $ { bnum }, $ { hours }, "${gender}", $ { phone_num }, $ { s_ssn })
-            `;
-
-
-    db.query(myquery, (err, result, field) => {
-=======
         let myquery = `INSERT INTO wgsa_company.customer
         (Fname,Lname,Id,Phone_num,Plan_code,Balance,Address
        ,Gender,Used_min,Used_megas,Renewal_date,Password)
@@ -1461,20 +898,14 @@ app.post('/Add_employee', urlencodedParser, function(req, res) {
        ,'${Renewal_date}','${Password}')`;
 console.log(myquery);
     db.query(myquery, (err, result2, field) => {
->>>>>>> bf25bc7bffff5811d9a467f32e82d333af6459f2
         if (err) {
             console.log(err)
             res.render('404', { err });
         } else {
             console.log(result2);
 
-<<<<<<< HEAD
-});
-app.post('/Remove_customer', urlencodedParser, function(req, res) {
-=======
             let myquery1 = `Select * from wgsa_company.customer
             where customer.Phone_num=${Phone_num}`;
->>>>>>> bf25bc7bffff5811d9a467f32e82d333af6459f2
 
             db.query(myquery1, (err, result, field) => {
                 if (err) {
@@ -1482,48 +913,11 @@ app.post('/Remove_customer', urlencodedParser, function(req, res) {
                     res.render('404', { err });
                 }
 
-<<<<<<< HEAD
-    let myquery = `
-            delete FROM wgsa_company.customer WHERE customer.Phone_num = $ { phone_num }
-            `;
-
-    db.query(myquery, (err, result, field) => {
-        if (err) {
-            console.log(err)
-            res.render('404', { err });
-        }
-        console.log(result);
-        res.render('HR', { result });
-    });
-
-});
-
-app.post('/Remove_employee', urlencodedParser, function(req, res) {
-
-    var ssn = req.body.SSN;
-
-    let myquery = `
-            delete FROM wgsa_company.EMPLOYEE WHERE EMPLOYEE.SSN = $ { ssn }
-            `;
-
-    db.query(myquery, (err, result, field) => {
-        if (err) {
-            console.log(err)
-            res.render('404', { err });
-        }
-        console.log(result);
-        res.render('HR', { result });
-    });
-
-});
-app.post('/Add_branch', urlencodedParser, function(req, res) {
-=======
                 if (result[0].Renewal_date) {
                     result[0].Renewal_date = result[0].Renewal_date.toString().substr(0, 15);
                 }
 
 
->>>>>>> bf25bc7bffff5811d9a467f32e82d333af6459f2
 
                 let query2 = `select plan_name,plan_code from wgsa_company.plan `;
                 db.query(query2, (err, plans) => {
@@ -1542,28 +936,13 @@ app.post('/Add_branch', urlencodedParser, function(req, res) {
                     res.render('CustomerService', { result, plans, errmessage: '', successMes: 'Done' })
 
 
-<<<<<<< HEAD
-    let myquery = `
-            INSERT INTO wgsa_company.branch(Phone_num, Bnum, Location) VALUES($ { phone_num }, $ { bnum }, "${location}")
-            `;
-=======
                 });
->>>>>>> bf25bc7bffff5811d9a467f32e82d333af6459f2
 
             });
         }
     });
 
 });
-<<<<<<< HEAD
-app.post('/Remove_branch', urlencodedParser, function(req, res) {
-
-    var bnum = req.body.bnum;
-
-    let myquery = `
-            delete FROM wgsa_company.branch WHERE branch.bnum = $ { bnum }
-            `;
-=======
 app.post('/Add_Customer', urlencodedParser, function (req, res) {
 
     var Fname = req.body.Fname;
@@ -1600,7 +979,6 @@ app.post('/Add_Customer', urlencodedParser, function (req, res) {
         VALUES("${Fname}","${Lname}",${Id},${Phone_num},${Plan_code}
         ,${Balance},"${Address}","${Gender}",${Used_min},${Used_megas}
         ,"${Renewal_date}","${Password}")`;
->>>>>>> bf25bc7bffff5811d9a467f32e82d333af6459f2
 
     db.query(myquery, (err, result, field) => {
         if (err) {
@@ -1613,19 +991,46 @@ app.post('/Add_Customer', urlencodedParser, function (req, res) {
     });
 
 });
-<<<<<<< HEAD
-/*-------------------------------------------------customer service--------------------------------*/
-app.post('/change_cplan', urlencodedParser, function(req, res) {
-
-    var plane_code = req.body.plane_code;
-    var phone_num = req.body.phone_num;
-    let myquery = `
-            UPDATE wgsa_company.customer SET Plan_code = $ { plane_code }
-            WHERE Phone_num = $ { phone_num }
-            `;
-=======
-
->>>>>>> bf25bc7bffff5811d9a467f32e82d333af6459f2
 
 
-;
+
+app.get('/TechnicalSupport', (req, res) => {
+
+    res.render('TechnicalSupport')
+});
+
+app.post('/change_c_status', urlencodedParser, (req, res) => {
+
+    var complaint_code = req.body.complaint_code;
+    var complaint_status = req.body.complaint_status;
+    var replied_by = req.body.replied_by;
+    var rep_date = req.body.rep_date;
+    var reply = req.body.reply;
+    // console.log(rep_date);
+    let myquery1 = `UPDATE wgsa_company.complaint SET C_Status = '${complaint_status}', Replied_by = ${replied_by}, Reply_date = '${rep_date}' , Reply = '${reply}' WHERE (C_Code = ${complaint_code});`;
+
+    db.query(myquery1, (err, result, field) => {
+        if (err) res.render('404', { err });
+        console.log(result);
+        res.render('TechnicalSupport', { result });
+    });
+
+});
+app.post('/Add_faq', urlencodedParser, (req, res) => {
+
+    var question = req.body.question;
+    var answer = req.body.answer;
+    var code = req.body.code;
+    var ID = req.body.ID;
+
+
+    //console.log(rep_date);
+    let myquery1 = `INSERT INTO wgsa_company.faqs (Answer, Question, Question_code, Answered_by) VALUES ('${answer}', '${question}', ${code} , ${ID});`
+
+    db.query(myquery1, (err, result, field) => {
+        if (err) res.render('404', { err });
+        console.log(result);
+        res.render('TechnicalSupport', { result });
+    });
+
+});
