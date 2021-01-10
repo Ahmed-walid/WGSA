@@ -1,193 +1,184 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <title>Document</title>
-    <style>
-        .btn-group{
-            display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 200px;
- 
-}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/Style.css">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+        crossorigin="anonymous"></script>
+    <title>WGSA</title>
+    <link rel="icon" href="/images/logo.svg">
 
-
-    </style>
-
-    <script>
-
-
-
-
-      function myFunction1() {
-        var x = document.getElementById("form1");
-        if (x.style.display === "none") {
-          x.style.display = "block";
-        } else {
-          x.style.display = "none";
-        }
-      }
-
-      function myFunction2() {
-        var x = document.getElementById("form2");
-        if (x.style.display === "none") {
-          x.style.display = "block";
-        } else {
-          x.style.display = "none";
-        }
-      }
-
-      function myFunction3() {
-        var x = document.getElementById("form3");
-        if (x.style.display === "none") {
-          x.style.display = "block";
-        } else {
-          x.style.display = "none";
-        }
-      }
-
-      function myFunction4() {
-        var x = document.getElementById("form4");
-        if (x.style.display === "none") {
-          x.style.display = "block";
-        } else {
-          x.style.display = "none";
-        }
-      }
-
-    </script>
-    
 </head>
+
 <body>
-    
-    <div class="btn-group" role="group" aria-label="Basic example">
-        <button onclick="myFunction1()" type="button" class="btn btn-primary">Change plan cost</button>
-        <button onclick="myFunction2()" type="button" class="btn btn-primary">Add plan</button>
-        <button onclick="myFunction3()" type="button" class="btn btn-primary">Add offer</button>
-        <button onclick="myFunction4()" type="button" class="btn btn-primary">Remove plan</button>
-    </div>
+    <header>
+        <section class="nav-container">
+            <nav>
+                <div class="logo">
+                    <span class="lgci"> </span>
+                    <a href="/">
+                        <h2>WSGA</h2>
+                    </a>
+                </div>
+                <ul>
+                    <li><a href="plans"> Plans</a></li>
+                    <li><a href="Offers">Offers</a></li>
+                    <li><a href="FAQS">FAQS</a></li>
+                    <li><a href="Login"> <Button class="log-btn">log out</Button> </a></li>
+                </ul>
+            </nav>
+        </section>
+        <hr class="Line" />
+    </header>
 
 
-      <div style="display:none;" class="alert alert-success">
-        <strong>Success!</strong> Indicates a successful or positive action.
-      </div>
+    <main class="CS">
 
-      <div style="display:none;" class="alert alert-danger">
-        <strong>Danger!</strong>
-      </div>
-
-
-
-      <!-- For update plan cost -->
-      <div id="form1"  style="display:none;" >  
-      <form action="/Update_Plan_Cost" method="POST">
-        <div  class="mb-3">
-          <label for="exampleInputEmail1" class="form-label">Plan code</label>
-          <input type="number" name="Plan_Code" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-        </div>
-        <div class="mb-3">
-          <label for="exampleInputPassword1" class="form-label">New cost</label>
-          <input type="number" name="Plan_New_Price" class="form-control" id="exampleInputPassword1">
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
-    </div>
-
-
-
-    <!-- for adding new plan -->
-<div id="form2" style="display:none;">
-      <form action="/Add_New_Plan" method="POST">
-
-        <div class="mb-3">
-          <label for="exampleInputEmail1"  class="form-label">Plan name</label>
-          <input type="text" name="Plan_name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        <div class="siden">
+            <div class="listContainer">
+                <ul>
+                    <div class="listElement">
+                        <li><a href="#ChangePlan">Change plan cost</a></li>
+                    </div>
+                    <div class="listElement">
+                        <li><a href="#AddPlan">Add plan</a></li>
+                    </div>
+                    <div class="listElement">
+                        <li><a href="#AddOffer">Add offer</a></li>
+                    </div>
+                    <div class="listElement">
+                        <li><a href="#RemovePlan">Remove plan</a></li>
+                    </div>
+                </ul>
+            </div>
         </div>
 
-        <div class="mb-3">
-          <label for="exampleInputPassword1"   class="form-label">Plan code</label>
-          <input type="number"  name="Plan_code" class="form-control" id="exampleInputPassword1">
+
+        <div class="CSBody">
+
+            <h3 style="margin: 2em;">Change Plan Cost</h3>
+            <div class="FormContainer" id="ChangePlan">
+                <form action="/Update_Plan_Cost" method="POST">
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Plan code</label>
+                        <input type="number" name="Plan_Code" class="form-control" id="exampleInputEmail1"
+                        aria-describedby="emailHelp">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">New cost</label>
+                        <input type="number" name="Plan_New_Price" class="form-control" id="exampleInputPassword1">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </form>
+            </div>
+            
+            <br/><hr class="Line"/><br/>
+            <h3 style="margin: 2em;">Add New Plan</h3>
+            <div class="FormContainer" id="AddPlan">
+                <form action="/Add_New_Plan" method="POST">
+
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Plan name</label>
+                        <input type="text" name="Plan_name" class="form-control" id="exampleInputEmail1"
+                            aria-describedby="emailHelp">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Plan code</label>
+                        <input type="number" name="Plan_code" class="form-control" id="exampleInputPassword1">
+                    </div>
+
+                    <div class="mb-3 ">
+                        <label for="exampleInputPassword1" class="form-label">Minutes</label>
+                        <input type="number" name="Minutes" class="form-control" id="exampleInputPassword1">
+
+                    </div>
+
+                    <div class="mb-3 ">
+                        <label for="exampleInputPassword1" class="form-label">Megas</label>
+                        <input type="number" name="Megas" class="form-control" id="exampleInputPassword1">
+                    </div>
+
+                    <div class="mb-3 ">
+                        <label for="exampleInputPassword1" class="form-label">Price</label>
+                        <input type="number" name="Price" class="form-control" id="exampleInputPassword1">
+
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Add</button>
+                </form>
+            </div>
+
+            <br/><hr class="Line"/><br/>
+
+            <h3 style="margin: 2em;">Add New Offer</h3>
+            <div class="FormContainer" id="AddOffer">
+
+                <form action="/Add_New_Offer" method="POST">
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Offer_num</label>
+                        <input type="number" name="Offer_num" class="form-control" id="exampleInputEmail1"
+                            aria-describedby="emailHelp">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Offer describtion</label>
+                        <input type="text" name="Offer_describtion" class="form-control" id="exampleInputEmail1"
+                            aria-describedby="emailHelp">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Minutes</label>
+                        <input type="number" name="Minutes" class="form-control" id="exampleInputPassword1">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Megas</label>
+                        <input type="number" name="Megas" class="form-control" id="exampleInputPassword1">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Price</label>
+                        <input type="number" name="Price" class="form-control" id="exampleInputPassword1">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Launch date</label>
+                        <input type="date" name="Launch_date" class="form-control" id="exampleInputPassword1">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Expire date</label>
+                        <input type="date" name="Expire_date" class="form-control" id="exampleInputPassword1">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Add</button>
+                </form>
+            </div>
+            <br/><hr class="Line"/><br/>
+
+            <h3 style="margin: 2em;">Remove Plan</h3>
+            <div class="FormContainer" id="RemovePlan">
+                <form action="/Delete_Plan" method="POST">
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Plan code</label>
+                        <input type="number" name="Plan_Code" class="form-control" id="exampleInputEmail1"
+                            aria-describedby="emailHelp">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Delete Plan</button>
+                </form>
+            </div>
+
         </div>
 
-        <div class="mb-3 ">
-        <label for="exampleInputPassword1"   class="form-label">Minutes</label>
-        <input type="number"  name="Minutes" class="form-control" id="exampleInputPassword1">
-   
-        </div>
-
-        <div class="mb-3 ">
-        <label for="exampleInputPassword1"   class="form-label">Megas</label>
-         <input type="number"   name="Megas" class="form-control" id="exampleInputPassword1">
-          </div>
-
-          <div class="mb-3 ">
-            <label for="exampleInputPassword1"  class="form-label">Price</label>
-            <input type="number"   name="Price" class="form-control" id="exampleInputPassword1">
-        
-          </div>
-
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
-    </div>
-
-
-
-    <!-- for adding new offer -->
-<div id="form3" style="display:none;">
-      <form action="/Add_New_Offer" method="POST">
-        <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label">Offer_num</label>
-          <input type="number" name ="Offer_num" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-        </div>
-
-        <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Offer describtion</label>
-            <input type="text"  name="Offer_describtion" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-          </div>
-
-        <div class="mb-3">
-          <label for="exampleInputPassword1" class="form-label">Minutes</label>
-          <input type="number"  name ="Minutes" class="form-control" id="exampleInputPassword1">
-        </div>
-
-        <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Megas</label>
-            <input type="number"  name ="Megas" class="form-control" id="exampleInputPassword1">
-          </div>
-
-          <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Price</label>
-            <input type="number" name ="Price" class="form-control" id="exampleInputPassword1">
-          </div>
-
-          <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Launch date</label>
-            <input type="date" name ="Launch_date" class="form-control" id="exampleInputPassword1">
-          </div>
-
-          <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Expire date</label>
-            <input type="date" name ="Expire_date" class="form-control" id="exampleInputPassword1">
-          </div>
-
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
-    </div>
-
-
-
-<div id="form4" style="display:none;">
-      <form action="/Delete_Plan" method="POST" >
-        <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label">Plan code</label>
-          <input type="number" name ="Plan_Code" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-        </div>
-        <button type="submit" class="btn btn-primary">Delete Plan</button>
-      </form>
-    </div>
+    </main>
 
 </body>
+
 </html>
