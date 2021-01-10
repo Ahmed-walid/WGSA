@@ -51,9 +51,9 @@ DROP TABLE IF EXISTS `card`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `card` (
   `Serial_number` int NOT NULL,
-  `Recharge_code` int DEFAULT NULL,
-  `Card_value` int DEFAULT NULL,
-  `Is_charged` tinyint(1) DEFAULT NULL,
+  `Recharge_code` int NOT NULL,
+  `Card_value` int NOT NULL,
+  `Is_charged` tinyint(1) DEFAULT 0,
   `Recharged_by` int DEFAULT NULL,
   `Recharge_date` date DEFAULT NULL,
   PRIMARY KEY (`Serial_number`),
@@ -81,10 +81,10 @@ DROP TABLE IF EXISTS `complaint`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `complaint` (
   `C_Code` int NOT NULL,
-  `C_Status` varchar(10) DEFAULT NULL,
-  `C_Descrip` varchar(50) DEFAULT NULL,
-  `Complaint_by` int DEFAULT NULL,
-  `Complaint_date` date DEFAULT NULL,
+  `C_Status` varchar(10) DEFAULT "Wait",
+  `C_Descrip` varchar(50) NOT NULL,
+  `Complaint_by` int NOT NULL,
+  `Complaint_date` date NOT NULL,
   `Replied_by` int DEFAULT NULL,
   `Reply_date` date DEFAULT NULL,
   `Reply` varchar(200) DEFAULT NULL,
@@ -114,16 +114,16 @@ DROP TABLE IF EXISTS `customer`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `customer` (
-  `Fname` varchar(50) DEFAULT NULL,
-  `Lname` varchar(50) DEFAULT NULL,
+  `Fname` varchar(50) not NULL,
+  `Lname` varchar(50) not NULL,
   `Id` int NOT NULL,
   `Phone_num` int not NULL,
-  `Plan_code` int DEFAULT NULL,
-  `Balance` float DEFAULT NULL,
+  `Plan_code` int DEFAULT 0,
+  `Balance` float DEFAULT 0,
   `Address` varchar(50) DEFAULT NULL,
   `Gender` char(1) DEFAULT NULL,
-  `Used_min` int DEFAULT NULL,
-  `Used_megas` int DEFAULT NULL,
+  `Used_min` int DEFAULT 0,
+  `Used_megas` int DEFAULT 0,
   `Renewal_date` date DEFAULT NULL,
   `Password` varchar(50) not NULL,
   PRIMARY KEY (`Phone_num`),
@@ -178,8 +178,8 @@ DROP TABLE IF EXISTS `department`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `department` (
   `Dnum` int NOT NULL,
-  `Dname` varchar(50) DEFAULT NULL,
-  `Mgr_ssn` int DEFAULT NULL,
+  `Dname` varchar(50) NOT NULL,
+  `Mgr_ssn` int NOT NULL,
   `Mgr_start_date` date DEFAULT NULL,
   PRIMARY KEY (`Dnum`),
   KEY `Mgr_ssn` (`Mgr_ssn`),
@@ -205,14 +205,14 @@ DROP TABLE IF EXISTS `employee`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `employee` (
-  `Fname` varchar(50) DEFAULT NULL,
-  `Lname` varchar(50) DEFAULT NULL,
-  `Dnum` int DEFAULT NULL,
+  `Fname` varchar(50) NOT NULL,
+  `Lname` varchar(50) NOT NULL,
+  `Dnum` int NOT NULL,
   `Address` varchar(50) DEFAULT NULL,
   `Ssn` int NOT NULL,
   `Postion` varchar(50) DEFAULT NULL,
-  `Salary` int DEFAULT NULL,
-  `Branch_num` int DEFAULT NULL,
+  `Salary` int NOT NULL,
+  `Branch_num` int NOT NULL,
   `Hours` int DEFAULT NULL,
   `Gender` char(1) DEFAULT NULL,
   `Phone_num` int DEFAULT NULL,
@@ -247,10 +247,10 @@ DROP TABLE IF EXISTS `faqs`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `faqs` (
-  `Answer` varchar(100) DEFAULT NULL,
-  `Question` varchar(100) DEFAULT NULL,
+  `Answer` varchar(100) NOT NULL,
+  `Question` varchar(100) NOT NULL,
   `Question_code` int NOT NULL,
-  `Answered_by` int DEFAULT NULL,
+  `Answered_by` int NOT NULL,
   PRIMARY KEY (`Question_code`),
   KEY `Answered_by` (`Answered_by`),
   CONSTRAINT `faqs_ibfk_1` FOREIGN KEY (`Answered_by`) REFERENCES `employee` (`Ssn`)
@@ -333,8 +333,8 @@ DROP TABLE IF EXISTS `plan`;
 CREATE TABLE `plan` (
   `Plan_code` int NOT NULL,
   `Price` float DEFAULT NULL,
-  `Minutes` int DEFAULT NULL,
-  `Megas` int DEFAULT NULL,
+  `Minutes` int DEFAULT 0,
+  `Megas` int DEFAULT 0,
   `Plan_name` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`Plan_code`),
   UNIQUE KEY `Plan_name_UNIQUE` (`Plan_name`)
@@ -352,13 +352,13 @@ INSERT INTO `plan` VALUES (112,100,600,3000,'WAFARX'),(333,50,300,500,'SPACEX'),
 UNLOCK TABLES;
 
 --
--- Table structure for table `sevices`
+-- Table structure for table `services`
 --
 
-DROP TABLE IF EXISTS `sevices`;
+DROP TABLE IF EXISTS `services`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `sevices` (
+CREATE TABLE `services` (
   `Serv_code` int NOT NULL,
   `cost` float DEFAULT NULL,
   `S_descrip` varchar(100) DEFAULT NULL,
@@ -367,13 +367,13 @@ CREATE TABLE `sevices` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `sevices`
+-- Dumping data for table `services`
 --
 
-LOCK TABLES `sevices` WRITE;
-/*!40000 ALTER TABLE `sevices` DISABLE KEYS */;
-INSERT INTO `sevices` VALUES (1,200,'Service_1'),(2,300,'Service_2'),(3,400,'Service_3'),(4,500,'Service_4');
-/*!40000 ALTER TABLE `sevices` ENABLE KEYS */;
+LOCK TABLES `services` WRITE;
+/*!40000 ALTER TABLE `services` DISABLE KEYS */;
+INSERT INTO `services` VALUES (1,200,'Service_1'),(2,300,'Service_2'),(3,400,'Service_3'),(4,500,'Service_4');
+/*!40000 ALTER TABLE `services` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
