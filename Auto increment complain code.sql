@@ -1,0 +1,1 @@
+ALTER TABLE wgsa_company.Complaint AUTO_INCREMENT=100;
