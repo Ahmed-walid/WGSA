@@ -89,7 +89,7 @@
         <form action="/Remove_employee" method="POST">
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">SSN</label>
-                <input type="number" name="SSN" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                <input type="number" name="SSN" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
                 <button type="submit" class="btn btn-primary">Remove employee</button>
             </div>
         </form>
@@ -103,18 +103,17 @@
 
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Frist name</label>
-                <input type="text" name="Fname" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                <input type="text" name="Fname" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
             </div>
 
             <div class="mb-3">
                 <label for="exampleInputPassword1" class="form-label">Last name</label>
-                <input type="text" name="Lname" class="form-control" id="exampleInputPassword1">
+                <input type="text" name="Lname" class="form-control" id="exampleInputPassword1" required>
             </div>
 
             <div class="mb-3 ">
                 <label for="exampleInputPassword1" class="form-label">Department number</label>
-                <input type="number" name="Dnum" class="form-control" id="exampleInputPassword1">
-
+                <input type="number" name="Dnum" class="form-control" id="exampleInputPassword1" required>
             </div>
 
             <div class="mb-3 ">
@@ -124,22 +123,22 @@
 
             <div class="mb-3 ">
                 <label for="exampleInputPassword1" class="form-label">SSN</label>
-                <input type="number" name="SSN" class="form-control" id="exampleInputPassword1">
+                <input type="number" name="SSN" class="form-control" id="exampleInputPassword1" required>
             </div>
 
             <div class="mb-3 ">
                 <label for="exampleInputPassword1" class="form-label">Position</label>
-                <input type="text" name="Position" class="form-control" id="exampleInputPassword1">
+                <input type="text" name="Position" class="form-control" id="exampleInputPassword1" required>
             </div>
 
             <div class="mb-3 ">
                 <label for="exampleInputPassword1" class="form-label">Salary</label>
-                <input type="number" name="Salary" class="form-control" id="exampleInputPassword1">
+                <input type="number" name="Salary" class="form-control" id="exampleInputPassword1" required>
             </div>
 
             <div class="mb-3 ">
                 <label for="exampleInputPassword1" class="form-label">branch number</label>
-                <input type="number" name="Bnum" class="form-control" id="exampleInputPassword1">
+                <input type="number" name="Bnum" class="form-control" id="exampleInputPassword1" required>
             </div>
 
             <div class="mb-3 ">
@@ -157,9 +156,14 @@
                 <input type="number" name="Phone_number" class="form-control" id="exampleInputPassword1">
             </div>
 
-            <div class="mb-3 ">
+           <div class="mb-3 ">
                 <label for="exampleInputPassword1" class="form-label">Super SSN</label>
                 <input type="number" name="Super_ssn" class="form-control" id="exampleInputPassword1">
+            </div>
+
+            <div class="mb-3 ">
+                <label for="exampleInputPassword1" class="form-label">Password</label>
+                <input type="password" name="Password" class="form-control" id="exampleInputPassword1" required>
             </div>
 
             <button type="submit" class="btn btn-primary">Add new employee</button>
@@ -173,7 +177,7 @@
         <form action="/Remove_customer" method="POST">
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Phone number</label>
-                <input type="number" name="Phone_num" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                <input type="number" name="Phone_num" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
             </div>
             <button type="submit" class="btn btn-primary">Remove customer</button>
         </form>
@@ -189,7 +193,7 @@
             </div>
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Branch number</label>
-                <input type="number" name="bnum" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                <input type="number" name="bnum" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
             </div>
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Location</label>
@@ -204,7 +208,7 @@
         <form action="/Remove_branch" method="POST">
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Branch number</label>
-                <input type="number" name="bnum" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                <input type="number" name="bnum" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
             </div>
             <button type="submit" class="btn btn-primary">Remove branch</button>
         </form>

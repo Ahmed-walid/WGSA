@@ -32,6 +32,8 @@
                 x.style.display = "none";
             }
         }
+
+
     </script>
 </head>
 
@@ -41,21 +43,18 @@
         <a href="Test"><button type=" button " class="btn btn-primary ">Get Customer info</button></a>
         <button onclick="myFunction2()" type=" button " class="btn btn-primary ">Change customers' plan</button>
         <button onclick="myFunction3()" type="button " class="btn btn-primary ">Add new customer</button>
-        <button onclick="myFunction5()" type="button " class="btn btn-primary ">Register customers' complaint</button>
+        <a href="Complain"><button type=" button " class="btn btn-primary ">Register customers' complaint</button></a>
     </div>
-
-
-
 
     <div id="form2" style="display:none; ">
         <form action="/change_cplan" method="POST">
             <div class="mb-3 ">
-                <label for="exampleInputEmail1 " class="form-label ">Plane code</label>
-                <input type="number " name="plane_code" class="form-control " id="exampleInputEmail1 " aria-describedby="emailHelp ">
+                <label for="exampleInputPassword1 " class="form-label ">Customer phone number</label>
+                <input type="number " name="phone_num" class="form-control " id="exampleInputPassword1 " required>
             </div>
             <div class="mb-3 ">
-                <label for="exampleInputPassword1 " class="form-label ">Customer phone number</label>
-                <input type="number " name="phone_num" class="form-control " id="exampleInputPassword1 ">
+                <label for="exampleInputEmail1 " class="form-label ">New Plan code</label>
+                <input type="number " name="plane_code" class="form-control " id="exampleInputEmail1 " aria-describedby="emailHelp " required>
             </div>
             <button type="submit " class="btn btn-primary ">Change customers' plan</button>
         </form>
@@ -69,18 +68,17 @@
 
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Frist name</label>
-                <input type="text" name="Fname" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                <input type="text" name="Fname" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
             </div>
 
             <div class="mb-3">
                 <label for="exampleInputPassword1" class="form-label">Last name</label>
-                <input type="text" name="Lname" class="form-control" id="exampleInputPassword1">
+                <input type="text" name="Lname" class="form-control" id="exampleInputPassword1" required>
             </div>
 
             <div class="mb-3 ">
-                <label for="exampleInputPassword1" class="form-label">Department number</label>
-                <input type="number" name="Dnum" class="form-control" id="exampleInputPassword1">
-
+                <label for="exampleInputPassword1" class="form-label">ID</label>
+                <input type="number" name="Id" class="form-control" id="exampleInputPassword1" required>
             </div>
 
             <div class="mb-3 ">
@@ -89,28 +87,23 @@
             </div>
 
             <div class="mb-3 ">
-                <label for="exampleInputPassword1" class="form-label">SSN</label>
-                <input type="number" name="SSN" class="form-control" id="exampleInputPassword1">
+                <label for="exampleInputPassword1" class="form-label">Plan code</label>
+                <input type="number" name="Plan_code" class="form-control" id="exampleInputPassword1">
             </div>
 
             <div class="mb-3 ">
-                <label for="exampleInputPassword1" class="form-label">Position</label>
-                <input type="text" name="Position" class="form-control" id="exampleInputPassword1">
+                <label for="exampleInputPassword1" class="form-label">Balance</label>
+                <input type="number" name="Balance" class="form-control" id="exampleInputPassword1">
             </div>
 
             <div class="mb-3 ">
-                <label for="exampleInputPassword1" class="form-label">Salary</label>
-                <input type="number" name="Salary" class="form-control" id="exampleInputPassword1">
+                <label for="exampleInputPassword1" class="form-label">Used Minutes</label>
+                <input type="number" name="Used_min" class="form-control" id="exampleInputPassword1">
             </div>
 
             <div class="mb-3 ">
-                <label for="exampleInputPassword1" class="form-label">branch number</label>
-                <input type="number" name="Bnum" class="form-control" id="exampleInputPassword1">
-            </div>
-
-            <div class="mb-3 ">
-                <label for="exampleInputPassword1" class="form-label">Hours</label>
-                <input type="number" name="hours" class="form-control" id="exampleInputPassword1">
+                <label for="exampleInputPassword1" class="form-label">Used Megas</label>
+                <input type="number" name="Used_megas" class="form-control" id="exampleInputPassword1">
             </div>
 
             <div class="mb-3 ">
@@ -120,15 +113,20 @@
 
             <div class="mb-3 ">
                 <label for="exampleInputPassword1" class="form-label">Phone number</label>
-                <input type="number" name="Phone_number" class="form-control" id="exampleInputPassword1">
+                <input type="number" name="Phone_num" class="form-control" id="exampleInputPassword1" required>
             </div>
 
             <div class="mb-3 ">
-                <label for="exampleInputPassword1" class="form-label">Super SSN</label>
-                <input type="number" name="Super_ssn" class="form-control" id="exampleInputPassword1">
+                <label for="exampleInputPassword1" class="form-label">Renewal Date</label>
+                <input type="date" name="Renewal_date" class="form-control" id="exampleInputPassword1">
+            </div>
+            
+            <div class="mb-3 ">
+                <label for="exampleInputPassword1" class="form-label">Password</label>
+                <input type="password" name="Password" class="form-control" id="exampleInputPassword1" required>
             </div>
 
-            <button type="submit" class="btn btn-primary">Add new employee</button>
+            <button type="submit" class="btn btn-primary">Add new customer</button>
         </form>
     </div>
 
