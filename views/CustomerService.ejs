@@ -36,10 +36,10 @@
         </section>
         <hr class="Line" />
     </header>
-    
-    
+
+
     <main class="CS">
-        
+
         <div class="siden">
             <div class="listContainer">
                 <ul>
@@ -51,34 +51,36 @@
                     </div>
                 </ul>
             </div>
-        </div>
-        
-        
-        <div class="CSBody">
-            
-            <div class="FormContainer" id="Cusomerinfo">
-                <form action="/getCustomerinfo" method="POST">
-                    
-                    <div class="input">
-                        <input placeholder="Phone Number" type="number" name="Phone_number" required>
-                    </div>
-                    
-                    <div class="input">
-                        <button class="log-btn" value="getCustomerinfo">Get Customer info</button>
-                    </div>
-                    
-                </form>
-            </div>
             <% if (errmessage) { %>
-                <div class="alertErr" >
+                <div class="alertErr">
                     <%= errmessage %>
                 </div>
                 <% } %>
-            <% if (successMes) { %>
-                <div class="alertSuccess">
-                    <%= successMes %>
-                </div>
-                <% } %>
+                    <% if (successMes) { %>
+                        <div class="alertSuccess">
+                            <%= successMes %>
+                        </div>
+                        <% } %>
+        </div>
+
+
+
+        <div class="CSBody">
+
+            <div class="FormContainer" id="Cusomerinfo">
+                <form action="/getCustomerinfo" method="POST">
+
+                    <div class="input">
+                        <input placeholder="Phone Number" type="number" name="Phone_number" required>
+                    </div>
+
+                    <div class="input">
+                        <button class="log-btn" value="getCustomerinfo">Get Customer info</button>
+                    </div>
+
+                </form>
+            </div>
+
             <% if (result){ %>
                 <div class="FormContainer">
                     <form action="/change_cplan" method="POST">
@@ -87,7 +89,7 @@
                                 <th>Name :</th>
                                 <td>
                                     <%=result[0].Fname%>
-                                    <%=result[0].Lname%>
+                                        <%=result[0].Lname%>
                                 </td>
                             </tr>
                             <tr>
@@ -116,65 +118,65 @@
                                                     <option value="<%=row.plan_code%>">
                                                         <%=row.plan_name%>
                                                     </option>
-                                                    <% } %> 
                                                     <% } %>
-                                                </select>
-                                            </td>
-                                        </tr>
-                                        
-                                        <tr>
-                                            <th>Renewal Date: </th>
-                                            <td>
-                                                <%=result[0].Renewal_date%>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th>Balance : </th>
-                                            <td>
-                                                <%=result[0].Balance%> Egp
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th>Gender </th>
-                                            <td>
-                                                <%=result[0].Gender%>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th>Address </th>
-                                            <td>
-                                                <%=result[0].Address%>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th>Used Minutes </th>
-                                            <td>
-                                                <%=result[0].Used_min%> Minute
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th>Used Megabytes </th>
-                                            <td>
-                                                <%=result[0].Used_megas%> Megabytes
-                                            </td>
-                                        </tr>
-                                    </table>
-                                    <button type="submit" class="log-btn">Save Changes</button>
-                                </form>
-                            </div>
-                            <%}%>
+                                                        <% } %>
+                                    </select>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <th>Renewal Date: </th>
+                                <td>
+                                    <%=result[0].Renewal_date%>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Balance : </th>
+                                <td>
+                                    <%=result[0].Balance%> Egp
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Gender </th>
+                                <td>
+                                    <%=result[0].Gender%>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Address </th>
+                                <td>
+                                    <%=result[0].Address%>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Used Minutes </th>
+                                <td>
+                                    <%=result[0].Used_min%> Minute
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Used Megabytes </th>
+                                <td>
+                                    <%=result[0].Used_megas%> Megabytes
+                                </td>
+                            </tr>
+                        </table>
+                        <button type="submit" class="log-btn">Save Changes</button>
+                    </form>
+                </div>
+                <%}%>
 
 
-                            
-                            
-                            <p>
-                                <a class="btn btn-primary" style="border-radius: 2em; margin: 2em 0 0 11em;"
-                                data-bs-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false"
-                                aria-controls="multiCollapseExample1">Add New Complaint</a>
-                            </p>
-                            <div class="FormContainer">
-                                <form action="/Complain_processCS" method="POST">
-                                    <div class="collapse multi-collapse" id="multiCollapseExample1">
+
+
+                    <p>
+                        <a class="btn btn-primary" style="border-radius: 2em; margin: 2em 0 0 11em;"
+                            data-bs-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false"
+                            aria-controls="multiCollapseExample1">Add New Complaint</a>
+                    </p>
+                    <div class="FormContainer">
+                        <form action="/Complain_processCS" method="POST">
+                            <div class="collapse multi-collapse" id="multiCollapseExample1">
                                 <div class="input">
                                     <input placeholder="Phone Number" type="number" name="Phone_numberC" required>
                                 </div>
@@ -213,12 +215,12 @@
                     <input placeholder="ID" type="number" name="Id" required>
                     <img src="../images/ID.svg">
                 </div>
-                <div class="input" >
-                    <select name="Plan_codeN" id="plan" >
+                <div class="input">
+                    <select name="Plan_codeN" id="plan">
                         <% for (row of plans){ %>
 
-                                <option value="<%=row.plan_code%>">
-                                    <%=row.plan_name%>
+                            <option value="<%=row.plan_code%>">
+                                <%=row.plan_name%>
                             </option>
                             <% } %>
                     </select>
