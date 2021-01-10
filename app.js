@@ -6,12 +6,13 @@ const { check, body, validationResult } = require('express-validator');
 const express = require('express');
 const morgan = require('morgan');
 const mysql = require('mysql');
+const { response } = require("express");
 
 
 const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password:'',
+    password: '7561275612',
     database: 'wgsa_company'
 });
 
@@ -99,7 +100,7 @@ app.get('/FAQS', (req, res) => {
     });
 });
 app.get('/Login', (req, res) => {
-    
+
     res.render('Login', { errmessage: '', successMes: '' })
 });
 
@@ -155,23 +156,25 @@ app.get('/Register', (req, res) => {
 
 app.get('/Customer', (req, res) => {
 
-    var user_number = 130000000;
+    var user_number = 13789321;
 
-    let myquery1 = `Select customer.balance, customer.Renewal_date, customer.gender ,customer.fname,customer.lname, plan.Plan_name,customer.used_megas,customer.used_min
+    let myquery1 = `Select customer.Balance, customer.Renewal_date, customer.Gender ,customer.Fname,customer.Lname, plan.Plan_name,customer.Used_megas,customer.Used_min
     from wgsa_company.plan,wgsa_company.customer
     where customer.plan_code=plan.Plan_code and customer.Phone_num=${user_number}`;
 
     db.query(myquery1, (err, result, field) => {
         if (err) throw err;
-        result[0].Renewal_date=result[0].Renewal_date.toString().substr(0,15);
-        console.log(result);
-        res.render('Customer', { result })
+        if (result.length > 0) {
+            result[0].Renewal_date = result[0].Renewal_date.toString().substr(0, 15);
+            console.log(result);
+            res.render('Customer', { result })
+        }
     });
 
 });
 
 
-app.post('/heatmapp', function(req, res, err) {
+app.post('/heatmapp', function (req, res, err) {
 
     console.log("hey");
 
@@ -181,7 +184,7 @@ app.post('/heatmapp', function(req, res, err) {
 });
 
 
-app.post('/Update_Plan_Cost', urlencodedParser, function(req, res) {
+app.post('/Update_Plan_Cost', urlencodedParser, function (req, res) {
 
     var Plannewprice = req.body.Plan_New_Price;
     var plancode = req.body.Plan_Code;
@@ -194,7 +197,7 @@ app.post('/Update_Plan_Cost', urlencodedParser, function(req, res) {
     });
 
 });
-app.post('/Delete_Plan', urlencodedParser, function(req, res) {
+app.post('/Delete_Plan', urlencodedParser, function (req, res) {
 
     var Plan_code = req.body.Plan_Code;
 
@@ -207,7 +210,7 @@ app.post('/Delete_Plan', urlencodedParser, function(req, res) {
     });
 
 });
-app.post('/Remove_customer', urlencodedParser, function(req, res) {
+app.post('/Remove_customer', urlencodedParser, function (req, res) {
 
     var phone_num = req.body.Phone_num;
 
@@ -223,7 +226,7 @@ app.post('/Remove_customer', urlencodedParser, function(req, res) {
     });
 
 });
-app.post('/Remove_employee', urlencodedParser, function(req, res) {
+app.post('/Remove_employee', urlencodedParser, function (req, res) {
 
     var ssn = req.body.SSN;
 
@@ -241,7 +244,7 @@ app.post('/Remove_employee', urlencodedParser, function(req, res) {
 });
 
 
-app.post('/Add_New_Plan', urlencodedParser, function(req, res) {
+app.post('/Add_New_Plan', urlencodedParser, function (req, res) {
 
     var Plan_name = req.body.Plan_name;
     var Plan_code = req.body.Plan_code;
@@ -262,7 +265,7 @@ app.post('/Add_New_Plan', urlencodedParser, function(req, res) {
 
 });
 
-app.post('/Add_employee', urlencodedParser, function(req, res) {
+app.post('/Add_employee', urlencodedParser, function (req, res) {
 
     var Fname = req.body.Fname;
     var Lname = req.body.Lname;
@@ -317,7 +320,7 @@ app.post('/Recharge_Process', urlencodedParser, function (req, res) {
 
 
 
-app.post('/Add_New_Offer', urlencodedParser, function(req, res) {
+app.post('/Add_New_Offer', urlencodedParser, function (req, res) {
 
     var Offer_num = req.body.Offer_num;
     var Offer_describtion = req.body.Offer_describtion;
@@ -426,49 +429,121 @@ app.post('/Delete_Complaint', urlencodedParser, (req, res) => {
 });
 
 app.get('/Transfer', (req, res) => {
-    res.render('Transfer')
+    res.render('Transfer', { errmessage: '', successMes: '' })
 });
 
+/*
+     app.use((req,res,next)=>{
+    
+        next();
+     });
+    */
 
 
+app.post('/Transfer_balance', urlencodedParser, (req, res, (req, res, (req, res) => {//4
+                                
+    // var user_phone_number = 13357741;//Gehan sadat
+    // var Recipient_Phone_number = req.body.Recipient_phone_num;
+    // var Balance_to_be_transfered = req.body.Balance_to_be_transfered;
 
-app.post('/Transfer_balance', urlencodedParser, (req, res) => {
+    let query1 = `Update wgsa_company.customer 
+    set customer.Balance=customer.Balance-${Balance_to_be_transfered}
+    where customer.Phone_num=${user_phone_number}`;
 
-        var user_phone_number= 13654456 ;
-        var Recipient_Phone_number=req.body.Recipient_phone_num;
-        var Balance_to_be_transfered =req.body.Balance_to_be_transfered;
+    db.query(query1, (err, result, field) => {//5
+        if (err) {
+            res.render('404', { err });
+            console.log(result);
+        } else {
 
-        let query1 = `Update wgsa_company.customer 
-        set customer.Balance=customer.Balance-${Balance_to_be_transfered}
-        where customer.Phone_num=${user_phone_number}`;
-        
-       
-        db.query(query1, (err, result, field) => {
-            if (err) {
-                res.render('404', { err });
-                console.log(result);
-            } else {
+            let query2 = `update wgsa_company.customer
+            set customer.Balance=customer.Balance+${Balance_to_be_transfered}
+            where customer.phone_num=${Recipient_Phone_number};`
 
-                let  query2  =`update wgsa_company.customer
-                set customer.Balance=customer.Balance+${Balance_to_be_transfered}
-                where customer.phone_num=${Recipient_Phone_number};`
+            db.query(query2, (err, result, field) => {//6
+                if (err) {
+                    res.render('404', { err });
+                    console.log(result);
+                } else {
 
-                db.query(query2, (err, result, field) => {
-                    if (err) {
-                        res.render('404', { err });
-                        console.log(result);
-                    } else {
+                    res.render('Transfer', { errmessage: '', successMes: '' });
 
-                        res.render('Transfer');
-                        
-                    }
-                });
+                }
+            });//6
 
-            }
-        });        
-});
+        }
+    });//5
 
+}) => {//2
+    console.log("g");
+    // var user_phone_number1 = 13357741; //Gehan sadat
+    // var Recipient_Phone_number1 = parseInt(req.body.Recipient_phone_num,10);
+    // var Balance_to_be_transfered = parseint(req.body.Balance_to_be_transfered,10);
+    //query to check that the recipient is a client of wsga
+    let queryrecipient = `select *
+from wgsa_company.customer
+where customer.phone_num=${Recipient_Phone_number}; `;
 
+    db.query(queryrecipient, (err, result, field) => { //3
+        if (err) {
+            res.render('404', { err });
+            throw err;
+        }
+        if (result.length === 0) {
+            console.log("The recipient number is not fount");
+            return res.render('Transfer', { errmessage: 'There is no recipent with such a number', successMes: '' });
+        }
+
+    }
+}) => {
+
+    
+////////////////////////////////////////////////////////////////////
+    var user_phone_number = 13357741;  //Gehan sadat
+    var Recipient_Phone_number =parseInt( req.body.Recipient_phone_num,10);
+    var Balance_to_be_transfered =  parseInt(req.body.Balance_to_be_transfered, 10);
+   
+
+    //check that the number entered and balance to be transfered is postive
+    if (user_phone_number <= 0 || Recipient_Phone_number <= 0) {
+        return res.render('Transfer', { errmessage: 'Please enter valid numbers', successMes: '' });
+    }
+    // check that the user has a balance greater than or equal to Balance_to_be_transfered
+    let query_customer_curr_balance = `select customer.Balance
+         from wgsa_company.customer
+         where customer.phone_num='${user_phone_number}';`;
+    db.query(query_customer_curr_balance,  (err, result1, field) => {//1
+        if (err) {
+            res.render('404', { err });
+            throw err;
+        }
+    
+        //console.log(result1[0].Balance);
+        //console.log(parseInt(Balance_to_be_transfered, 10));
+        if (result1[0].Balance < Balance_to_be_transfered) {
+            
+            console.log("your balance is not sufficient to complete the transfer process");
+            return res.render('Transfer', { errmessage: 'your balance is not sufficient to complete the transfer process', successMes: '' });
+        }
+    }
+}
+});            
+    
+    
+    
+    
+    
+                                               
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
 
 
@@ -483,8 +558,7 @@ app.post('/registernew', urlencodedParser, (req, res) => {
     if (!Fname || !Lname || !Phone_number || !password || !ID || !gender) {
         return res.render('Register', { errmessage: 'Please enter all fields', successMes: '' });
     }
-    if(!parseInt(Phone_number)||!parseInt(ID))
-    {
+    if (!parseInt(Phone_number) || !parseInt(ID)) {
         return res.render('Register', { errmessage: 'Please enter a Valid number', successMes: '' });
     }
 
@@ -515,8 +589,8 @@ app.post('/registernew', urlencodedParser, (req, res) => {
 
 app.post('/loginSubmit', urlencodedParser, (req, res) => {
     const { Phone_number, password } = req.body;
-    console.log(Phone_number,password);
-    
+    console.log(Phone_number, password);
+
     if (!Phone_number || !password) {
         return res.render('Login', { errmessage: 'Please enter all fields', successMes: '' });
     }

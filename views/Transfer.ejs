@@ -34,9 +34,19 @@
 
     <main class="Reg">
 
+        <% if (errmessage) { %>
+            <div class="alertErr">
+                <%= errmessage %>
+            </div>
+            <% } %>
+                <% if (successMes) { %>
+                    <div class="alertSuccess">
+                        <%= successMes %>
+                    </div>
+                    <% } %>
+
+
         <div class="FormContainer">
-
-
             <section class="inputs">
                 <form action="/Transfer_balance" method="POST">
                     <div class="mb-3">

@@ -34,7 +34,7 @@
                             <div class="btn-group" role="group">
                                 <button id="btnGroupDrop1" type="button" class="log-btn" data-bs-toggle="dropdown"
                                     aria-expanded="false">
-                                    <%=result[0].fname%> ▼
+                                    <%=result[0].Fname%> ▼
                                 </button>
                                 <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
                                     <li><a class="dropdown-item" href="Recharge">Recharge</a></li>
@@ -62,8 +62,8 @@
                         <img src="images/male.png" alt="male image">
                         <%}%>
                                 <p>
-                                    <%=result[0].fname%>
-                                        <%=result[0].lname%>
+                                    <%=result[0].Fname%>
+                                        <%=result[0].Lname%>
                                 </p>
             </div>
             <div class="UserBal">
@@ -71,7 +71,7 @@
                     <div class="GradCirc"></div>
                 </div>
                 <h2>
-                    <%=result[0].balance%> Egp
+                    <%=result[0].Balance%> Egp
                 </h2>
             </div>
 
@@ -89,8 +89,8 @@
         </div>
 
         <div class="lower">
-            <p>Used MegaBytes : <%=result[0].used_megas%> Megabytes</p>
-            <p>Used Minutes : <%=result[0].used_min%> Minutes</p>
+            <p>Used MegaBytes : <%=result[0].Used_megas%> Megabytes</p>
+            <p>Used Minutes : <%=result[0].Used_min%> Minutes</p>
         </div>
     </main>
 
