@@ -1,3 +1,5 @@
+
+create database wgsa_company;
 -- CREATE DATABASE  IF NOT EXISTS `wgsa_company` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `wgsa_company`;
 -- MySQL dump 10.13  Distrib 8.0.22, for Win64 (x86_64)
@@ -58,9 +60,7 @@ CREATE TABLE `card` (
   `Recharge_date` date DEFAULT NULL,
   PRIMARY KEY (`Serial_number`),
   KEY `Recharged_by` (`Recharged_by`),
-  CONSTRAINT `card_ibfk_1` FOREIGN KEY (`Recharged_by`) REFERENCES `customer` (`Phone_num`)   -- GH: chk [add customer start date for del no action - if we get history of cards for customer]
-        ON DELETE NO ACTION 
-        ON UPDATE CASCADE
+  CONSTRAINT `card_ibfk_1` FOREIGN KEY (`Recharged_by`) REFERENCES `customer` (`Phone_num`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -82,7 +82,7 @@ DROP TABLE IF EXISTS `complaint`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `complaint` (
-  `C_Code` int NOT NULL,
+  `C_Code` int NOT NULL AUTO_INCREMENT,
   `C_Status` varchar(10) DEFAULT "Wait",
   `C_Descrip` varchar(50) NOT NULL,
   `Complaint_by` int NOT NULL,
@@ -93,12 +93,8 @@ CREATE TABLE `complaint` (
   PRIMARY KEY (`C_Code`),
   KEY `Complaint_by` (`Complaint_by`),
   KEY `Replied_by` (`Replied_by`),
-  CONSTRAINT `complaint_ibfk_1` FOREIGN KEY (`Complaint_by`) REFERENCES `customer` (`Phone_num`)    -- GH: CHK
-        ON DELETE CASCADE
-        ON UPDATE CASCADE,
+  CONSTRAINT `complaint_ibfk_1` FOREIGN KEY (`Complaint_by`) REFERENCES `customer` (`Phone_num`),
   CONSTRAINT `complaint_ibfk_2` FOREIGN KEY (`Replied_by`) REFERENCES `employee` (`Ssn`)
-        ON DELETE set NULL
-        ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -135,8 +131,6 @@ CREATE TABLE `customer` (
   PRIMARY KEY (`Phone_num`),
   KEY `Plan_code` (`Plan_code`),
   CONSTRAINT `customer_ibfk_1` FOREIGN KEY (`Plan_code`) REFERENCES `plan` (`Plan_code`)
-        ON DELETE RESTRict
-        ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -163,11 +157,7 @@ CREATE TABLE `dep_loc` (
   PRIMARY KEY (`Bnum`,`Dno`),
   KEY `Dno` (`Dno`),
   CONSTRAINT `dep_loc_ibfk_1` FOREIGN KEY (`Bnum`) REFERENCES `branch` (`Bnum`),
-        ON DELETE CASCADE
-        ON UPDATE CASCADE,
   CONSTRAINT `dep_loc_ibfk_2` FOREIGN KEY (`Dno`) REFERENCES `department` (`Dnum`)
-        ON DELETE CASCADE
-        ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -196,8 +186,6 @@ CREATE TABLE `department` (
   PRIMARY KEY (`Dnum`),
   KEY `Mgr_ssn` (`Mgr_ssn`),
   CONSTRAINT `department_ibfk_1` FOREIGN KEY (`Mgr_ssn`) REFERENCES `employee` (`Ssn`)
-        ON DELETE RESTRict
-        ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -231,21 +219,15 @@ CREATE TABLE `employee` (
   `Gender` char(1) DEFAULT NULL,
   `Phone_num` int DEFAULT NULL,
   `Super_ssn` int DEFAULT NULL,
-  `Password` varchar(50) NOT null,
+   `Password` varchar(50) NOT null,
   PRIMARY KEY (`Ssn`),
   UNIQUE KEY `Phone_num_UNIQUE` (`Phone_num`),
   KEY `Super_ssn` (`Super_ssn`),
   KEY `Branch_num` (`Branch_num`),
   KEY `Dnum` (`Dnum`),
-  CONSTRAINT `employee_ibfk_1` FOREIGN KEY (`Super_ssn`) REFERENCES `employee` (`Ssn`)
-        ON DELETE set NULL
-        ON UPDATE CASCADE,
-  CONSTRAINT `employee_ibfk_2` FOREIGN KEY (`Branch_num`) REFERENCES `branch` (`Bnum`)
-        ON DELETE RESTRict
-        ON UPDATE CASCADE,
+  CONSTRAINT `employee_ibfk_1` FOREIGN KEY (`Super_ssn`) REFERENCES `employee` (`Ssn`),
+  CONSTRAINT `employee_ibfk_2` FOREIGN KEY (`Branch_num`) REFERENCES `branch` (`Bnum`),
   CONSTRAINT `employee_ibfk_3` FOREIGN KEY (`Dnum`) REFERENCES `department` (`Dnum`)
-        ON DELETE RESTRict
-        ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -274,8 +256,6 @@ CREATE TABLE `faqs` (
   PRIMARY KEY (`Question_code`),
   KEY `Answered_by` (`Answered_by`),
   CONSTRAINT `faqs_ibfk_1` FOREIGN KEY (`Answered_by`) REFERENCES `employee` (`Ssn`)
-        ON DELETE NO ACTION 
-        ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -330,12 +310,8 @@ CREATE TABLE `offered_to` (
   `Offer_code` int NOT NULL,
   PRIMARY KEY (`Cus_Phone_num`,`Offer_code`),
   KEY `Offer_code` (`Offer_code`),
-  CONSTRAINT `offered_to_ibfk_1` FOREIGN KEY (`Cus_Phone_num`) REFERENCES `customer` (`Phone_num`)
-        ON DELETE CASCADE
-        ON UPDATE CASCADE,
+  CONSTRAINT `offered_to_ibfk_1` FOREIGN KEY (`Cus_Phone_num`) REFERENCES `customer` (`Phone_num`),
   CONSTRAINT `offered_to_ibfk_2` FOREIGN KEY (`Offer_code`) REFERENCES `offer` (`Offer_num`)
-        ON DELETE CASCADE
-        ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -413,12 +389,8 @@ CREATE TABLE `sign_for` (
   `Cus_Phone_num` int NOT NULL,
   `Service_code` int NOT NULL,
   PRIMARY KEY (`Cus_Phone_num`,`Service_code`),
-  CONSTRAINT `sign_for_ibfk_1` FOREIGN KEY (`Cus_Phone_num`) REFERENCES `customer` (`Phone_num`)
-        ON DELETE CASCADE
-        ON UPDATE CASCADE,
+  CONSTRAINT `sign_for_ibfk_1` FOREIGN KEY (`Cus_Phone_num`) REFERENCES `customer` (`Phone_num`),
   CONSTRAINT `sign_for_ibfk_2` FOREIGN KEY (`Service_code`) REFERENCES `services` (`Serv_code`)
-        ON DELETE CASCADE
-        ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 

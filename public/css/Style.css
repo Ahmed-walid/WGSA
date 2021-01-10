@@ -68,6 +68,13 @@ h1 {
   font-size: 150%;
 }
 
+header {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 5;
+}
+
 main {
   height: 100vh;
 }
@@ -623,5 +630,161 @@ td p {
   font-size: 130%;
   margin-top: -4em;
   margin-bottom: 2em;
+}
+
+.CS {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  background-image: unset;
+  background-color: var(--mid);
+  height: 100%;
+}
+
+.CS .CSBody {
+  -webkit-box-flex: 5;
+      -ms-flex: 5;
+          flex: 5;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding-bottom: 6em;
+  padding-top: 6em;
+}
+
+.CS .CSBody p a {
+  margin: 0;
+  background-color: var(--light);
+}
+
+.CS .CSBody .FormContainer {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.CS .CSBody .FormContainer .input input {
+  -webkit-box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.3), -3px -3px 7px rgba(0, 0, 0, 0.3);
+          box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.3), -3px -3px 7px rgba(0, 0, 0, 0.3);
+}
+
+.CS .CSBody .FormContainer form {
+  width: 70%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+
+.CS .CSBody .FormContainer form button {
+  margin-top: 1em;
+}
+
+.CS .CSBody .FormContainer form table {
+  width: 100%;
+  -ms-flex-item-align: start;
+      align-self: flex-start;
+}
+
+.CS .CSBody .FormContainer form table tr,
+.CS .CSBody .FormContainer form table th,
+.CS .CSBody .FormContainer form table td {
+  border: unset;
+  color: white;
+  padding-left: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.CS .CSBody .FormContainer form table tr {
+  border-bottom: 1px solid #444444;
+}
+
+.CS .CSBody .FormContainer #multiCollapseExample1 {
+  width: 100%;
+}
+
+.CS .siden {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  background-color: #252525;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(var(--mid)), to(#252525));
+  background-image: linear-gradient(var(--mid), #252525);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  border-right: 2px solid #333333;
+  -webkit-box-shadow: 5px 0 10px rgba(0, 0, 0, 0.3);
+          box-shadow: 5px 0 10px rgba(0, 0, 0, 0.3);
+  height: 100vh;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+}
+
+.CS .siden ul {
+  list-style: none;
+}
+
+.CS .siden ul .listElement li {
+  border-radius: 0.2em;
+  text-align: center;
+  padding: 1em;
+  font-size: 110%;
+  font-weight: bolder;
+  border-bottom: 2px solid var(--BGColor);
+  border-top: 2px solid var(--BGColor);
+  border-collapse: collapse;
+}
+
+.CS .siden ul .listElement :hover {
+  background-image: radial-gradient(circle, #252525, var(--mid));
+}
+
+select {
+  background-color: var(--BGColor);
+  border: unset;
+  border-radius: 1em;
+  padding: .4em;
+}
+
+#AddNewUser form .name-cont {
+  width: 100%;
+}
+
+#AddNewUser form .name-cont input {
+  width: 48%;
+}
+
+#AddNewUser select {
+  width: 48%;
 }
 /*# sourceMappingURL=Style.css.map */

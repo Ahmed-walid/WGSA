@@ -1,0 +1,111 @@
+.CS {
+    display: flex;
+    background-image: unset;
+    background-color: var(--mid);
+    height: 100%;
+    .CSBody {
+        flex: 5;
+        display: flex;
+        flex-direction: column;
+        padding-bottom: 6em;
+        padding-top: 6em;
+        p{
+            a{
+                margin: 0  ;
+                background-color: var(--light);
+            }
+        }
+        .FormContainer {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            .input{
+                input{
+                box-shadow: 3px 3px 7px rgba($color: #000000, $alpha: .3),-3px -3px 7px rgba($color: #000000, $alpha: .3);
+                }
+            }
+            form {
+                width: 70%;
+                display: flex;
+                justify-content: flex-start;
+                flex-direction: column;
+                align-items: flex-start;
+                button{
+                    margin-top: 1em;
+                }
+                table {
+                    width: 100%;
+                    align-self: flex-start;
+                    tr,
+                    th,
+                    td {
+                        border: unset;
+                        color: white;
+                        padding-left: 0;
+                        display: flex;
+                        align-items: center;
+
+                    }
+                    tr {
+                        border-bottom: 1px solid #444444;
+                    }
+                }
+            }
+            #multiCollapseExample1{
+                width: 100%;
+            }
+        }
+    }
+    .siden {
+        flex: 1;
+        background-color: #252525;
+        background-image: linear-gradient(var(--mid), #252525);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-right: 2px solid #333333;
+        box-shadow: 5px 0 10px rgba($color: #000000, $alpha: 0.3);
+        height: 100vh;
+        position: sticky;
+        top: 0;
+        ul {
+            list-style: none;
+            .listElement {
+                li {
+                    border-radius: 0.2em;
+                    text-align: center;
+                    padding: 1em;
+                    font-size: 110%;
+                    font-weight: bolder;
+                    border-bottom: 2px solid var(--BGColor);
+                    border-top: 2px solid var(--BGColor);
+                    border-collapse: collapse;
+                }
+                :hover {
+                    background-image: radial-gradient(circle, #252525, var(--mid));
+                }
+            }
+        }
+    }
+}
+select{
+    background-color: var(--BGColor);
+    border: unset;
+    border-radius: 1em;
+    padding: .4em;
+}
+#AddNewUser{
+
+        form{
+            .name-cont{
+                width: 100%;
+                input{
+                    width: 48%;
+                }
+            }
+        }
+        select{
+            
+            width: 48%;
+        }
+}

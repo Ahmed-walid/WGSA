@@ -12,7 +12,7 @@ const { response } = require("express");
 const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: '7561275612',
+    password:'7561275612',
     database: 'wgsa_company'
 });
 
@@ -28,7 +28,8 @@ app.set('view engine', 'ejs');
 app.use(express.static('public'));
 
 db.connect((err) => {
-    if (err) {
+    if (err)
+    {
         throw err;
     }
     console.log('my sql connected');
@@ -128,8 +129,74 @@ app.get('/', (req, res) => {
 
 app.get('/CustomerService', (req, res) => {
 
-    res.render('CustomerService')
+    let query = `select Fname,Lname from wgsa_company.employee where SSn=${895623}`;
+    let query2 = `select plan_name,plan_code from wgsa_company.plan `;
+
+    db.query(query, (err, emp) => {
+        if (err) {
+            console.log(err)
+        }
+
+        db.query(query2, (err, plans) => {
+            if (err) {
+                console.log(err)
+                return res.render('404', { err });
+            }
+
+
+            res.render('CustomerService', { plans, result: '', errmessage: '', successMes: '' })
+        });
+
+    });
 });
+
+
+
+
+app.post('/getCustomerinfo', urlencodedParser, (req, res) => {
+
+    var user_number = req.body.Phone_number;
+
+    let myquery1 = `Select * from wgsa_company.customer
+    where customer.Phone_num=${user_number}`;
+
+    db.query(myquery1, (err, result, field) => {
+        if (err) {
+            console.log(err);
+            throw err;
+        }
+
+        if (result[0].Renewal_date) {
+            result[0].Renewal_date = result[0].Renewal_date.toString().substr(0, 15);
+        }
+
+
+
+        let query2 = `select plan_name , plan_code from wgsa_company.plan `;
+        db.query(query2, (err, plans) => {
+            if (err) {
+                console.log(err)
+                return res.render('404', { err });
+            }
+            console.log(plans);
+            console.log(result);
+            if (result[0].Gender) {
+                if (result[0].Gender == 'M')
+                    result[0].Gender = 'Male';
+                else
+                    result[0].Gender = 'Female';
+            }
+            res.render('CustomerService', { result, plans, errmessage: '', successMes: '' })
+
+
+        });
+
+    });
+
+
+
+});
+
 
 app.get('/Offers', (req, res) => {
 
@@ -172,6 +239,7 @@ app.get('/Customer', (req, res) => {
     });
 
 });
+
 
 
 app.post('/heatmapp', function (req, res, err) {
@@ -252,6 +320,12 @@ app.post('/Add_New_Plan', urlencodedParser, function (req, res) {
     var Megas = req.body.Megas;
     var Price = req.body.Price;
 
+    if(!Minutes)
+        Minutes="NULL";
+
+    if(!Megas)
+        Megas="NULL";
+
     let myquery = `Insert into wgsa_company.plan (Plan_code, Price, Minutes, Megas, Plan_name) values (${Plan_code},${Price},${Minutes},${Megas},"${Plan_name.toString()}")`;
 
 
@@ -264,40 +338,6 @@ app.post('/Add_New_Plan', urlencodedParser, function (req, res) {
     });
 
 });
-
-app.post('/Add_employee', urlencodedParser, function (req, res) {
-
-    var Fname = req.body.Fname;
-    var Lname = req.body.Lname;
-    var Dnum = req.body.Dnum;
-    var Address = req.body.Address;
-    var ssn = req.body.SSN;
-    var Position = req.body.Position;
-    var Salary = req.body.Salary;
-    var bnum = req.body.Bnum;
-    var hours = req.body.hours;
-    var gender = req.body.Gender;
-    var phone_num = req.body.Phone_number;
-    var s_ssn = req.body.Super_ssn;
-
-
-
-    let myquery = `INSERT INTO wgsa_company.employee(Fname, Lname, Dnum, Address, Ssn, Postion, Salary, Branch_num, Hours, Gender, Phone_num, Super_ssn) VALUES("${Fname}", "${Lname}", ${Dnum}, "${Address}", ${ssn}, "${Position}", ${Salary}, ${bnum}, ${hours}, "${gender}", ${phone_num}, ${s_ssn})`;
-
-
-    db.query(myquery, (err, result, field) => {
-        if (err) {
-            console.log(err)
-            res.render('404', { err });
-        } else {
-            console.log(result);
-            res.render('HR');
-        }
-    });
-
-});
-
-
 
 app.post('/Recharge_Process', urlencodedParser, function (req, res) {
     var Card_Serial_Num = req.body.Card_Serial_Num;
@@ -330,6 +370,24 @@ app.post('/Add_New_Offer', urlencodedParser, function (req, res) {
     var Launch_date = req.body.Launch_date;
     var Expire_date = req.body.Expire_date;
 
+    if(!Offer_describtion)
+        Offer_describtion="NULL";
+
+    if(!Minutes)
+        Minutes="NULL";
+
+    if(!Megas)
+        Megas="NULL";
+
+    if(!Price)
+        Price="NULL";
+
+    if(!Launch_date)
+        Launch_date="NULL";
+
+    if(!Expire_date)
+        Expire_date="NULL";
+
     let myquery = `
             Insert into wgsa_company.Offer(Launch_date, Price, Minutes, Expire_date, Megas, Offer_describ, Offer_num) values('${Launch_date}', ${Price}, ${Minutes}, '${Expire_date}', ${Megas}, '${Offer_describtion}', ${Offer_num})
             `;
@@ -343,19 +401,9 @@ app.post('/Add_New_Offer', urlencodedParser, function (req, res) {
 });
 
 
-app.post('/getemployeeinfo', urlencodedParser, (req, res) => {
 
-    var PhoneNumber = req.body.Phone_number;
 
-    let myquery1 = `SELECT * from wgsa_company.Customer where Customer.Phone_num = ${PhoneNumber}`;
 
-    db.query(myquery1, (err, result, field) => {
-        if (err) throw err;
-        console.log(result);
-        res.render('Test', { result });
-    });
-
-});
 
 
 
@@ -375,7 +423,7 @@ app.post('/Complain_process', urlencodedParser, (req, res) => {
         var maxcode = result[0].m;
         maxcode = maxcode + 1;
         console.log(Complaint);
-        let myquery1 = `Insert into wgsa_company.complaint (C_Code, C_Status, C_Descrip, Complaint_by, Complaint_date) values (${maxcode},'Wait','${Complaint}','${user_id}','${current_date}')`;
+        let myquery1 = `Insert into wgsa_company.complaint (C_Code, C_Descrip, Complaint_by, Complaint_date) values (${maxcode},'${Complaint}','${user_id}','${current_date}')`;
         db.query(myquery1, (err, result, field) => {
             if (err) {
                 res.render('404', { err });
@@ -547,8 +595,6 @@ where customer.phone_num=${Recipient_Phone_number}; `;
 
 
 
-
-
 //login and register
 
 app.post('/registernew', urlencodedParser, (req, res) => {
@@ -562,7 +608,7 @@ app.post('/registernew', urlencodedParser, (req, res) => {
         return res.render('Register', { errmessage: 'Please enter a Valid number', successMes: '' });
     }
 
-    db.query('select phone_num from customer where phone_num=? or ID=?', [Phone_number, ID], (err, result) => {
+    db.query('select phone_num from customer where phone_num=? or ID=?', [Phone_number, ID], (err, result) => {     // GH: why or ID
         console.log();
         if (err) throw err;
         if (result.length > 0) {
@@ -570,7 +616,7 @@ app.post('/registernew', urlencodedParser, (req, res) => {
         }
         else {      //valid
 
-            if (gender == 'male')
+            if (gender == 'Male')
                 gender = 'M';
             else
                 gender = 'F';
@@ -620,449 +666,6 @@ app.get('/CustomerAccount', (req, res) => {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /*----------------------------------------------------------------HR-----------------------------------*/
 app.post('/Add_employee', urlencodedParser, function (req, res) {
 
@@ -1078,10 +681,21 @@ app.post('/Add_employee', urlencodedParser, function (req, res) {
     var gender = req.body.Gender;
     var phone_num = req.body.Phone_number;
     var s_ssn = req.body.Super_ssn;
+    var Password = req.body.Password;
 
+    // NULL VALUES SYNTAX
+    if (!s_ssn)
+            s_ssn="NULL";
+    if (!Address)
+        Address="NULL";
+    if (!hours)
+        hours="NULL";
+    if (!gender)
+        gender="NULL";
+    if (!phone_num)
+        phone_num="NULL";
 
-
-    let myquery = `INSERT INTO wgsa_company.employee(Fname, Lname, Dnum, Address, Ssn, Postion, Salary, Branch_num, Hours, Gender, Phone_num, Super_ssn) VALUES("${Fname}", "${Lname}", ${Dnum}, "${Address}", ${ssn}, "${Position}", ${Salary}, ${bnum}, ${hours}, "${gender}", ${phone_num}, ${s_ssn})`;
+    let myquery = `INSERT INTO wgsa_company.employee(Fname, Lname, Dnum, Address, Ssn, Postion, Salary, Branch_num, Hours, Gender, Phone_num, Super_ssn, Password) VALUES("${Fname}", "${Lname}", ${Dnum}, "${Address}", ${ssn}, "${Position}", ${Salary}, ${bnum}, ${hours}, "${gender}", ${phone_num}, ${s_ssn},"${Password}")`;
 
 
     db.query(myquery, (err, result, field) => {
@@ -1134,6 +748,11 @@ app.post('/Add_branch', urlencodedParser, function (req, res) {
     var bnum = req.body.bnum;
     var location = req.body.location;
 
+    if(!phone_num)
+        phone_num="NULL";
+
+    if(!location)
+        location="NULL";
 
     let myquery = `INSERT INTO wgsa_company.branch(Phone_num, Bnum, Location) VALUES(${phone_num}, ${bnum}, "${location}")`;
 
@@ -1166,17 +785,213 @@ app.post('/Remove_branch', urlencodedParser, function (req, res) {
 /*-------------------------------------------------customer service--------------------------------*/
 app.post('/change_cplan', urlencodedParser, function (req, res) {
 
-    var plane_code = req.body.plane_code;
+    var plan_code = req.body.plan_code;
+    console.log(plan_code);
     var phone_num = req.body.phone_num;
-    let myquery = `UPDATE wgsa_company.customer SET Plan_code =${plane_code} WHERE Phone_num = ${phone_num}`;
+    let myquery = `UPDATE wgsa_company.customer SET Plan_code =${plan_code} WHERE Phone_num = ${phone_num}`;
+    let query = `select *  from  wgsa_company.customer WHERE Phone_num = ${phone_num}`;
+
+    db.query(myquery, (err, result2, field) => {
+        if (err) {
+            console.log(err)
+            res.render('404', { err });
+        }
+        console.log(result2);
+
+
+        db.query(query, (err, result, field) => {
+            if (err) {
+                console.log(err)
+                res.render('404', { err });
+            }
+            console.log(result);
+
+
+            let query2 = `select plan_name,plan_code from wgsa_company.plan `;
+
+            db.query(query2, (err, plans) => {
+                if (err) {
+                    console.log(err)
+                    return res.render('404', { err });
+                }
+
+
+                res.render('CustomerService', { result, plans, errmessage: '', successMes: 'Done' });
+            });
+        });
+    });
+});
+
+app.post('/Complain_processCS', urlencodedParser, function (req, res) {
+
+    var phone_num = req.body.Phone_numberC;
+    var User_Complaint = req.body.User_Complaint;
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+
+    today = yyyy + '-' + mm + '-' + dd;
+
+    let myquery = `INSERT INTO wgsa_company.complaint ( C_Status, C_Descrip, Complaint_by,Complaint_date) VALUES (  'Wait', ${User_Complaint}, ${phone_num},'${today}');`;
+    console.log(myquery);
+    db.query(myquery, (err, result2, field) => {
+        if (err) {
+            console.log(err)
+            res.render('404', { err });
+        }
+
+
+
+
+        let query2 = `select plan_name,plan_code from wgsa_company.plan `;
+
+        db.query(query2, (err, plans) => {
+            if (err) {
+                console.log(err)
+                return res.render('404', { err });
+            }
+
+
+            res.render('CustomerService', { result: '', plans, errmessage: '', successMes: 'Done' });
+        });
+    });
+});
+
+
+app.post('/Add_Customer', urlencodedParser, function (req, res) {
+
+    var Fname = req.body.Fname;
+    var Lname = req.body.Lname;
+    var Id = req.body.Id;
+    var Phone_num = req.body.Phone_num;
+    var Plan_code = req.body.Plan_codeN;
+    var Balance = 0;
+    var Address = req.body.Address;
+    var Used_min = 0;
+    var Used_megas = 0;
+    var Gender = req.body.gender;
+    var Renewal_date = 0;
+    var Password = req.body.Password;
+    
+    
+    var today = new Date();
+    
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 2).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+    
+    Renewal_date = yyyy + '-' + mm + '-' + dd;
+    
+
+    if (Gender == 'Male')
+        Gender = 'M';
+    else
+        Gender = 'F';
+
+
+        let myquery = `INSERT INTO wgsa_company.customer
+        (Fname,Lname,Id,Phone_num,Plan_code,Balance,Address
+       ,Gender,Used_min,Used_megas,Renewal_date,Password)
+       VALUES('${Fname}','${Lname}',${Id},${Phone_num},${Plan_code}
+       ,${Balance},'${Address}','${Gender}',${Used_min},${Used_megas}
+       ,'${Renewal_date}','${Password}')`;
+console.log(myquery);
+    db.query(myquery, (err, result2, field) => {
+        if (err) {
+            console.log(err)
+            res.render('404', { err });
+        } else {
+            console.log(result2);
+
+            let myquery1 = `Select * from wgsa_company.customer
+            where customer.Phone_num=${Phone_num}`;
+
+            db.query(myquery1, (err, result, field) => {
+                if (err) {
+                    console.log(err)
+                    res.render('404', { err });
+                }
+
+                if (result[0].Renewal_date) {
+                    result[0].Renewal_date = result[0].Renewal_date.toString().substr(0, 15);
+                }
+
+
+
+                let query2 = `select plan_name,plan_code from wgsa_company.plan `;
+                db.query(query2, (err, plans) => {
+                    if (err) {
+                        console.log(err)
+                        return res.render('404', { err });
+                    }
+                    console.log(plans);
+                    console.log(result);
+                    if (result[0].Gender) {
+                        if (result[0].Gender == 'M')
+                            result[0].Gender = 'Male';
+                        else
+                            result[0].Gender = 'Female';
+                    }
+                    res.render('CustomerService', { result, plans, errmessage: '', successMes: 'Done' })
+
+
+                });
+
+            });
+        }
+    });
+
+});
+app.post('/Add_Customer', urlencodedParser, function (req, res) {
+
+    var Fname = req.body.Fname;
+    var Lname = req.body.Lname;
+    var Id = req.body.Id;
+    var Phone_num = req.body.Phone_num;
+    var Plan_code = req.body.Plan_code;
+    var Balance = req.body.Balance;
+    var Address = req.body.Address;
+    var Used_min = req.body.Used_min;
+    var Used_megas = req.body.Used_megas;
+    var Gender = req.body.Gender;
+    var Renewal_date = req.body.Renewal_date;
+    var Password = req.body.Password;
+
+    if(!Plan_code)
+        Plan_code="NULL";
+    if(!Balance)
+        Balance="NULL";
+    if(!Used_min)
+        Used_min="NULL";
+    if(!Used_megas)
+        Used_megas="NULL";
+    if(!Address)
+        Address="NULL";
+    if(!Gender)
+        Gender ="NULL";
+    if(!Renewal_date)
+        Renewal_date="NULL";
+
+    let myquery = `INSERT INTO wgsa_company.customer
+         (Fname,Lname,Id,Phone_num,Plan_code,Balance,Address
+        ,Gender,Used_min,Used_megas,Renewal_date,Password)
+        VALUES("${Fname}","${Lname}",${Id},${Phone_num},${Plan_code}
+        ,${Balance},"${Address}","${Gender}",${Used_min},${Used_megas}
+        ,"${Renewal_date}","${Password}")`;
 
     db.query(myquery, (err, result, field) => {
         if (err) {
             console.log(err)
             res.render('404', { err });
+        } else {
+            console.log(result);
+            res.render('CustomerService');
         }
-        console.log(result);
-        res.render('CustomerService', { result });
     });
 
 });
+
+
+
+;
