@@ -57,8 +57,14 @@ h1{
     padding: 0;
     font-size: 150%;
 }
+header{
+    position: sticky;
+    top:0;
+    z-index: 5;
+}
 @import "home" ;
 @import "Register" ;
 @import "Plans" ;
 @import"FAQS";
 @import"User";
+@import"CusService";
