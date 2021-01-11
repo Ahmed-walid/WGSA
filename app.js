@@ -12,7 +12,7 @@ const { response } = require("express");
 const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password:'7561275612',
+    password: '',
     database: 'wgsa_company'
 });
 
@@ -28,8 +28,7 @@ app.set('view engine', 'ejs');
 app.use(express.static('public'));
 
 db.connect((err) => {
-    if (err)
-    {
+    if (err) {
         throw err;
     }
     console.log('my sql connected');
@@ -121,10 +120,10 @@ app.get('/Recharge', (req, res) => {
 
 
 app.get('/DataEmployee', (req, res) => {
-    res.render('DataEmployee')
+    res.render('DataEmployee',{ successMes: '', errmessage: ''})
 });
 app.get('/HR', (req, res) => {
-    res.render('HR')
+    res.render('HR',{successMes: '', errmessage: ''})
 });
 app.get('/', (req, res) => {
 
@@ -190,7 +189,7 @@ app.post('/getCustomerinfo', urlencodedParser, (req, res) => {
                 else
                     result[0].Gender = 'Female';
             }
-            res.render('CustomerService', { result, plans, errmessage: '', successMes: '' })
+            res.render('CustomerService', { result, plans, errmessage: '', successMes: 'Done' })
 
 
         });
@@ -200,6 +199,34 @@ app.post('/getCustomerinfo', urlencodedParser, (req, res) => {
 
 
 });
+app.post('/ViewCustomerData', urlencodedParser, (req, res) => {
+
+    var user_number = req.body.Phone_number;
+
+    let myquery1 = `Select * from wgsa_company.customer as c ,wgsa_company.plan as p   
+    where c.plan_code=p.plan_code AND c.Phone_num=${user_number}`;
+
+    db.query(myquery1, (err, result, field) => {
+        if (err) {
+            console.log(err);
+            res.render('404', { err });
+        }
+
+        if (result[0].Gender) {
+            if (result[0].Gender == 'M')
+                result[0].Gender = 'Male';
+            else
+                result[0].Gender = 'Female';
+        }
+        console.log(result);
+        res.render('TechnicalSupport', { result, successMes: 'Done', errmessage: '' })
+
+    });
+
+});
+
+
+
 
 
 app.get('/Offers', (req, res) => {
@@ -265,7 +292,7 @@ app.post('/Update_Plan_Cost', urlencodedParser, function (req, res) {
     db.query(myquery, (err, result, field) => {
         if (err) throw err;
         console.log(result);
-        res.render('DataEmployee', { result });
+        res.render('DataEmployee',{ result,successMes: 'Done', errmessage: ''});
     });
 
 });
@@ -278,7 +305,7 @@ app.post('/Delete_Plan', urlencodedParser, function (req, res) {
     db.query(myquery, (err, result, field) => {
         if (err) throw err;
         console.log(result);
-        res.render('DataEmployee', { result });
+        res.render('DataEmployee', { result,successMes: 'Done', errmessage: '' });
     });
 
 });
@@ -294,7 +321,7 @@ app.post('/Remove_customer', urlencodedParser, function (req, res) {
             res.render('404', { err });
         }
         console.log(result);
-        res.render('HR', { result });
+        res.render('HR', { result,successMes: 'Done', errmessage: '' });
     });
 
 });
@@ -310,7 +337,7 @@ app.post('/Remove_employee', urlencodedParser, function (req, res) {
             res.render('404', { err });
         }
         console.log(result);
-        res.render('HR', { result });
+        res.render('HR', { result ,successMes: 'Done', errmessage: ''});
     });
 
 });
@@ -324,11 +351,11 @@ app.post('/Add_New_Plan', urlencodedParser, function (req, res) {
     var Megas = req.body.Megas;
     var Price = req.body.Price;
 
-    if(!Minutes)
-        Minutes="NULL";
+    if (!Minutes)
+        Minutes = "NULL";
 
-    if(!Megas)
-        Megas="NULL";
+    if (!Megas)
+        Megas = "NULL";
 
     let myquery = `Insert into wgsa_company.plan (Plan_code, Price, Minutes, Megas, Plan_name) values (${Plan_code},${Price},${Minutes},${Megas},"${Plan_name.toString()}")`;
 
@@ -337,7 +364,7 @@ app.post('/Add_New_Plan', urlencodedParser, function (req, res) {
         if (err) res.render('404', { err });
         else {
             console.log(result);
-            res.render('DataEmployee');
+            res.render('DataEmployee',{ successMes: 'Done', errmessage: ''});
         }
     });
 
@@ -374,23 +401,23 @@ app.post('/Add_New_Offer', urlencodedParser, function (req, res) {
     var Launch_date = req.body.Launch_date;
     var Expire_date = req.body.Expire_date;
 
-    if(!Offer_describtion)
-        Offer_describtion="NULL";
+    if (!Offer_describtion)
+        Offer_describtion = "NULL";
 
-    if(!Minutes)
-        Minutes="NULL";
+    if (!Minutes)
+        Minutes = "NULL";
 
-    if(!Megas)
-        Megas="NULL";
+    if (!Megas)
+        Megas = "NULL";
 
-    if(!Price)
-        Price="NULL";
+    if (!Price)
+        Price = "NULL";
 
-    if(!Launch_date)
-        Launch_date="NULL";
+    if (!Launch_date)
+        Launch_date = "NULL";
 
-    if(!Expire_date)
-        Expire_date="NULL";
+    if (!Expire_date)
+        Expire_date = "NULL";
 
     let myquery = `
             Insert into wgsa_company.Offer(Launch_date, Price, Minutes, Expire_date, Megas, Offer_describ, Offer_num) values('${Launch_date}', ${Price}, ${Minutes}, '${Expire_date}', ${Megas}, '${Offer_describtion}', ${Offer_num})
@@ -399,7 +426,7 @@ app.post('/Add_New_Offer', urlencodedParser, function (req, res) {
     db.query(myquery, (err, result, field) => {
         if (err) throw err;
         console.log(result);
-        res.render('DataEmployee');
+        res.render('DataEmployee',{ successMes: 'Done', errmessage: ''});
     });
 
 });
@@ -692,15 +719,15 @@ app.post('/Add_employee', urlencodedParser, function (req, res) {
 
     // NULL VALUES SYNTAX
     if (!s_ssn)
-            s_ssn="NULL";
+        s_ssn = "NULL";
     if (!Address)
-        Address="NULL";
+        Address = "NULL";
     if (!hours)
-        hours="NULL";
+        hours = "NULL";
     if (!gender)
-        gender="NULL";
+        gender = "NULL";
     if (!phone_num)
-        phone_num="NULL";
+        phone_num = "NULL";
 
     let myquery = `INSERT INTO wgsa_company.employee(Fname, Lname, Dnum, Address, Ssn, Postion, Salary, Branch_num, Hours, Gender, Phone_num, Super_ssn, Password) VALUES("${Fname}", "${Lname}", ${Dnum}, "${Address}", ${ssn}, "${Position}", ${Salary}, ${bnum}, ${hours}, "${gender}", ${phone_num}, ${s_ssn},"${Password}")`;
 
@@ -711,7 +738,7 @@ app.post('/Add_employee', urlencodedParser, function (req, res) {
             res.render('404', { err });
         } else {
             console.log(result);
-            res.render('HR');
+            res.render('HR' ,{ successMes: 'Done', errmessage: ''});
         }
     });
 
@@ -753,7 +780,7 @@ function ExecuteDeleteCustomer()
             res.render('404', { err });
         }
         console.log(result);
-        res.render('HR', { result });
+        res.render('HR', { result ,successMes: 'Done', errmessage: '' });
     });
 
 }
@@ -772,7 +799,7 @@ app.post('/Remove_employee', urlencodedParser, function (req, res) {
             res.render('404', { err });
         }
         console.log(result);
-        res.render('HR', { result });
+        res.render('HR', { result ,successMes: 'Done', errmessage: ''});
     });
 
 });
@@ -782,11 +809,11 @@ app.post('/Add_branch', urlencodedParser, function (req, res) {
     var bnum = req.body.bnum;
     var location = req.body.location;
 
-    if(!phone_num)
-        phone_num="NULL";
+    if (!phone_num)
+        phone_num = "NULL";
 
-    if(!location)
-        location="NULL";
+    if (!location)
+        location = "NULL";
 
     let myquery = `INSERT INTO wgsa_company.branch(Phone_num, Bnum, Location) VALUES(${phone_num}, ${bnum}, "${location}")`;
 
@@ -796,7 +823,7 @@ app.post('/Add_branch', urlencodedParser, function (req, res) {
             res.render('404', { err });
         }
         console.log(result);
-        res.render('HR');
+        res.render('HR',{ successMes: 'Done', errmessage: ''});
     });
 
 });
@@ -812,7 +839,7 @@ app.post('/Remove_branch', urlencodedParser, function (req, res) {
             res.render('404', { err });
         }
         console.log(result);
-        res.render('HR', { result });
+        res.render('HR', { result ,successMes: 'Done', errmessage: '' });
     });
 
 });
@@ -907,16 +934,16 @@ app.post('/Add_Customer', urlencodedParser, function (req, res) {
     var Gender = req.body.gender;
     var Renewal_date = 0;
     var Password = req.body.Password;
-    
-    
+
+
     var today = new Date();
-    
+
     var dd = String(today.getDate()).padStart(2, '0');
     var mm = String(today.getMonth() + 2).padStart(2, '0'); //January is 0!
     var yyyy = today.getFullYear();
-    
+
     Renewal_date = yyyy + '-' + mm + '-' + dd;
-    
+
 
     if (Gender == 'Male')
         Gender = 'M';
@@ -924,13 +951,13 @@ app.post('/Add_Customer', urlencodedParser, function (req, res) {
         Gender = 'F';
 
 
-        let myquery = `INSERT INTO wgsa_company.customer
+    let myquery = `INSERT INTO wgsa_company.customer
         (Fname,Lname,Id,Phone_num,Plan_code,Balance,Address
        ,Gender,Used_min,Used_megas,Renewal_date,Password)
        VALUES('${Fname}','${Lname}',${Id},${Phone_num},${Plan_code}
        ,${Balance},'${Address}','${Gender}',${Used_min},${Used_megas}
        ,'${Renewal_date}','${Password}')`;
-console.log(myquery);
+    console.log(myquery);
     db.query(myquery, (err, result2, field) => {
         if (err) {
             console.log(err)
@@ -992,20 +1019,20 @@ app.post('/Add_Customer', urlencodedParser, function (req, res) {
     var Renewal_date = req.body.Renewal_date;
     var Password = req.body.Password;
 
-    if(!Plan_code)
-        Plan_code="NULL";
-    if(!Balance)
-        Balance="NULL";
-    if(!Used_min)
-        Used_min="NULL";
-    if(!Used_megas)
-        Used_megas="NULL";
-    if(!Address)
-        Address="NULL";
-    if(!Gender)
-        Gender ="NULL";
-    if(!Renewal_date)
-        Renewal_date="NULL";
+    if (!Plan_code)
+        Plan_code = "NULL";
+    if (!Balance)
+        Balance = "NULL";
+    if (!Used_min)
+        Used_min = "NULL";
+    if (!Used_megas)
+        Used_megas = "NULL";
+    if (!Address)
+        Address = "NULL";
+    if (!Gender)
+        Gender = "NULL";
+    if (!Renewal_date)
+        Renewal_date = "NULL";
 
     let myquery = `INSERT INTO wgsa_company.customer
          (Fname,Lname,Id,Phone_num,Plan_code,Balance,Address
@@ -1030,7 +1057,7 @@ app.post('/Add_Customer', urlencodedParser, function (req, res) {
 
 app.get('/TechnicalSupport', (req, res) => {
 
-    res.render('TechnicalSupport')
+    res.render('TechnicalSupport', { result: '', successMes: '', errmessage: '' })
 });
 
 app.post('/change_c_status', urlencodedParser, (req, res) => {
@@ -1046,7 +1073,7 @@ app.post('/change_c_status', urlencodedParser, (req, res) => {
     db.query(myquery1, (err, result, field) => {
         if (err) res.render('404', { err });
         console.log(result);
-        res.render('TechnicalSupport', { result });
+        res.render('TechnicalSupport', { result:'', successMes: 'Done', errmessage: '' });
     });
 
 });
@@ -1064,7 +1091,7 @@ app.post('/Add_faq', urlencodedParser, (req, res) => {
     db.query(myquery1, (err, result, field) => {
         if (err) res.render('404', { err });
         console.log(result);
-        res.render('TechnicalSupport', { result });
+        res.render('TechnicalSupport', { result:'', errmessage: '', successMes: 'Done' });
     });
 
 });

@@ -4,109 +4,231 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <title>Document</title>
-    <style>
-        .btn-group {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 200px;
-        }
-    </style>
-    <script>
-        function myFunction2() {
-            var x = document.getElementById("form2");
-            if (x.style.display === "none") {
-                x.style.display = "block";
-            } else {
-                x.style.display = "none";
-            }
-        }
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/Style.css">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+        crossorigin="anonymous"></script>
+    <title>WGSA</title>
+    <link rel="icon" href="/images/logo.svg">
 
-        function myFunction3() {
-            var x = document.getElementById("form3");
-            if (x.style.display === "none") {
-                x.style.display = "block";
-            } else {
-                x.style.display = "none";
-            }
-        }
-    </script>
 </head>
 
 <body>
+    <header>
+        <section class="nav-container">
+            <nav>
+                <div class="logo">
+                    <span class="lgci"> </span>
+                    <a href="/">
+                        <h2>WSGA</h2>
+                    </a>
+                </div>
+                <ul>
+                    <li><a href="plans"> Plans</a></li>
+                    <li><a href="Offers">Offers</a></li>
+                    <li><a href="FAQS">FAQS</a></li>
+                    <li><a href="Login"> <Button class="log-btn">log out</Button> </a></li>
+                </ul>
+            </nav>
+        </section>
+        <hr class="Line" />
+    </header>
 
-    <div class="btn-group" role="group" aria-label="Basic example">
-        <a href="Test"><button type=" button " class="btn btn-primary ">Get Customer info</button></a>
-        <button onclick="myFunction2()" type=" button " class="btn btn-primary ">Change complaint status</button>
-        <button onclick="myFunction3()" type="button " class="btn btn-primary ">Add to FAQs</button>
-    </div>
 
+    <main class="CS">
 
-
-
-    <div id="form2" style="display:none; ">
-        <form action="/change_c_status" method="POST">
-            <div class="mb-3 ">
-                <label for="exampleInputEmail1 " class="form-label ">Complaint code</label>
-                <input type="number " name="complaint_code" class="form-control " id="exampleInputEmail1 " aria-describedby="emailHelp ">
+        <div class="siden">
+            <div class="listContainer">
+                <ul>
+                    <div class="listElement">
+                        <li><a href="#CusInfo">Get Customer info</a></li>
+                    </div>
+                    <div class="listElement">
+                        <li><a href="#UpdateComp">Change complaint status</a></li>
+                    </div>
+                    <div class="listElement">
+                        <li><a href="#AddToFAQS">Add to FAQs</a></li>
+                    </div>
+                </ul>
             </div>
-            <div class="mb-3 ">
-                <label for="exampleInputPassword1 " class="form-label ">Complaint Status</label>
-                <input type="text" name="complaint_status" class="form-control " id="exampleInputPassword1 ">
-            </div>
-            <div class="mb-3 ">
-                <label for="exampleInputPassword1 " class="form-label ">ID</label>
-                <input type="number" name="replied_by" class="form-control " id="exampleInputPassword1 ">
-            </div>
-            <div class="mb-3 ">
-                <label for="exampleInputPassword1 " class="form-label ">Reply Date</label>
-                <input type="date" name="rep_date" class="form-control " id="exampleInputPassword1 ">
-            </div>
-            <div class="mb-3 ">
-                <label for="exampleInputPassword1 " class="form-label ">Reply</label>
-                <input type="text" name="reply" class="form-control " id="exampleInputPassword1 ">
-            </div>
-            <button type="submit " class="btn btn-primary ">Change complaint status</button>
-        </form>
-    </div>
+            <% if (errmessage) { %>
+                <div class="alertErr">
+                    <%= errmessage %>
+                </div>
+                <% } %>
+                    <% if (successMes) { %>
+                        <div class="alertSuccess">
+                            <%= successMes %>
+                        </div>
+                        <% } %>
+        </div>
 
 
+        <div class="CSBody">
 
+            <div class="FormContainer" id="CusInfo">
+                <form action="/ViewCustomerData" method="POST">
 
-    <div id="form3" style="display:none;">
-        <form action="/Add_faq" method="POST">
+                    <div class="input">
+                        <input placeholder="Phone Number" type="number" name="Phone_number" required>
+                    </div>
 
-            <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Question</label>
-                <input type="text" name="question" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-            </div>
+                    <div class="input">
+                        <button class="log-btn" value="getCustomerinfo">Get Customer info</button>
+                    </div>
 
-            <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label">Answer</label>
-                <input type="text" name="answer" class="form-control" id="exampleInputPassword1">
-            </div>
-
-            <div class="mb-3 ">
-                <label for="exampleInputPassword1" class="form-label">Question code</label>
-                <input type="text" name="code" class="form-control" id="exampleInputPassword1">
+                </form>
 
             </div>
+            <% if (result){ %>
+            <div class="FormContainer">
+                <form >
+                        <table>
+                            <tr>
+                                <th>Name :</th>
+                                <td>
+                                    <%=result[0].Fname%>
+                                        <%=result[0].Lname%>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>ID :</th>
+                                <td>
+                                    <%=result[0].Id%>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Phone Number</th>
+                                <td>
+                                    <input type="text" name="phone_num" value="<%=result[0].Phone_num%>" hidden>
+                                    0<%=result[0].Phone_num%>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Plan: </th>
+                                <td>
+                                    <%=result[0].Plan_name%>
+                                </td>
+                            </tr>
 
-            <div class="mb-3 ">
-                <label for="exampleInputPassword1" class="form-label">ID</label>
-                <input type="number" name="ID" class="form-control" id="exampleInputPassword1">
+                            <tr>
+                                <th>Renewal Date: </th>
+                                <td>
+                                    <%=result[0].Renewal_date%>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Balance : </th>
+                                <td>
+                                    <%=result[0].Balance%> Egp
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Gender </th>
+                                <td>
+                                    <%=result[0].Gender%>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Address </th>
+                                <td>
+                                    <%=result[0].Address%>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Used Minutes </th>
+                                <td>
+                                    <%=result[0].Used_min%> Minute
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Used Megabytes </th>
+                                <td>
+                                    <%=result[0].Used_megas%> Megabytes
+                                </td>
+                            </tr>
+                        </table>
+                </form>
             </div>
-
-
-            <button type="submit" class="btn btn-primary">Add to FAQs</button>
-        </form>
-    </div>
-
+            <%}%>
+                <br />
+                <hr class="Line" /><br />
 
 
 
+                <h3 style="margin: 2em;">Change complaint status</h3>
+                <div class="FormContainer" id="UpdateComp">
+                    <form action="/change_c_status" method="POST">
+                        <div class="mb-3 ">
+                            <label for="exampleInputEmail1 " class="form-label ">Complaint code</label>
+                            <input type="number " name="complaint_code" class="form-control " id="exampleInputEmail1 "
+                                aria-describedby="emailHelp ">
+                        </div>
+                        <div class="mb-3 ">
+                            <label for="exampleInputPassword1 " class="form-label ">Complaint Status</label>
+                            <input type="text" name="complaint_status" class="form-control "
+                                id="exampleInputPassword1 ">
+                        </div>
+                        <div class="mb-3 ">
+                            <label for="exampleInputPassword1 " class="form-label ">ID</label>
+                            <input type="number" name="replied_by" class="form-control " id="exampleInputPassword1 ">
+                        </div>
+                        <div class="mb-3 ">
+                            <label for="exampleInputPassword1 " class="form-label ">Reply Date</label>
+                            <input type="date" name="rep_date" class="form-control " id="exampleInputPassword1 ">
+                        </div>
+                        <div class="mb-3 ">
+                            <label for="exampleInputPassword1 " class="form-label ">Reply</label>
+                            <input type="text" name="reply" class="form-control " id="exampleInputPassword1 ">
+                        </div>
+                        <button type="submit " class="btn btn-primary ">Change complaint status</button>
+                    </form>
+                </div>
+
+
+                <br />
+                <hr class="Line" /><br />
+
+                <h3 style="margin: 2em;">Add to FAQs</h3>
+                <div class="FormContainer" id="AddToFAQS">
+                    <form action="/Add_faq" method="POST">
+
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Question</label>
+                            <input type="text" name="question" class="form-control" id="exampleInputEmail1"
+                                aria-describedby="emailHelp">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="exampleInputPassword1" class="form-label">Answer</label>
+                            <input type="text" name="answer" class="form-control" id="exampleInputPassword1">
+                        </div>
+
+                        <div class="mb-3 ">
+                            <label for="exampleInputPassword1" class="form-label">Question code</label>
+                            <input type="text" name="code" class="form-control" id="exampleInputPassword1">
+
+                        </div>
+
+                        <div class="mb-3 ">
+                            <label for="exampleInputPassword1" class="form-label">ID</label>
+                            <input type="number" name="ID" class="form-control" id="exampleInputPassword1">
+                        </div>
+
+
+                        <button type="submit" class="btn btn-primary">Add to FAQs</button>
+                    </form>
+                </div>
+
+
+
+
+        </div>
+
+    </main>
 
 </body>
 

@@ -57,6 +57,16 @@
                     </div>
                 </ul>
             </div>
+            <% if (errmessage) { %>
+                <div class="alertErr">
+                    <%= errmessage %>
+                </div>
+                <% } %>
+                    <% if (successMes) { %>
+                        <div class="alertSuccess">
+                            <%= successMes %>
+                        </div>
+                        <% } %>
         </div>
 
 

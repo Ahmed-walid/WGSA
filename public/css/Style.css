@@ -741,6 +741,10 @@ td p {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   border-right: 2px solid #333333;
   -webkit-box-shadow: 5px 0 10px rgba(0, 0, 0, 0.3);
           box-shadow: 5px 0 10px rgba(0, 0, 0, 0.3);
