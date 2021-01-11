@@ -37,8 +37,18 @@
         <hr class="Line" />
     </header>
 
+    <% if (errmessage) { %>
+        <div class="alertErr">
+            <%= errmessage %>
+        </div>
+        <% } %>
+            <% if (successMes) { %>
+                <div class="alertSuccess">
+                    <%= successMes %>
+                </div>
+                <% } %>
 
-    <main class="CS">
+<main class="CS">
 
         <div class="siden">
             <div class="listContainer">
@@ -133,7 +143,7 @@
 
                     <div class="mb-3 ">
                         <label for="exampleInputPassword1" class="form-label">branch number</label>
-                        <input type="number" name="Bnum" class="form-control" id="exampleInputPassword1">
+                        <input type="number" name="bnum" class="form-control" id="exampleInputPassword1">
                     </div>
 
                     <div class="mb-3 ">
@@ -204,23 +214,13 @@
             <hr class="Line" /><br />
             <h3 style="margin: 2em;">Remove Branch</h3>
             <div class="FormContainer" id="RemoveBranch">
-                <form action="/Add_branch" method="POST">
-                    <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Phone number</label>
-                        <input type="number" name="phone_num" class="form-control" id="exampleInputEmail1"
-                            aria-describedby="emailHelp">
-                    </div>
+                <form action="/Remove_branch" method="POST">
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Branch number</label>
                         <input type="number" name="bnum" class="form-control" id="exampleInputEmail1"
                             aria-describedby="emailHelp">
                     </div>
-                    <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Location</label>
-                        <input type="ntext" name="location" class="form-control" id="exampleInputEmail1"
-                            aria-describedby="emailHelp">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Add branch</button>
+                    <button type="submit" class="btn btn-primary">Remove branch</button>
                 </form>
             </div>
 
