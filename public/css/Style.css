@@ -589,8 +589,8 @@ td p {
   top: 0;
   left: 0;
   font-size: 230%;
-  -webkit-transform: translate(100%, 280%);
-          transform: translate(100%, 280%);
+  -webkit-transform: translate(4em, 3.5em);
+          transform: translate(4em, 3.5em);
 }
 
 #userPlan {

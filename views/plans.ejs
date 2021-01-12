@@ -27,7 +27,7 @@
                         <li><a href="plans"> Plans</a></li>
                         <li><a href="Offers">Offers</a></li>
                         <li><a href="FAQS">FAQS</a></li>
-                        <li><a href="Login"> <Button class="log-btn">Log in</Button> </a></li>
+                        <li><a href="Customer"> <Button class="log-btn">Account</Button> </a></li>
                     </ul>
                 </nav>
             </section>
@@ -37,9 +37,21 @@
         <section class="plans">
             
             <h2>WSGA Mobile Packages</h2>
+            <form action="ChangePlan" method="POST">
+            <select style="margin-left:42em; margin-bottom:3em;"  name="plan_code" > 
+             <% for(var row of result) { %>
+             <option value="<%=row.Plan_code%>" >
+             <div class="card">
+                     
+                     <h2 class="card-title"><%=row.Plan_name%></h2>
+             </div>
+         </option>
+             <%}%>
+         </select>
+         <button class="log-btn" type="submit">Migrate</button>
+        </form>
             <div class="cards">
                 <% for(var row of result) { %>
-                
                 <div class="card">
                     <div class="card-body">
                         
@@ -52,11 +64,9 @@
                             </table>
                             
                         </p>
-                        <a href="#" class="btn btn-primary">Migrate</a>
                     </div>
                 </div>
                 <%}%>
-
         </section>
     </main>
 
