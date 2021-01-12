@@ -12,7 +12,7 @@ const { response } = require("express");
 const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: '7561275612',
+    password: '',
     database: 'wgsa_company'
 });
 
@@ -84,13 +84,12 @@ app.listen(3000, () => {
 
 // });
 
-
 app.get('/', (req, res) => {
 
-   
-    
-        res.render('index');
-     
+
+
+    res.render('index');
+
 
 });
 
@@ -120,10 +119,10 @@ app.get('/Recharge', (req, res) => {
 
 
 app.get('/DataEmployee', (req, res) => {
-    res.render('DataEmployee',{ successMes: '', errmessage: ''})
+    res.render('DataEmployee', { successMes: '', errmessage: '' })
 });
 app.get('/HR', (req, res) => {
-    res.render('HR',{successMes: '', errmessage: ''})
+    res.render('HR', { successMes: '', errmessage: '' })
 });
 app.get('/', (req, res) => {
 
@@ -175,7 +174,7 @@ app.post('/getCustomerinfo', urlencodedParser, (req, res) => {
 
 
 
-        let query2 = `select plan_name , plan_code from wgsa_company.plan `;
+        let query2 = `select * from wgsa_company.plan `;
         db.query(query2, (err, plans) => {
             if (err) {
                 console.log(err)
@@ -240,7 +239,7 @@ app.get('/Offers', (req, res) => {
 });
 app.get('/plans', (req, res) => {
 
-    let myquery1 = "SELECT  Plan_name,Plan_code, Price, Minutes, Megas from wgsa_company.plan";
+    let myquery1 = "SELECT * from wgsa_company.plan";
     db.query(myquery1, (err, result, field) => {
         if (err) throw err;
         res.render('plans', { result })
@@ -254,7 +253,7 @@ app.get('/Register', (req, res) => {
 
 app.get('/Customer', (req, res) => {
 
-    var user_number = 13789321;
+    var user_number = us;
 
     let myquery1 = `Select customer.Balance, customer.Renewal_date, customer.Gender ,customer.Fname,customer.Lname, plan.Plan_name,customer.Used_megas,customer.Used_min
     from wgsa_company.plan,wgsa_company.customer
@@ -282,7 +281,7 @@ app.post('/Update_Plan_Cost', urlencodedParser, function (req, res) {
     db.query(myquery, (err, result, field) => {
         if (err) throw err;
         console.log(result);
-        res.render('DataEmployee',{ result,successMes: 'Done', errmessage: ''});
+        res.render('DataEmployee', { result, successMes: 'Done', errmessage: '' });
     });
 
 });
@@ -295,7 +294,7 @@ app.post('/Delete_Plan', urlencodedParser, function (req, res) {
     db.query(myquery, (err, result, field) => {
         if (err) throw err;
         console.log(result);
-        res.render('DataEmployee', { result,successMes: 'Done', errmessage: '' });
+        res.render('DataEmployee', { result, successMes: 'Done', errmessage: '' });
     });
 
 });
@@ -304,30 +303,29 @@ app.post('/Delete_Plan', urlencodedParser, function (req, res) {
 
 app.post('/Remove_customer', urlencodedParser, function (req, res) {
 
-    var phone_num =parseInt(req.body.Phone_num,10);
+    var phone_num = parseInt(req.body.Phone_num, 10);
 
-    function CheckNumbersEntered123 (){
+    function CheckNumbersEntered123() {
 
-     
+
         if (phone_num <= 0) {
             return res.render('HR', { errmessage: 'Enter valid number please', successMes: '' });
         }
-        else
-        {
+        else {
             CheckCustomer123();
         }
-       
+
     }
 
 
 
-    function CheckCustomer123 (){
+    function CheckCustomer123() {
 
         let query123 = `select *
         from wgsa_company.customer
         where customer.phone_num=${phone_num}; `;
 
-        db.query(query123, (err, result, field) => { 
+        db.query(query123, (err, result, field) => {
             if (err) {
                 res.render('404', { err });
                 throw err;
@@ -338,85 +336,82 @@ app.post('/Remove_customer', urlencodedParser, function (req, res) {
             }
             else {
                 ExecuteDeleteCustomer();
-                }
-    
+            }
+
         });
     }
 
-function ExecuteDeleteCustomer()
-{
+    function ExecuteDeleteCustomer() {
 
-    let myquery = `delete FROM wgsa_company.customer WHERE customer.Phone_num =${phone_num}`;
-    db.query(myquery, (err, result, field) => {
-        if (err) {
-            console.log(err)
-            res.render('404', { err });
-        }
-        console.log(result);
-        res.render('HR', { successMes: 'Done', errmessage: '' });
-    });
+        let myquery = `delete FROM wgsa_company.customer WHERE customer.Phone_num =${phone_num}`;
+        db.query(myquery, (err, result, field) => {
+            if (err) {
+                console.log(err)
+                res.render('404', { err });
+            }
+            console.log(result);
+            res.render('HR', { successMes: 'Done', errmessage: '' });
+        });
 
-}
+    }
 
-CheckNumbersEntered123();
+    CheckNumbersEntered123();
 
 });
 
 app.post('/Remove_employee', urlencodedParser, function (req, res) {
 
-    var ssn = parseInt(req.body.SSN,10);
+    var ssn = parseInt(req.body.SSN, 10);
 
-    function CheckssnEntered1233 (){
+    function CheckssnEntered1233() {
 
-     
+
         if (ssn <= 0) {
             return res.render('HR', { errmessage: 'Enter valid ssn please', successMes: '' });
         }
-        else
-        {
+        else {
             checkssnifexistbefore();
         }
-       
+
     }
 
-   
-    function checkssnifexistbefore()
-{
-    let query123 = `select *
+
+    function checkssnifexistbefore() {
+        let query123 = `select *
     from wgsa_company.employee
     where employee.ssn=${ssn};`;
 
-    db.query(query123, (err, result, field) => { 
-        if (err) {
-            res.render('404', { err });
-            throw err;
-        }
-        if (result.length === 0) {
-            console.log("There is no Employee with that ssn");
-            return res.render('HR', { errmessage: 'There is no Employee with that ssn', successMes: '' });
-        }
-        else {
-            ExecuteDeleteforEmployee();
+        db.query(query123, (err, result, field) => {
+            if (err) {
+                res.render('404', { err });
+                throw err;
+            }
+            if (result.length === 0) {
+                console.log("There is no Employee with that ssn");
+                return res.render('HR', { errmessage: 'There is no Employee with that ssn', successMes: '' });
+            }
+            else {
+                ExecuteDeleteforEmployee();
             }
 
-    });
+        });
 
 
-}
+    }
 
-function ExecuteDeleteforEmployee(){
-    let myquery = `delete FROM wgsa_company.EMPLOYEE WHERE EMPLOYEE.SSN =${ssn}`;
-    db.query(myquery, (err, result, field) => {
-        if (err) {
-            console.log(err)
-            res.render('404', { err });
-        }
-        console.log(result);
-        res.render('HR', {successMes: `The employee with SSN ${ssn} is deleted successfully`, errmessage: ''});
-    });
-}
+    function ExecuteDeleteforEmployee() {
+        let myquery = `delete FROM wgsa_company.EMPLOYEE WHERE EMPLOYEE.SSN =${ssn}`;
+        db.query(myquery, (err, result, field) => {
+            if (err) {
+                console.log(err)
+                res.render('404', { err });
+            }
+            console.log(result);
+            res.render('HR', { successMes: `The employee with SSN ${ssn} is deleted successfully`, errmessage: '' });
+        });
+    }
 
-CheckssnEntered1233();
+    CheckssnEntered1233();
 
 });
 
@@ -442,21 +437,21 @@ app.post('/Add_New_Plan', urlencodedParser, function (req, res) {
         if (err) res.render('404', { err });
         else {
             console.log(result);
-            res.render('DataEmployee',{ successMes: 'Done', errmessage: ''});
+            res.render('DataEmployee', { successMes: 'Done', errmessage: '' });
         }
     });
 
 });
-
+var us;
 app.post('/Recharge_Process', urlencodedParser, function (req, res) {
     var Card_Serial_Num = req.body.Card_Serial_Num;
-    var user_number = 13654456;
+    var user_number = us;
     let myquery = `Update wgsa_company.customer
     set customer.balance=customer.balance+ (select Card_value
                                                     from wgsa_company.card
                                                     where card.Serial_number=${Card_Serial_Num})
     where customer.Phone_num=${user_number}`;
-
+    
 
     db.query(myquery, (err, result, field) => {
         if (err) res.render('404', { err });
@@ -504,7 +499,7 @@ app.post('/Add_New_Offer', urlencodedParser, function (req, res) {
     db.query(myquery, (err, result, field) => {
         if (err) throw err;
         console.log(result);
-        res.render('DataEmployee',{ successMes: 'Done', errmessage: ''});
+        res.render('DataEmployee', { successMes: 'Done', errmessage: '' });
     });
 
 });
@@ -519,7 +514,7 @@ app.post('/Add_New_Offer', urlencodedParser, function (req, res) {
 app.post('/Complain_process', urlencodedParser, (req, res) => {
 
     var Complaint = req.body.User_Complaint;
-    var user_id = 123987;
+    var user_pn = us;
     current_date = '2021-08-08';
 
 
@@ -532,7 +527,7 @@ app.post('/Complain_process', urlencodedParser, (req, res) => {
         var maxcode = result[0].m;
         maxcode = maxcode + 1;
         console.log(Complaint);
-        let myquery1 = `Insert into wgsa_company.complaint (C_Code, C_Descrip, Complaint_by, Complaint_date) values (${maxcode},'${Complaint}','${user_id}','${current_date}')`;
+        let myquery1 = `Insert into wgsa_company.complaint (C_Code, C_Descrip, Complaint_by, Complaint_date) values (${maxcode},'${Complaint}','${user_pn}','${current_date}')`;
         db.query(myquery1, (err, result, field) => {
             if (err) {
                 res.render('404', { err });
@@ -548,8 +543,9 @@ app.post('/Complain_process', urlencodedParser, (req, res) => {
 
 app.get('/Complain', (req, res) => {
     let query = `Select *
-    from wgsa_company.complaint`;
+    from wgsa_company.complaint where Complaint_by=${us}`;
     db.query(query, (err, result, field) => {
+        console.log(result);
         if (err) {
             res.render('404', { err })
         } else {
@@ -601,107 +597,106 @@ app.get('/Transfer', (req, res) => {
 
 app.post('/Transfer_balance', urlencodedParser, (req, res) => {
 
-        var user_phone_number = 13264975;                                                 //Gehan sadat
-        var Recipient_Phone_number = parseInt(req.body.Recipient_phone_num,10);
-        var Balance_to_be_transfered = parseInt(req.body.Balance_to_be_transfered,10);
+    var user_phone_number = us;                                                 //Gehan sadat
+    console.log(us);
+    var Recipient_Phone_number = parseInt(req.body.Recipient_phone_num, 10);
+    var Balance_to_be_transfered = parseInt(req.body.Balance_to_be_transfered, 10);
 
-        function CheckNumbersEntered (){
+    function CheckNumbersEntered() {
 
-            console.log("yes");
-            if (Balance_to_be_transfered <= 0 || Recipient_Phone_number <= 0) {
-                return res.render('Transfer', { errmessage: 'Please enter valid numbers', successMes: '' });
-            }
-            else
-            {
-                CheckRecipient();
-            }
-           
+        console.log("yes");
+        if (Balance_to_be_transfered <= 0 || Recipient_Phone_number <= 0) {
+            return res.render('Transfer', { errmessage: 'Please enter valid numbers', successMes: '' });
+        }
+        else {
+            CheckRecipient();
         }
 
-        function CheckRecipient (){
+    }
 
-            let queryrecipient = `select *
+    function CheckRecipient() {
+
+        let queryrecipient = `select *
             from wgsa_company.customer
             where customer.phone_num=${Recipient_Phone_number}; `;
 
-            db.query(queryrecipient, (err, result, field) => { //3
-                if (err) {
-                    res.render('404', { err });
-                    throw err;
-                }
-                if (result.length === 0) {
-                    console.log("The recipient number is not fount");
-                    return res.render('Transfer', { errmessage: 'There is no recipent with such a number', successMes: '' });
-                }
-                else {
-                    CheckSufficientbalance();
-                       
-                    }
-        
-            });
-        }
+        db.query(queryrecipient, (err, result, field) => { //3
+            if (err) {
+                res.render('404', { err });
+                throw err;
+            }
+            if (result.length === 0) {
+                console.log("The recipient number is not fount");
+                return res.render('Transfer', { errmessage: 'There is no recipent with such a number', successMes: '' });
+            }
+            else {
+                CheckSufficientbalance();
 
-        function CheckSufficientbalance (){
+            }
 
-            
-            let query_customer_curr_balance = `select customer.Balance
+        });
+    }
+
+    function CheckSufficientbalance() {
+
+
+        let query_customer_curr_balance = `select customer.Balance
             from wgsa_company.customer
             where customer.phone_num='${user_phone_number}';`;
 
-           db.query(query_customer_curr_balance,  (err, result1, field) => {
-                        if (err) {
-                        res.render('404', { err });
-                        throw err;
-                    }
-                    if (result1[0].Balance < Balance_to_be_transfered) {
-                        
-                        console.log("your balance is not sufficient to complete the transfer process");
-                        return res.render('Transfer', { errmessage: 'your balance is not sufficient to complete the transfer process', successMes: '' });
-                    }
-                    else
-                    {
-                        ExecuteTransfer();
-                    }
-                    });    
-                          }
+        db.query(query_customer_curr_balance, (err, result1, field) => {
+            if (err) {
+                res.render('404', { err });
+                throw err;
+            }
+            if (result1[0].Balance < Balance_to_be_transfered) {
+
+                console.log("your balance is not sufficient to complete the transfer process");
+                return res.render('Transfer', { errmessage: 'your balance is not sufficient to complete the transfer process', successMes: '' });
+            }
+            else {
+                ExecuteTransfer();
+            }
+        });
+    }
 
 
 
-                          function ExecuteTransfer (){
+    function ExecuteTransfer() {
 
-                            console.log("noooooo");
-                                        let query1 = `Update wgsa_company.customer 
+        console.log("noooooo");
+        let query1 = `Update wgsa_company.customer 
                 set customer.Balance=customer.Balance-${Balance_to_be_transfered}
                 where customer.Phone_num=${user_phone_number}`;
 
-                db.query(query1, (err, result, field) => {//5
+        db.query(query1, (err, result, field) => {//5
+            if (err) {
+                res.render('404', { err });
+                console.log(result);
+            } else {
+
+                let query2 = `update wgsa_company.customer
+                        set customer.Balance=customer.Balance+${Balance_to_be_transfered}
+                        where customer.phone_num=${Recipient_Phone_number};`
+
+                db.query(query2, (err, result, field) => {//6
                     if (err) {
                         res.render('404', { err });
                         console.log(result);
                     } else {
 
-                        let query2 = `update wgsa_company.customer
-                        set customer.Balance=customer.Balance+${Balance_to_be_transfered}
-                        where customer.phone_num=${Recipient_Phone_number};`
-
-                        db.query(query2, (err, result, field) => {//6
-                            if (err) {
-                                res.render('404', { err });
-                                console.log(result);
-                            } else {
-
-                                 return res.render('Transfer', { errmessage: '', successMes: 'Balance is Transfered successfully' });
-
-                            }
-                        });
+                        return res.render('Transfer', { errmessage: '', successMes: 'Balance is Transfered successfully' });
 
                     }
                 });
-                        }
 
-                        CheckNumbersEntered();
-                               
+            }
         });
+    }
+
+    CheckNumbersEntered();
+
+});
 
 
 
@@ -750,20 +745,28 @@ app.post('/loginSubmit', urlencodedParser, (req, res) => {
     const { Phone_number, password } = req.body;
     console.log(Phone_number, password);
 
+
     if (!Phone_number || !password) {
         return res.render('Login', { errmessage: 'Please enter all fields', successMes: '' });
     }
 
-    db.query('select phone_num,password from customer where phone_num=?', [Phone_number], (err, result) => {
-        if (err) throw err;
+    let myquery1 = `Select *
+    from wgsa_company.plan,wgsa_company.customer
+    where customer.plan_code=plan.Plan_code and customer.Phone_num=${Phone_number}`;
 
+    db.query(myquery1, (err, result) => {
+        if (err) throw err;
+        
         if (result.length == 0) {
             return res.render('Login', { errmessage: 'This Phone is not Registered yet', successMes: '' });
         }
-        if (result[0].password != password)
+        if (result[0].Password != password)
             return res.render('Login', { errmessage: 'Wrong Password', successMes: '' });
-
-        return res.render('CustomerAccount', { errmessage: '', successMes: '' });
+            
+            
+        result[0].Renewal_date = result[0].Renewal_date.toString().substr(0, 15);
+        us=Phone_number;
+        return res.render('Customer', { result });
 
     }
     );
@@ -786,38 +789,37 @@ app.post('/Add_employee', urlencodedParser, function (req, res) {
     var ssn = req.body.SSN;
     var Position = req.body.Position;
     var Salary = req.body.Salary;
-    var bnum = parseInt(req.body.bnum,10);
+    var bnum = parseInt(req.body.bnum, 10);
     var hours = req.body.hours;
     var gender = req.body.Gender;
     var phone_num = req.body.Phone_number;
     var s_ssn = req.body.Super_ssn;
     var Password = req.body.password;
 
-    
-  
-                    // NULL VALUES SYNTAX
-                    if (!s_ssn)
-                        s_ssn = "NULL";
-                    if (!Address)
-                        Address = "NULL";
-                    if (!hours)
-                        hours = "NULL";
-                    if (!gender)
-                        gender = "NULL";
-                    if (!phone_num)
-                        phone_num = "NULL";
 
 
-function SSNifexistasln ()
-{
-    
+    // NULL VALUES SYNTAX
+    if (!s_ssn)
+        s_ssn = "NULL";
+    if (!Address)
+        Address = "NULL";
+    if (!hours)
+        hours = "NULL";
+    if (!gender)
+        gender = "NULL";
+    if (!phone_num)
+        phone_num = "NULL";
+
+
+    function SSNifexistasln() {
+
 
         let query123 = `SELECT
         employee.Ssn
     FROM wgsa_company.employee
     WHERE  employee.Ssn=${ssn};`;
 
-        db.query(query123, (err, result, field) => { 
+        db.query(query123, (err, result, field) => {
             if (err) {
                 res.render('404', { err });
                 throw err;
@@ -827,168 +829,160 @@ function SSNifexistasln ()
                 return res.render('HR', { errmessage: 'There is an Employee with that SSN', successMes: '' });
             }
             else {
-                    CHECK_PHONE_NUM_FOR_EMPLOYEE();
-                }
-    
+                CHECK_PHONE_NUM_FOR_EMPLOYEE();
+            }
+
         });
 
-}
+    }
 
-function CHECK_PHONE_NUM_FOR_EMPLOYEE()
-{
+    function CHECK_PHONE_NUM_FOR_EMPLOYEE() {
 
-    let query12345 = `select employee.phone_num
+        let query12345 = `select employee.phone_num
     from employee
     where phone_num=${phone_num}`;
 
-    db.query(query12345, (err, result, field) => { 
-        if (err) {
-            res.render('404', { err });
-            throw err;
-        }
-        if (result.length > 0) {
-            console.log("There is another one with that phone number");
-            return res.render('HR', { errmessage: 'There is another one with that phone number', successMes: '' });
-        }
-        else {
+        db.query(query12345, (err, result, field) => {
+            if (err) {
+                res.render('404', { err });
+                throw err;
+            }
+            if (result.length > 0) {
+                console.log("There is another one with that phone number");
+                return res.render('HR', { errmessage: 'There is another one with that phone number', successMes: '' });
+            }
+            else {
                 CHECK_PHONE_NUM_FOR_EMPLOYEE_customer();
             }
 
-    });
+        });
 
-}
+    }
 
 
-function CHECK_PHONE_NUM_FOR_EMPLOYEE_customer()
-{
+    function CHECK_PHONE_NUM_FOR_EMPLOYEE_customer() {
 
-    let query123456  = `select *
+        let query123456 = `select *
     from wgsa_company.customer
     where customer.phone_num=${phone_num}; `;
 
-    db.query(query123456, (err, result, field) => { 
-        if (err) {
-            res.render('404', { err });
-            throw err;
-        }
-        if (result.length > 0) {
-            console.log("There is another one with that phone number");
-            return res.render('HR', { errmessage: 'There is another one with that phone number', successMes: '' });
-        }
-        else {
+        db.query(query123456, (err, result, field) => {
+            if (err) {
+                res.render('404', { err });
+                throw err;
+            }
+            if (result.length > 0) {
+                console.log("There is another one with that phone number");
+                return res.render('HR', { errmessage: 'There is another one with that phone number', successMes: '' });
+            }
+            else {
                 CHECK_BNUM();
             }
 
-    });
+        });
 
-}
+    }
 
-function CHECK_BNUM()
-{
+    function CHECK_BNUM() {
 
 
-    let query1234567  = `select * from wgsa_company.branch where branch.bnum=${bnum}`;
+        let query1234567 = `select * from wgsa_company.branch where branch.bnum=${bnum}`;
 
-    db.query(query1234567, (err, result, field) => { 
-        if (err) {
-            res.render('404', { err });
-            throw err;
-        }
-        if (result.length === 0) {
-            console.log("There is no branch with that number");
-            return res.render('HR', { errmessage: 'There is no branch with that number', successMes: '' });
-        }
-        else {
+        db.query(query1234567, (err, result, field) => {
+            if (err) {
+                res.render('404', { err });
+                throw err;
+            }
+            if (result.length === 0) {
+                console.log("There is no branch with that number");
+                return res.render('HR', { errmessage: 'There is no branch with that number', successMes: '' });
+            }
+            else {
                 CHECK_superssn();
             }
 
         });
 
-}
+    }
 
-function CHECK_superssn()
-{
-      if (s_ssn != "NULL") {
-
+    function CHECK_superssn() {
+        if (s_ssn != "NULL") {
 
 
-                let query12345678  = `SELECT *
+
+            let query12345678 = `SELECT *
                   
                 FROM wgsa_company.employee
                 WHERE  employee.ssn=${s_ssn};`;
 
-                db.query(query12345678, (err, result, field) => { 
-                    if (err) {
-                        res.render('404', { err });
-                        throw err;
-                    }
-                    if (result.length === 0) {
-                        console.log("There is Super ssn with that number");
-                        return res.render('HR', { errmessage: 'There is Super ssn with that number', successMes: '' });
-                    }
-                    else {
-                            Check_dnum();
-                        }
+            db.query(query12345678, (err, result, field) => {
+                if (err) {
+                    res.render('404', { err });
+                    throw err;
+                }
+                if (result.length === 0) {
+                    console.log("There is Super ssn with that number");
+                    return res.render('HR', { errmessage: 'There is Super ssn with that number', successMes: '' });
+                }
+                else {
+                    Check_dnum();
+                }
 
-                    });
+            });
         }
-    else
-    {
+        else {
 
-        Check_dnum();
+            Check_dnum();
+        }
+
+
     }
 
-
-}
-
-function Check_dnum()
-{
+    function Check_dnum() {
 
 
-    let query123456789  = `select department.Dnum
+        let query123456789 = `select department.Dnum
    from wgsa_company.department
     where dnum=${Dnum}`;
 
-db.query(query123456789, (err, result, field) => { 
-    if (err) {
-        res.render('404', { err });
-        throw err;
+        db.query(query123456789, (err, result, field) => {
+            if (err) {
+                res.render('404', { err });
+                throw err;
+            }
+            if (result.length === 0) {
+                console.log("There is no department with that number");
+                return res.render('HR', { errmessage: 'There is no department with that number', successMes: '' });
+            }
+            else {
+                ExecuteADDnewemployee();
+            }
+
+        });
+
     }
-    if (result.length === 0) {
-        console.log("There is no department with that number");
-        return res.render('HR', { errmessage: 'There is no department with that number', successMes: '' });
+
+    function ExecuteADDnewemployee() {
+
+
+        let myquery = `INSERT INTO wgsa_company.employee(Fname, Lname, Dnum, Address, Ssn, Postion, Salary, Branch_num, Hours, Gender, Phone_num, Super_ssn, Password) VALUES("${Fname}", "${Lname}", ${Dnum}, "${Address}", ${ssn}, "${Position}", ${Salary}, ${bnum}, ${hours}, "${gender}", ${phone_num}, ${s_ssn},"${Password}")`;
+
+
+        db.query(myquery, (err, result, field) => {
+            if (err) {
+                console.log(err)
+                res.render('404', { err });
+            } else {
+                console.log(result);
+                res.render('HR', { successMes: `${Fname} is added as a new employee`, errmessage: '' });
+            }
+        });
+
     }
-    else {
-            ExecuteADDnewemployee();
-        }
-
-    });
-
-}
-
-function ExecuteADDnewemployee(){
-
-    
-    let myquery = `INSERT INTO wgsa_company.employee(Fname, Lname, Dnum, Address, Ssn, Postion, Salary, Branch_num, Hours, Gender, Phone_num, Super_ssn, Password) VALUES("${Fname}", "${Lname}", ${Dnum}, "${Address}", ${ssn}, "${Position}", ${Salary}, ${bnum}, ${hours}, "${gender}", ${phone_num}, ${s_ssn},"${Password}")`;
-
-
-    db.query(myquery, (err, result, field) => {
-        if (err) {
-            console.log(err)
-            res.render('404', { err });
-        } else {
-            console.log(result);
-            res.render('HR' ,{ successMes:  `${Fname} is added as a new employee`, errmessage: ''});
-        }
-    });
-
-}
-ExecuteADDnewemployee();
+    ExecuteADDnewemployee();
 
 });
-app.post('/Add_branch', urlencodedParser, function (req, res) 
-
-{
+app.post('/Add_branch', urlencodedParser, function (req, res) {
 
     var phone_num = req.body.phone_num;
     var bnum = req.body.bnum;
@@ -1001,101 +995,91 @@ app.post('/Add_branch', urlencodedParser, function (req, res)
         location = "NULL";
 
 
-    function br_num_exist_in_branch()
-        {
+    function br_num_exist_in_branch() {
 
         let qq = `select branch.phone_num
         from wgsa_company.Branch
         where branch.phone_num=${phone_num};`;
 
-        db.query(qq,(err,result,field)=>{
-            if(err){
-            res.render('404', { err });
-            throw err;
-                }
-                if (result.length>0)
-                {
-                    console.log("Branch Phone Num Already exist");
-                    return res.render('HR',{errmessage:'Branch Phone Num Already exist' ,successMes:''});
-                }
-                else
-                {
-                    br_num_exist_in_customer();
-                }
-    });
-}
+        db.query(qq, (err, result, field) => {
+            if (err) {
+                res.render('404', { err });
+                throw err;
+            }
+            if (result.length > 0) {
+                console.log("Branch Phone Num Already exist");
+                return res.render('HR', { errmessage: 'Branch Phone Num Already exist', successMes: '' });
+            }
+            else {
+                br_num_exist_in_customer();
+            }
+        });
+    }
 
-    function br_num_exist_in_customer(){
+    function br_num_exist_in_customer() {
 
         let qq = `select customer.phone_num
         from wgsa_company.customer
         where customer.phone_num=${phone_num};`;
 
-        db.query(qq,(err,result,field)=>{
-            if(err){
-            res.render('404', { err });
-            throw err;
-        }
-        if(result.length>0)
-        {
-            console.log("Phone Num Already exists in customer");
-            return res.render('HR',{errmessage:'Phone Num Already exists in customer' ,successMes:''});
-        }
-        else
-        {
-            br_num_exist_in_employee();
-        }
-    });
+        db.query(qq, (err, result, field) => {
+            if (err) {
+                res.render('404', { err });
+                throw err;
+            }
+            if (result.length > 0) {
+                console.log("Phone Num Already exists in customer");
+                return res.render('HR', { errmessage: 'Phone Num Already exists in customer', successMes: '' });
+            }
+            else {
+                br_num_exist_in_employee();
+            }
+        });
     }
 
-    function br_num_exist_in_employee(){
+    function br_num_exist_in_employee() {
 
         let qq = `select employee.phone_num
         from wgsa_company.employee
         where employee.phone_num=${phone_num};`;
 
-        db.query(qq,(err,result,field)=>{
-            if(err){
-            res.render('404', { err });
-            throw err;
-        }
-        if(result.length>0)
-        {
-            console.log("Phone Num Already exists in employee");
-            return res.render('HR',{errmessage:'Phone Num Already exists in employee' ,successMes:''});
-        }
-        else
-        {
-            br_bnum_exist_in_branch();
-        }
+        db.query(qq, (err, result, field) => {
+            if (err) {
+                res.render('404', { err });
+                throw err;
+            }
+            if (result.length > 0) {
+                console.log("Phone Num Already exists in employee");
+                return res.render('HR', { errmessage: 'Phone Num Already exists in employee', successMes: '' });
+            }
+            else {
+                br_bnum_exist_in_branch();
+            }
         });
-}
+    }
 
-    function br_bnum_exist_in_branch(){
+    function br_bnum_exist_in_branch() {
 
         let qq = `select branch.bnum
         from wgsa_company.branch
         where branch.bnum=${bnum};`;
 
-        db.query(qq,(err,result,field)=>{
-            if(err){
-            res.render('404', { err });
-            throw err;
-        }
-        if(result.length>0)
-        {
-            console.log("branch Num Already exists");
-            return res.render('HR',{errmessage:'branch Num Already exists' ,successMes:''});
-        }
-        else
-        {
-            exec();
-        }
+        db.query(qq, (err, result, field) => {
+            if (err) {
+                res.render('404', { err });
+                throw err;
+            }
+            if (result.length > 0) {
+                console.log("branch Num Already exists");
+                return res.render('HR', { errmessage: 'branch Num Already exists', successMes: '' });
+            }
+            else {
+                exec();
+            }
         });
     }
 
-    function exec()
-    {
+    function exec() {
         let myquery = `INSERT INTO wgsa_company.branch(Phone_num, Bnum, Location) VALUES(${phone_num}, ${bnum}, "${location}")`;
 
         db.query(myquery, (err, result, field) => {
@@ -1104,10 +1088,10 @@ app.post('/Add_branch', urlencodedParser, function (req, res)
                 res.render('404', { err });
             }
             console.log(result);
-            res.render('HR',{ successMes: 'Done', errmessage: ''});
-                });
+            res.render('HR', { successMes: 'Done', errmessage: '' });
+        });
     }
-br_num_exist_in_branch();
+    br_num_exist_in_branch();
 });
 
 app.post('/Remove_branch', urlencodedParser, function (req, res) {
@@ -1115,31 +1099,28 @@ app.post('/Remove_branch', urlencodedParser, function (req, res) {
     var bnum = req.body.bnum;
 
 
-    function br_bnum_exist_in_branch(){
+    function br_bnum_exist_in_branch() {
 
         let qq = `select branch.bnum
         from wgsa_company.branch
         where branch.bnum=${bnum};`;
 
-        db.query(qq,(err,result,field)=>{
-            if(err){
-            res.render('404', { err });
-            throw err;
+        db.query(qq, (err, result, field) => {
+            if (err) {
+                res.render('404', { err });
+                throw err;
             }
-            if(result.length==0)
-            {
+            if (result.length == 0) {
                 console.log("branch Num doesnt exists");
-                return res.render('HR',{errmessage:'branch Num doesnt exists' ,successMes:''});
+                return res.render('HR', { errmessage: 'branch Num doesnt exists', successMes: '' });
             }
-            else
-            {
+            else {
                 exec();
             }
         });
     }
 
-    function exec()
-    {
+    function exec() {
         let myquery = `delete FROM wgsa_company.branch WHERE branch.bnum =${bnum}`;
 
         db.query(myquery, (err, result, field) => {
@@ -1151,10 +1132,38 @@ app.post('/Remove_branch', urlencodedParser, function (req, res) {
             res.render('HR', { successMes: 'Done', errmessage: '' });
         });
     }
-    
+
     br_bnum_exist_in_branch();
 });
 
+
+app.post('/ChangePlan', urlencodedParser, function (req, res) {
+
+    var plan_code = req.body.plan_code;
+    var phone_num = us;
+    let myquery = `UPDATE wgsa_company.customer SET Plan_code =${plan_code} WHERE Phone_num = ${phone_num}`;
+    let query = `select *  from  wgsa_company.customer WHERE Phone_num = ${phone_num}`;
+
+    db.query(myquery, (err, result2, field) => {
+        if (err) {
+            console.log(err)
+            res.render('404', { err });
+        }
+        console.log(result2);
+
+
+        db.query(query, (err, result, field) => {
+            if (err) {
+                console.log(err)
+                res.render('404', { err });
+            }
+            console.log(result);
+
+
+                res.redirect('Customer');
+            });
+        });
+    });
 
 /*-------------------------------------------------customer service--------------------------------*/
 app.post('/change_cplan', urlencodedParser, function (req, res) {
@@ -1386,7 +1395,7 @@ app.post('/change_c_status', urlencodedParser, (req, res) => {
     db.query(myquery1, (err, result, field) => {
         if (err) res.render('404', { err });
         console.log(result);
-        res.render('TechnicalSupport', { result:'', successMes: 'Done', errmessage: '' });
+        res.render('TechnicalSupport', { result: '', successMes: 'Done', errmessage: '' });
     });
 
 });
@@ -1404,7 +1413,7 @@ app.post('/Add_faq', urlencodedParser, (req, res) => {
     db.query(myquery1, (err, result, field) => {
         if (err) res.render('404', { err });
         console.log(result);
-        res.render('TechnicalSupport', { result:'', errmessage: '', successMes: 'Done' });
+        res.render('TechnicalSupport', { result: '', errmessage: '', successMes: 'Done' });
     });
 
 });
