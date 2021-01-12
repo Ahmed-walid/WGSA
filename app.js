@@ -709,6 +709,7 @@ app.post('/registernew', urlencodedParser, (req, res) => {
     const { Fname, Lname, Phone_number, password, ID } = req.body;
     var gender = req.body.gender;
 
+    
     if (!Fname || !Lname || !Phone_number || !password || !ID || !gender) {
         return res.render('Register', { errmessage: 'Please enter all fields', successMes: '' });
     }
@@ -732,7 +733,14 @@ app.post('/registernew', urlencodedParser, (req, res) => {
             if (password.length < 7)
                 return res.render('Register', { errmessage: 'Password should be at least 7 characters', successMes: '' });
 
-            db.query('insert into customer(Fname,Lname,Phone_num,ID,gender,password) values(?,?,?,?,?,?)', [Fname, Lname, Phone_number, ID, gender, password], err => {
+                var today = new Date();
+                var dd = String(today.getDate()).padStart(2, '0');
+                var mm = String(today.getMonth() + 2).padStart(2, '0'); //January is 0!
+                var yyyy = today.getFullYear();
+            
+                today = yyyy + '-' + mm + '-' + dd;
+
+            db.query('insert into customer(Fname,Lname,Phone_num,ID,gender,password,Renewal_date) values(?,?,?,?,?,?,?)', [Fname, Lname, Phone_number, ID, gender, password,today], err => {
                 if (err) throw err;
                 res.render('Register', { errmessage: '', successMes: 'Registerd You Can now Log in ' });
             });
