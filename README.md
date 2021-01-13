@@ -1,10 +1,18 @@
 # WGSA Company
 Website for a telecommunication company with data base
 
+## Table of Contents
+- [Home Preview](#Home)
+- [Register Preview](#Register)
+- [Offers Preview](#Offers)
+- [Plans Preview](#Plans)
+- [Contributors](#Contributors)
+
+
 ## Home
 ![Home](Screenshots/Home.png)
 
-## Register\Login
+## Register
 ![Register--Login](Screenshots/Register--Login.png)
 
 ## FAQs
@@ -18,6 +26,11 @@ Website for a telecommunication company with data base
 
 
 
+## Contributors
+- https://github.com/Ahmed-walid
+- https://github.com/GhiathAjam
+- https://github.com/Mohammed-Salama
+- https://github.com/AndrewBoshra
 
 
 
