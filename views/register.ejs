@@ -22,7 +22,6 @@
                     </a>
                 </div>
                 <ul>
-                    <li><a href="plans"> Plans</a></li>
                     <li><a href="Offers">Offers</a></li>
                     <li><a href="FAQS">FAQS</a></li>
                     <li><a href="Login"> <Button class="log-btn">Log in</Button> </a></li>
@@ -49,22 +48,22 @@
                             <section class="inputs">
                                 <form action="/registernew" method="POST">
                                     <div class="name-cont">
-                                        <input placeholder="First name" type="text" name="Fname">
-                                        <input placeholder="Last Name" type="text" name="Lname">
+                                        <input placeholder="First name" type="text" name="Fname" required>
+                                        <input placeholder="Last Name" type="text" name="Lname" required>
                                     </div>
                                     <div class="input">
-                                        <input placeholder="Phone number" type="text" name="Phone_number">
+                                        <input placeholder="Phone number" type="number" name="Phone_number"required>
                                         <img src="../images/phone.svg">
                                     </div>
 
                                     <div class="input">
-                                        <input placeholder="ID" type="text" name="ID">
+                                        <input placeholder="ID" type="number" name="ID"required>
                                         <img src="../images/ID.svg">
                                     </div>
 
 
                                     <div class="input">
-                                        <input placeholder="Password" type="password" name="password">
+                                        <input placeholder="Password" type="password" name="password"required>
                                         <img src="../images/pass.png">
                                     </div>
 
