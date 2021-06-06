@@ -1,9 +1,9 @@
 # WGSA Company
 Website for a telecommunication company 
 ## Used tools
--node js
 - HTML , CSS, and Javascript
--SQL database
+- node js
+- SQL database
 
 ## Table of Contents
 - [Home Preview](#Home)
