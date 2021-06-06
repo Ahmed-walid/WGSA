@@ -1,6 +1,6 @@
 # WGSA Company
 Website for a telecommunication company 
-#Used tools
+## Used tools
 -node js
 - HTML , CSS, and Javascript
 -SQL database
