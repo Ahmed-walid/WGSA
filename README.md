@@ -1,5 +1,9 @@
 # WGSA Company
-Website for a telecommunication company with data base
+Website for a telecommunication company 
+#Used tools
+-node js
+- HTML , CSS, and Javascript
+-SQL database
 
 ## Table of Contents
 - [Home Preview](#Home)
