@@ -568,8 +568,6 @@ app.post('/Transfer_balance', urlencodedParser, (req, res) => {
 
 
     function ExecuteTransfer() {
-
-        console.log("noooooo");
         let query1 = `Update wgsa_company.customer 
                 set customer.Balance=customer.Balance-${Balance_to_be_transfered}
                 where customer.Phone_num=${user_phone_number}`;
@@ -618,7 +616,7 @@ app.post('/registernew', urlencodedParser, (req, res) => {
     }
 
     db.query('select phone_num from customer where phone_num=? or ID=?', [Phone_number, ID], (err, result) => {     // GH: why or ID
-        console.log();
+    
         if (err) throw err;
         if (result.length > 0) {
             res.render('Register', { errmessage: 'This Phone is Already registerd', successMes: '' });
@@ -651,8 +649,6 @@ app.post('/registernew', urlencodedParser, (req, res) => {
 
 app.post('/loginSubmit', urlencodedParser, (req, res) => {
     const { Phone_number, password } = req.body;
-    console.log(Phone_number, password);
-
 
     if (!Phone_number || !password) {
         return res.render('Login', { errmessage: 'Please enter all fields', successMes: '' });
@@ -730,7 +726,7 @@ app.post('/Add_employee', urlencodedParser, function (req, res) {
                 throw err;
             }
             if (result.length > 0) {
-                console.log("There is an Employee with that SSN");
+                
                 return res.render('HR', { errmessage: 'There is an Employee with that SSN', successMes: '' });
             }
             else {
@@ -753,7 +749,6 @@ app.post('/Add_employee', urlencodedParser, function (req, res) {
                 throw err;
             }
             if (result.length > 0) {
-                console.log("There is another one with that phone number");
                 return res.render('HR', { errmessage: 'There is another one with that phone number', successMes: '' });
             }
             else {
@@ -777,7 +772,6 @@ app.post('/Add_employee', urlencodedParser, function (req, res) {
                 throw err;
             }
             if (result.length > 0) {
-                console.log("There is another one with that phone number");
                 return res.render('HR', { errmessage: 'There is another one with that phone number', successMes: '' });
             }
             else {
@@ -799,7 +793,6 @@ app.post('/Add_employee', urlencodedParser, function (req, res) {
                 throw err;
             }
             if (result.length === 0) {
-                console.log("There is no branch with that number");
                 return res.render('HR', { errmessage: 'There is no branch with that number', successMes: '' });
             }
             else {
@@ -824,7 +817,6 @@ app.post('/Add_employee', urlencodedParser, function (req, res) {
                     throw err;
                 }
                 if (result.length === 0) {
-                    console.log("There is Super ssn with that number");
                     return res.render('HR', { errmessage: 'There is Super ssn with that number', successMes: '' });
                 }
                 else {
@@ -854,7 +846,6 @@ app.post('/Add_employee', urlencodedParser, function (req, res) {
                 throw err;
             }
             if (result.length === 0) {
-                console.log("There is no department with that number");
                 return res.render('HR', { errmessage: 'There is no department with that number', successMes: '' });
             }
             else {
@@ -873,10 +864,8 @@ app.post('/Add_employee', urlencodedParser, function (req, res) {
 
         db.query(myquery, (err, result, field) => {
             if (err) {
-                console.log(err)
                 res.render('404', { err });
             } else {
-                console.log(result);
                 res.render('HR', { successMes: `${Fname} is added as a new employee`, errmessage: '' });
             }
         });
@@ -910,7 +899,6 @@ app.post('/Add_branch', urlencodedParser, function (req, res) {
                 throw err;
             }
             if (result.length > 0) {
-                console.log("Branch Phone Num Already exist");
                 return res.render('HR', { errmessage: 'Branch Phone Num Already exist', successMes: '' });
             }
             else {
@@ -931,7 +919,6 @@ app.post('/Add_branch', urlencodedParser, function (req, res) {
                 throw err;
             }
             if (result.length > 0) {
-                console.log("Phone Num Already exists in customer");
                 return res.render('HR', { errmessage: 'Phone Num Already exists in customer', successMes: '' });
             }
             else {
@@ -952,7 +939,6 @@ app.post('/Add_branch', urlencodedParser, function (req, res) {
                 throw err;
             }
             if (result.length > 0) {
-                console.log("Phone Num Already exists in employee");
                 return res.render('HR', { errmessage: 'Phone Num Already exists in employee', successMes: '' });
             }
             else {
@@ -973,7 +959,6 @@ app.post('/Add_branch', urlencodedParser, function (req, res) {
                 throw err;
             }
             if (result.length > 0) {
-                console.log("branch Num Already exists");
                 return res.render('HR', { errmessage: 'branch Num Already exists', successMes: '' });
             }
             else {
