@@ -53,7 +53,6 @@ app.get('/Login', (req, res) => {
     res.render('Login', { errmessage: '', successMes: '' })
 });
 
-
 app.get('/Recharge', (req, res) => {
     res.render('Recharge')
 });
@@ -65,7 +64,6 @@ app.get('/HR', (req, res) => {
     res.render('HR', { successMes: '', errmessage: '' })
 });
 app.get('/', (req, res) => {
-
     res.render('index')
 });
 
@@ -84,7 +82,6 @@ app.get('/CustomerService', (req, res) => {
                 console.log(err)
                 return res.render('404', { err });
             }
-
             res.render('CustomerService', { plans, result: '', errmessage: '', successMes: '' })
         });
 
@@ -93,12 +90,11 @@ app.get('/CustomerService', (req, res) => {
 
 
 
-
 app.post('/getCustomerinfo', urlencodedParser, (req, res) => {
 
-    var user_number = req.body.Phone_number;
+    const user_number = req.body.Phone_number;
 
-    let myquery1 = `Select * from wgsa_company.customer
+    const myquery1 = `Select * from wgsa_company.customer
     where customer.Phone_num=${user_number}`;
 
     db.query(myquery1, (err, result, field) => {
