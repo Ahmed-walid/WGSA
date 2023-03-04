@@ -19,9 +19,7 @@ const db = mysql.createConnection({
 // express app
 const app = express();
 
-
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
-
 
 app.set('view engine', 'ejs');
 
@@ -35,41 +33,30 @@ db.connect((err) => {
 });
 
 
-
 // listen for requests
 app.listen(3000, () => {
     console.log('server started on port 3000');
 });
 
-
 app.get('/', (req, res) => {
     res.render('index');
 });
 
-
 app.get('/FAQS', (req, res) => {
-
-    let myquery1 = "SELECT Question_code, Question, Answer, Fname,Lname from wgsa_company.FAQs , wgsa_company.employee where Answered_by=Ssn";
+    const myquery1 = "SELECT Question_code, Question, Answer, Fname,Lname from wgsa_company.FAQs , wgsa_company.employee where Answered_by=Ssn";
     db.query(myquery1, (err, result, field) => {
         if (err) throw err;
         res.render('FAQS', { result })
     });
 });
 app.get('/Login', (req, res) => {
-
     res.render('Login', { errmessage: '', successMes: '' })
 });
 
-app.get('/Test', (req, res) => {
-
-    var result = "0"
-    res.render('Test', { result })
-});
 
 app.get('/Recharge', (req, res) => {
     res.render('Recharge')
 });
-
 
 app.get('/DataEmployee', (req, res) => {
     res.render('DataEmployee', { successMes: '', errmessage: '' })
