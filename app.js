@@ -41,56 +41,9 @@ app.listen(3000, () => {
     console.log('server started on port 3000');
 });
 
-// app.get('/makequery', (req, res) => {
-
-//     let myquery = "SELECT Plan_code,price from wgsa_company.plan";
-//     db.query(myquery, (err, result, field) => {
-
-//         if (err) throw err;
-
-//         res.render('plans', { result });
-//         //console.log(result);
-
-//     });
-
-// });
-
-
-// app.get('/plans', (req, res) => {
-
-//     let myquery = "SELECT Plan_code,Plan_name,price from wgsa_company.plan";
-//     db.query(myquery, (err, result, field) => {
-
-//         if (err) throw err;
-
-//         res.render('plans', { result });
-//         console.log(result);
-
-//     });
-
-// });
-
-
-// app.get('/getemployee',(req,res)=>{
-
-//     let myquery="SELECT Fname,Salary from nodemysql.Employee";
-//     db.query(myquery,(err,result,field)=>{
-
-//         res.render('register', { result });
-//         if (err) throw err;
-
-
-//     });
-
-// });
 
 app.get('/', (req, res) => {
-
-
-
     res.render('index');
-
-
 });
 
 
@@ -145,7 +98,6 @@ app.get('/CustomerService', (req, res) => {
                 return res.render('404', { err });
             }
 
-
             res.render('CustomerService', { plans, result: '', errmessage: '', successMes: '' })
         });
 
@@ -171,8 +123,6 @@ app.post('/getCustomerinfo', urlencodedParser, (req, res) => {
         if (result[0].Renewal_date) {
             result[0].Renewal_date = result[0].Renewal_date.toString().substr(0, 15);
         }
-
-
 
         let query2 = `select * from wgsa_company.plan `;
         db.query(query2, (err, plans) => {
@@ -225,9 +175,6 @@ app.post('/ViewCustomerData', urlencodedParser, (req, res) => {
 });
 
 
-
-
-
 app.get('/Offers', (req, res) => {
 
     let myquery1 = "SELECT Launch_date, Price, Minutes, Expire_date, Megas, Offer_describ, Offer_num from wgsa_company.Offer";
@@ -270,8 +217,6 @@ app.get('/Customer', (req, res) => {
 
 });
 
-
-
 app.post('/Update_Plan_Cost', urlencodedParser, function (req, res) {
 
     var Plannewprice = req.body.Plan_New_Price;
@@ -300,14 +245,11 @@ app.post('/Delete_Plan', urlencodedParser, function (req, res) {
 });
 
 
-
 app.post('/Remove_customer', urlencodedParser, function (req, res) {
 
     var phone_num = parseInt(req.body.Phone_num, 10);
 
     function CheckNumbersEntered123() {
-
-
         if (phone_num <= 0) {
             return res.render('HR', { errmessage: 'Enter valid number please', successMes: '' });
         }
@@ -316,8 +258,6 @@ app.post('/Remove_customer', urlencodedParser, function (req, res) {
         }
 
     }
-
-
 
     function CheckCustomer123() {
 
@@ -374,7 +314,6 @@ app.post('/Remove_employee', urlencodedParser, function (req, res) {
         }
 
     }
-
 
     function checkssnifexistbefore() {
         let query123 = `select *
@@ -456,12 +395,10 @@ app.post('/Recharge_Process', urlencodedParser, function (req, res) {
     db.query(myquery, (err, result, field) => {
         if (err) res.render('404', { err });
         else {
-            console.log(result);
             res.render('Recharge', { status: 1 });
         }
     });
 });
-
 
 
 app.post('/Add_New_Offer', urlencodedParser, function (req, res) {
@@ -503,12 +440,6 @@ app.post('/Add_New_Offer', urlencodedParser, function (req, res) {
     });
 
 });
-
-
-
-
-
-
 
 
 app.post('/Complain_process', urlencodedParser, (req, res) => {
@@ -584,15 +515,6 @@ app.post('/Delete_Complaint', urlencodedParser, (req, res) => {
 app.get('/Transfer', (req, res) => {
     res.render('Transfer', { errmessage: '', successMes: '' })
 });
-
-/*
-     app.use((req,res,next)=>{
-    
-        next();
-     });
-    */
-
-
 
 
 app.post('/Transfer_balance', urlencodedParser, (req, res) => {
@@ -698,11 +620,6 @@ app.post('/Transfer_balance', urlencodedParser, (req, res) => {
 
 });
 
-
-
-
-
-
 //login and register
 
 app.post('/registernew', urlencodedParser, (req, res) => {
@@ -804,8 +721,6 @@ app.post('/Add_employee', urlencodedParser, function (req, res) {
     var s_ssn = req.body.Super_ssn;
     var Password = req.body.password;
 
-
-
     // NULL VALUES SYNTAX
     if (!s_ssn)
         s_ssn = "NULL";
@@ -820,7 +735,6 @@ app.post('/Add_employee', urlencodedParser, function (req, res) {
 
 
     function SSNifexistasln() {
-
 
         let query123 = `SELECT
         employee.Ssn
@@ -915,8 +829,6 @@ app.post('/Add_employee', urlencodedParser, function (req, res) {
 
     function CHECK_superssn() {
         if (s_ssn != "NULL") {
-
-
 
             let query12345678 = `SELECT *
                   
@@ -1105,8 +1017,6 @@ app.post('/Add_branch', urlencodedParser, function (req, res) {
 app.post('/Remove_branch', urlencodedParser, function (req, res) {
 
     var bnum = req.body.bnum;
-
-
     function br_bnum_exist_in_branch() {
 
         let qq = `select branch.bnum
@@ -1231,10 +1141,6 @@ app.post('/Complain_processCS', urlencodedParser, function (req, res) {
             console.log(err)
             res.render('404', { err });
         }
-
-
-
-
         let query2 = `select plan_name,plan_code from wgsa_company.plan `;
 
         db.query(query2, (err, plans) => {
@@ -1309,7 +1215,6 @@ app.post('/Add_Customer', urlencodedParser, function (req, res) {
                 }
 
 
-
                 let query2 = `select plan_name,plan_code from wgsa_company.plan `;
                 db.query(query2, (err, plans) => {
                     if (err) {
@@ -1325,8 +1230,6 @@ app.post('/Add_Customer', urlencodedParser, function (req, res) {
                             result[0].Gender = 'Female';
                     }
                     res.render('CustomerService', { result, plans, errmessage: '', successMes: 'Done' })
-
-
                 });
 
             });
@@ -1384,7 +1287,6 @@ app.post('/Add_Customer', urlencodedParser, function (req, res) {
 });
 
 
-
 app.get('/TechnicalSupport', (req, res) => {
 
     res.render('TechnicalSupport', { result: '', successMes: '', errmessage: '' })
@@ -1397,7 +1299,7 @@ app.post('/change_c_status', urlencodedParser, (req, res) => {
     var replied_by = req.body.replied_by;
     var rep_date = req.body.rep_date;
     var reply = req.body.reply;
-    // console.log(rep_date);
+
     let myquery1 = `UPDATE wgsa_company.complaint SET C_Status = '${complaint_status}', Replied_by = ${replied_by}, Reply_date = '${rep_date}' , Reply = '${reply}' WHERE (C_Code = ${complaint_code});`;
 
     db.query(myquery1, (err, result, field) => {
@@ -1414,8 +1316,6 @@ app.post('/Add_faq', urlencodedParser, (req, res) => {
     var code = req.body.code;
     var ID = req.body.ID;
 
-
-    //console.log(rep_date);
     let myquery1 = `INSERT INTO wgsa_company.faqs (Answer, Question, Question_code, Answered_by) VALUES ('${answer}', '${question}', ${code} , ${ID});`
 
     db.query(myquery1, (err, result, field) => {
